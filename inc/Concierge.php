@@ -45,7 +45,7 @@ class Concierge {
 	}
 
 	public static function is_available( Room $room_unit, Period $period ) {
-		return static::has_states( $room_unit, $period, AweBooking::STATE_AVAILABLE, false );
+		return static::has_states( $room_unit, $period, Constants::STATE_AVAILABLE, false );
 	}
 
 	public static function is_unavailable( Room $room_unit, Period $period ) {
@@ -57,7 +57,7 @@ class Concierge {
 	 *
 	 * @param  Room   $room_unit The room unit.
 	 * @param  Period $period    Time period.
-	 * @param  int    $state     Oonly AweBooking::STATE_AVAILABLE and AweBooking::STATE_UNAVAILABLE is accepted.
+	 * @param  int    $state     Oonly Constants::STATE_AVAILABLE and Constants::STATE_UNAVAILABLE is accepted.
 	 * @param  array  $options   Optional, set state options.
 	 * @return bool
 	 */
@@ -72,7 +72,7 @@ class Concierge {
 		}
 
 		// If period have any pending or booked state, we cannot to do this.
-		if ( static::has_states( $room_unit, $period, [ AweBooking::STATE_PENDING, AweBooking::STATE_BOOKED ] ) ) {
+		if ( static::has_states( $room_unit, $period, [ Constants::STATE_PENDING, Constants::STATE_BOOKED ] ) ) {
 			return false;
 		}
 
@@ -158,7 +158,7 @@ class Concierge {
 			// Create an dummy booking with ID 0 to reset.
 			$unset_booking  = new Booking( 0 );
 
-			$state_status   = (new Room_State( $room_unit, $period, AweBooking::STATE_AVAILABLE ))->save();
+			$state_status   = (new Room_State( $room_unit, $period, Constants::STATE_AVAILABLE ))->save();
 			$booking_status = (new Room_Booking( $room_unit, $period, $unset_booking ))->save();
 
 			if ( ! $state_status || ! $booking_status ) {
@@ -299,7 +299,7 @@ class Concierge {
 		$response = $calendar->getMatchingUnits(
 			$request->get_check_in(),
 			$request->get_check_out()->subMinute(),
-			[ AweBooking::STATE_AVAILABLE ],
+			[ Constants::STATE_AVAILABLE ],
 			apply_filters( 'awebooking/concierge/constraints', [], $rooms, $request )
 		);
 

@@ -3,6 +3,7 @@ namespace AweBooking\Support;
 
 use Closure;
 use Exception;
+use PasswordHash;
 use Psr\Log\LoggerInterface;
 
 class Utils {
@@ -83,6 +84,20 @@ class Utils {
 
 			return static::value( $rescue );
 		}
+	}
+
+	/**
+	 * Generate a random string.
+	 *
+	 * @param  integer $length Random string length.
+	 * @return string
+	 */
+	public static function random_string( $length = 16 ) {
+		require_once ABSPATH . 'wp-includes/class-phpass.php';
+
+		$bytes = (new PasswordHash( 8, false ))->get_random_bytes( $length * 2 );
+
+		return substr( str_replace( [ '/', '+', '=' ], '', base64_encode( $bytes ) ), 0, $length );
 	}
 
 	/**

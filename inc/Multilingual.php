@@ -1,5 +1,5 @@
 <?php
-namespace AweBooking\Support;
+namespace AweBooking;
 
 class Multilingual {
 	/**
@@ -27,10 +27,7 @@ class Multilingual {
 	 * Class constructor.
 	 */
 	public function __construct() {
-	}
-
-	public function get_original_object_id( $object_id, $object_type = 'post' ) {
-		return icl_object_id( $object_id, $object_type, true, $this->get_default_language() );
+		// ...
 	}
 
 	/**
@@ -92,5 +89,9 @@ class Multilingual {
 	 */
 	public function is_wpml() {
 		return ( defined( 'ICL_SITEPRESS_VERSION' ) && ! $this->is_polylang() );
+	}
+
+	public function get_original_object_id( $object_id, $object_type = 'post' ) {
+		return icl_object_id( $object_id, $object_type, true, $this->get_default_language() );
 	}
 }

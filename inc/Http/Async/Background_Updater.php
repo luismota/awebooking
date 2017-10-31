@@ -1,5 +1,5 @@
 <?php
-namespace AweBooking;
+namespace AweBooking\Http\Async;
 
 use WP_Background_Process;
 use Psr\Log\LoggerInterface;
@@ -32,9 +32,9 @@ class Background_Updater extends WP_Background_Process {
 	 * @param LoggerInterface $logger The logger implementation.
 	 */
 	public function __construct( LoggerInterface $logger ) {
-		parent::__construct();
-
 		$this->logger = $logger;
+
+		parent::__construct();
 	}
 
 	/**
@@ -53,7 +53,7 @@ class Background_Updater extends WP_Background_Process {
 			define( 'AWEBOOKING_UPDATING', true );
 		}
 
-		require_once trailingslashit( __DIR__ ) . 'update-functions.php';
+		require_once trailingslashit( __DIR__ ) . '/../Migrations/update-functions.php';
 
 		if ( is_callable( $callback ) ) {
 			$logger->info( sprintf( 'Running %s callback', $callback ), array( 'source' => 'db_updates' ) );

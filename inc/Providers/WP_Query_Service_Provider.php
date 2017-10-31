@@ -1,23 +1,22 @@
 <?php
-namespace AweBooking;
+namespace AweBooking\Providers;
 
-use AweBooking\Support\Service_Hooks;
+use AweBooking\Factory;
+use AweBooking\Constants;
+use AweBooking\Support\Service_Provider;
 
-class WP_Query_Hooks extends Service_Hooks {
+class WP_Query_Service_Provider extends Service_Provider {
 	/**
 	 * Init service provider.
-	 *
-	 * This method will be run after container booted.
-	 *
-	 * @param AweBooking $awebooking AweBooking Container instance.
 	 */
-	public function init( $awebooking ) {
+	public function init() {
 		// Apply query clauses in the WP_Query.
 		add_filter( 'posts_clauses', [ $this, 'apply_query_clauses' ], 10, 2 );
 
 		// Setup the awebooking objects into the main query.
 		add_action( 'the_post', array( $this, 'setup_awebooking_objects' ) );
 
+		// ...
 		add_action( 'pre_get_posts', [ $this, 'loction_filter' ], 10, 1 );
 	}
 
@@ -37,7 +36,7 @@ class WP_Query_Hooks extends Service_Hooks {
 		$qv = $wp_query->query_vars;
 
 		// Working only in room-type.
-		if ( AweBooking::ROOM_TYPE !== $qv['post_type'] ) {
+		if ( Constants::ROOM_TYPE !== $qv['post_type'] ) {
 			return $pieces;
 		}
 
@@ -81,16 +80,18 @@ class WP_Query_Hooks extends Service_Hooks {
 		}
 
 		switch ( $post->post_type ) {
-			case AweBooking::ROOM_TYPE:
+			case Constants::ROOM_TYPE:
 				unset( $GLOBALS['room_type'] );
-				$GLOBALS['room_type'] = new Hotel\Room_Type( $post );
+				$GLOBALS['room_type'] = Factory::get_room_type( $post );
 				break;
 
-			case AweBooking::BOOKING:
+			case Constants::BOOKING:
 				unset( $GLOBALS['the_booking'] );
-				$GLOBALS['the_booking'] = new Booking\Booking( $post );
+				$GLOBALS['the_booking'] = Factory::get_booking( $post );
 				break;
 		}
+
+		do_action( 'awebooking/setup_objects', $post );
 	}
 
 	/**
@@ -107,14 +108,14 @@ class WP_Query_Hooks extends Service_Hooks {
 			return;
 		}
 
-		if ( ! is_post_type_archive( AweBooking::ROOM_TYPE ) || ! awebooking_option( 'enable_location' ) ) {
+		if ( ! is_post_type_archive( Constants::ROOM_TYPE ) || ! awebooking_option( 'enable_location' ) ) {
 			return;
 		}
 
 		if ( ! empty( $_REQUEST['location'] ) ) {
 			$query->set( 'tax_query', array(
 				array(
-					'taxonomy' => AweBooking::HOTEL_LOCATION,
+					'taxonomy' => Constants::HOTEL_LOCATION,
 					'terms'    => sanitize_text_field( wp_unslash( $_REQUEST['location'] ) ),
 					'field'    => 'slug',
 				),
@@ -128,7 +129,7 @@ class WP_Query_Hooks extends Service_Hooks {
 		if ( $default_location ) {
 			$query->set( 'tax_query', array(
 				array(
-					'taxonomy' => AweBooking::HOTEL_LOCATION,
+					'taxonomy' => Constants::HOTEL_LOCATION,
 					'terms'    => $default_location->slug,
 					'field'    => 'slug',
 				),

@@ -1,19 +1,28 @@
 <?php
 namespace AweBooking\Support;
 
+use Awethemes\WP_Session\WP_Session;
+
 class Flash_Message {
+	/**
+	 * WP_Session instance.
+	 *
+	 * @var \Awethemes\WP_Session\WP_Session
+	 */
+	protected $session;
+
 	/**
 	 * The messages collection.
 	 *
 	 * @var array
 	 */
-	protected $messages;
+	protected $messages = [];
 
 	/**
-	 * Flash message.
+	 * Create the flash message.
 	 */
-	public function __construct() {
-		$this->messages = [];
+	public function __construct( WP_Session $session ) {
+		$this->session = $session;
 	}
 
 	/**
@@ -194,7 +203,7 @@ class Flash_Message {
 	 * @return void
 	 */
 	protected function store_messages( $messages ) {
-		awebooking( 'session' )->flash( 'flash_messages', maybe_serialize( $messages ) );
+		$this->session->flash( 'flash_messages', maybe_serialize( $messages ) );
 	}
 
 	/**
@@ -203,7 +212,7 @@ class Flash_Message {
 	 * @return void
 	 */
 	protected function flush_messages() {
-		awebooking( 'session' )->remove( 'flash_messages' );
+		$this->session->remove( 'flash_messages' );
 	}
 
 	/**
@@ -213,7 +222,7 @@ class Flash_Message {
 	 */
 	protected function get_messages() {
 		return maybe_unserialize(
-			awebooking( 'session' )->pull( 'flash_messages', [] )
+			$this->session->pull( 'flash_messages', [] )
 		);
 	}
 }

@@ -17,31 +17,50 @@ class Period extends League_Period {
 	 */
 	public function __construct( $start_date, $end_date, $strict = false ) {
 		parent::__construct(
-			Carbonate::create_datetime( $start_date ),
-			Carbonate::create_datetime( $end_date )
+			Carbonate::create_datetime( $start_date ), Carbonate::create_datetime( $end_date )
 		);
 
 		$this->validate_period( $strict );
 	}
 
 	/**
-	 * Returns the starting date point as Carbon.
+	 * Alias of $this->getStartDate() method.
 	 *
-	 * @return Carbon
+	 * @return Carbonate
 	 */
 	public function get_start_date() {
-		$dt = $this->getStartDate();
+		return $this->getStartDate();
+	}
+
+	/**
+	 * Alias of $this->getEndDate() method.
+	 *
+	 * @return Carbonate
+	 */
+	public function get_end_date() {
+		return $this->getEndDate();
+	}
+
+	/**
+	 * Returns the starting date point.
+	 *
+	 * @return DateTimeImmutable
+	 */
+	public function getStartDate() {
+		// @codingStandardsIgnoreLine
+		$dt = $this->startDate;
 
 		return new Carbonate( $dt->format( 'Y-m-d H:i:s.u' ), $dt->getTimeZone() );
 	}
 
 	/**
-	 * Returns the ending datepoint as Carbon.
+	 * Returns the ending datepoint.
 	 *
-	 * @return Carbon
+	 * @return DateTimeImmutable
 	 */
-	public function get_end_date() {
-		$dt = $this->getEndDate();
+	public function getEndDate() {
+		// @codingStandardsIgnoreLine
+		$dt = $this->endDate;
 
 		return new Carbonate( $dt->format( 'Y-m-d H:i:s.u' ), $dt->getTimeZone() );
 	}
