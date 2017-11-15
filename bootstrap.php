@@ -28,3 +28,4 @@ require_once trailingslashit( __DIR__ ) . 'inc/template-functions.php';
 
 // Make AweBooking\AweBooking as AweBooking alias.
 class_alias( 'AweBooking\\AweBooking', 'AweBooking' );
+class_alias( 'AweBooking\\Support\\Service_Provider', 'AweBooking\\Support\\Service_Hooks' );
