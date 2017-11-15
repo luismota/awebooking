@@ -1,6 +1,7 @@
 <?php
 
 use AweBooking\Support\Utils;
+use AweBooking\Support\Formatting;
 use AweBooking\Support\Debug\Dumper;
 
 if ( ! function_exists( 'dd' ) ) {

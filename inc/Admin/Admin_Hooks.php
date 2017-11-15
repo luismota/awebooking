@@ -22,9 +22,7 @@ class Admin_Hooks extends Service_Hooks {
 	 * @param Container $container Container instance.
 	 */
 	public function register( $container ) {
-		$container->singleton( 'admin_notices', function() {
-			return new Admin_Notices;
-		});
+		$container->singleton( 'admin_notices', Admin_Notices::class );
 
 		$container->singleton( 'admin_menu', function() {
 			return new Admin_Menu;

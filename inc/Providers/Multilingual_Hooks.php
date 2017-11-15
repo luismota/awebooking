@@ -43,12 +43,12 @@ class Multilingual_Hooks extends Service_Hooks {
 	protected function run_copy_settings() {
 		$awebooking = awebooking();
 
-		if ( AweBooking::SETTING_KEY !== $awebooking['option_key'] ) {
+		if ( AweBooking::SETTING_KEY !== $awebooking['setting_key'] ) {
 			$current_options = $awebooking['setting']->all();
 			$original_options = (array) get_option( AweBooking::SETTING_KEY, [] );
 
 			if ( ! empty( $original_options ) && empty( $current_options ) ) {
-				update_option( $awebooking['option_key'], $original_options );
+				update_option( $awebooking['setting_key'], $original_options );
 			}
 		}
 	}

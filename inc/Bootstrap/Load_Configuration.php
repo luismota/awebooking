@@ -30,6 +30,7 @@ class Load_Configuration {
 	 */
 	public function bootstrap( AweBooking $awebooking ) {
 		$awebooking->instance( 'setting_key', $this->get_setting_key( $awebooking ) );
+		$awebooking->instance( 'setting_key', $this->get_setting_key( $awebooking ) );
 
 		$awebooking->singleton( 'setting', function ( $a ) {
 			return new Setting( $a['setting_key'] );

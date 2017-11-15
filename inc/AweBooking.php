@@ -17,6 +17,22 @@ final class AweBooking extends Container {
 	 */
 	const VERSION = '3.0.0-beta-12';
 
+	// Deprecated constants, use class \AweBooking\Constants instead.
+	const DATE_FORMAT    = 'Y-m-d';
+	const JS_DATE_FORMAT = 'yy-mm-dd';
+
+	const BOOKING        = 'awebooking';
+	const ROOM_TYPE      = 'room_type';
+	const PRICING_RATE   = 'pricing_rate';
+	const HOTEL_LOCATION = 'hotel_location';
+	const HOTEL_AMENITY  = 'hotel_amenity';
+	const HOTEL_SERVICE  = 'hotel_extra_service';
+
+	const STATE_AVAILABLE   = 0;
+	const STATE_UNAVAILABLE = 1;
+	const STATE_PENDING     = 2;
+	const STATE_BOOKED      = 3;
+
 	/**
 	 * The plugin file path.
 	 *
@@ -82,7 +98,11 @@ final class AweBooking extends Container {
 		\AweBooking\Currency\Currency_Service_Provider::class,
 		\AweBooking\Providers\Skeleton_Service_Provider::class,
 		\AweBooking\Providers\WP_Query_Service_Provider::class,
+		\AweBooking\Providers\Logic_Service_Provider::class,
 		\AweBooking\Providers\Route_Service_Provider::class,
+		\AweBooking\Booking\Booking_Service_Provider::class,
+		\AweBooking\Shortcodes\Shortcode_Service_Provider::class,
+		\AweBooking\Widgets\Widget_Service_Provider::class,
 	];
 
 	/**
@@ -184,7 +204,7 @@ final class AweBooking extends Container {
 	 * @return \Monolog\Handler\HandlerInterface
 	 */
 	protected function get_monolog_handler() {
-		return (new StreamHandler( WP_CONTENT_DIR . '/awebooking.log', Logger::DEBUG ))
+		return ( new StreamHandler( WP_CONTENT_DIR . '/awebooking.log', Logger::DEBUG ) )
 					->setFormatter( new LineFormatter( null, null, true, true ) );
 	}
 
@@ -229,6 +249,9 @@ final class AweBooking extends Container {
 			}
 		}
 
+		// TODO: Consider this.
+		$this->trigger( Admin\Admin_Hooks::class );
+
 		do_action( 'awebooking/init', $this );
 	}
 
@@ -271,7 +294,7 @@ final class AweBooking extends Container {
 	 * @return Service_Provider
 	 */
 	public function register( $provider, $force = false ) {
-		if ( ($registered = $this->get_provider( $provider )) && ! $force ) {
+		if ( ( $registered = $this->get_provider( $provider ) ) && ! $force ) {
 			return $registered;
 		}
 
@@ -285,7 +308,7 @@ final class AweBooking extends Container {
 
 		// Call the register on the provider.
 		if ( method_exists( $provider, 'register' ) ) {
-			$provider->register();
+			$provider->register( $this );
 		}
 
 		// If the awebooking has already booted, we will call
@@ -485,7 +508,7 @@ final class AweBooking extends Container {
 	 * @return string
 	 */
 	public function endpoint_name() {
-		return apply_filters( 'awebooking/endpoint_name', 'awebooking-hotel/' );
+		return apply_filters( 'awebooking/endpoint_name', 'awebooking-route/' );
 	}
 
 	/**
@@ -526,5 +549,23 @@ final class AweBooking extends Container {
 		$is_multilanguage = $multilingual->is_polylang() || $multilingual->is_wpml();
 
 		return apply_filters( 'awebooking/is_running_multilanguage', $is_multilanguage, $multilingual );
+	}
+
+	/**
+	 * Deprecated method.
+	 *
+	 * @return boolean
+	 */
+	public function is_multi_language() {
+		return $this->is_running_multilanguage();
+	}
+
+	/**
+	 * Deprecated method.
+	 *
+	 * @return bool
+	 */
+	public function is_multi_location() {
+		return (bool) $this['setting']->get( 'enable_location' );
 	}
 }

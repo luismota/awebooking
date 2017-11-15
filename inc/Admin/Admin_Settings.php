@@ -22,7 +22,7 @@ class Admin_Settings extends Admin_Page {
 	 * Make a new page settings.
 	 */
 	public function __construct() {
-		parent::__construct( awebooking( 'option_key' ) );
+		parent::__construct( awebooking( 'setting_key' ) );
 
 		$this->strings = array(
 			'updated' => esc_html__( 'Your settings have been saved.', 'awebooking' ),

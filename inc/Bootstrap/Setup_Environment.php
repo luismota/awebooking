@@ -67,7 +67,7 @@ class Setup_Environment {
 			'show_in_quick_edit' => false,
 		]))->register();
 
-		/*if ( awebooking( 'setting' )->is_multi_location() ) {
+		if ( awebooking()->is_multi_location() ) {
 			Taxonomy::make(
 				Constants::HOTEL_LOCATION,
 				apply_filters( 'awebooking/taxonomy_objects/hotel_location', Constants::ROOM_TYPE ),
@@ -82,9 +82,9 @@ class Setup_Environment {
 			]))
 			->register();
 
-			// $location_tax = new Taxonomy_Single_Term( Constants::HOTEL_LOCATION, [], 'select', absint( awebooking_option( 'location_default' ) ) );
-			// $location_tax->set( 'force_selection', true );
-		}*/
+			$location_tax = new Taxonomy_Single_Term( Constants::HOTEL_LOCATION, [], 'select', absint( awebooking_option( 'location_default' ) ) );
+			$location_tax->set( 'force_selection', true );
+		}
 
 		do_action( 'awebooking/register_taxonomy' );
 	}

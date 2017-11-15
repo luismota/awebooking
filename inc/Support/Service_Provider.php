@@ -31,7 +31,7 @@ abstract class Service_Provider {
 	 *
 	 * This method should only be used to configure services and parameters.
 	 */
-	public function register() {}
+	// public function register() {}
 
 	/**
 	 * Init (boot) the service provider.

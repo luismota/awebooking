@@ -1,9 +1,12 @@
 <?php
-namespace AweBooking;
+namespace AweBooking\Providers;
 
-use AweBooking\Support\Service_Hooks;
+use AweBooking\Factory;
+use AweBooking\Constants;
+use AweBooking\Support\Service_Provider;
 
-class Logic_Hooks extends Service_Hooks {
+// TODO: Need check.
+class Logic_Service_Provider extends Service_Provider {
 	/**
 	 * Init service provider.
 	 *
@@ -24,7 +27,7 @@ class Logic_Hooks extends Service_Hooks {
 	 * @return void
 	 */
 	public function pre_delete_location( $term, $taxonomy ) {
-		if ( AweBooking::HOTEL_LOCATION !== $taxonomy ) {
+		if ( Constants::HOTEL_LOCATION !== $taxonomy ) {
 			return;
 		}
 
@@ -46,7 +49,7 @@ class Logic_Hooks extends Service_Hooks {
 	public function delete_booking_items( $postid ) {
 		global $wpdb;
 
-		if ( get_post_type( $postid ) !== AweBooking::BOOKING ) {
+		if ( get_post_type( $postid ) !== Constants::BOOKING ) {
 			return;
 		}
 
@@ -76,7 +79,7 @@ class Logic_Hooks extends Service_Hooks {
 	public function delete_room_type( $postid ) {
 		global $wpdb;
 
-		if ( get_post_type( $postid ) !== AweBooking::ROOM_TYPE ) {
+		if ( get_post_type( $postid ) !== Constants::ROOM_TYPE ) {
 			return;
 		}
 
