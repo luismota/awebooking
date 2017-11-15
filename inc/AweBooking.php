@@ -15,7 +15,7 @@ final class AweBooking extends Container {
 	 *
 	 * @var string
 	 */
-	const VERSION = '3.0.0';
+	const VERSION = '3.0.0-beta-12';
 
 	/**
 	 * The plugin file path.
