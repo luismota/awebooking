@@ -6,30 +6,6 @@ use AweBooking\Support\Service_Hooks;
 
 class Multilingual_Hooks extends Service_Hooks {
 	/**
-	 * Registers services on the given container.
-	 *
-	 * @param AweBooking $awebooking AweBooking Container instance.
-	 */
-	public function register( $awebooking ) {
-		$awebooking->bind( 'multilingual', function () {
-			return new Multilingual;
-		});
-
-		$awebooking->extend( 'option_key', function ( $option_key ) use ( $awebooking ) {
-			if ( $awebooking->is_multi_language() ) {
-				$active_language = $awebooking['multilingual']->get_active_language();
-
-				// If active language is "en", "" or all.
-				if ( ! in_array( $active_language , [ '', 'en', 'all' ] ) ) {
-					$option_key .= '_' . $active_language;
-				}
-			}
-
-			return $option_key;
-		});
-	}
-
-	/**
 	 * Init service provider.
 	 *
 	 * @param AweBooking $awebooking AweBooking instance.

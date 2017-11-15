@@ -7,7 +7,7 @@
  * Author URI:      https://awethemes.com
  * Text Domain:     awebooking
  * Domain Path:     /languages
- * Version:         3.0.0-beta11
+ * Version:         3.0.0-beta12-dev
  *
  * @package         AweBooking
  */
@@ -61,15 +61,10 @@ if ( version_compare( phpversion(), '5.6.4', '<' ) ) {
  */
 require trailingslashit( __DIR__ ) . 'bootstrap.php';
 
-/* Constants */
-define( 'AWEBOOKING_PLUGIN_FILE_PATH', __FILE__ );
 define( 'AWEBOOKING_VERSION', AweBooking::VERSION );
 
-/**
- * Let create the AweBooking.
- */
-$awebooking = new AweBooking;
-
-register_activation_hook( AWEBOOKING_PLUGIN_FILE_PATH, array( 'AweBooking\Installer', 'install' ) );
+$awebooking = new AweBooking( __FILE__ );
 
 $GLOBALS['awebooking'] = $awebooking;
+
+$awebooking->initialize();

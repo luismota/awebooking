@@ -7,6 +7,8 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 }
 
 if ( defined( 'AWEBOOKING_REMOVE_ALL_DATA' ) && true === AWEBOOKING_REMOVE_ALL_DATA ) {
+	// Installer::remove_roles();
+
 	// Tables.
 	$wpdb->query( "DROP TABLE IF EXISTS {$wpdb->prefix}awebooking_rooms" );
 	$wpdb->query( "DROP TABLE IF EXISTS {$wpdb->prefix}awebooking_booking" );

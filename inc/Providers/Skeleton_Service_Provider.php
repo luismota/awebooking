@@ -1,29 +1,24 @@
 <?php
-namespace AweBooking;
+namespace AweBooking\Providers;
 
+use Skeleton\Skeleton;
 use Valitron\Validator;
-use AweBooking\Support\Service_Hooks;
+use AweBooking\Support\Service_Provider;
 use AweBooking\Admin\Fields\Date_Range_Field;
 use AweBooking\Admin\Fields\Service_List_Field;
 
-class Skeleton_Hooks extends Service_Hooks {
-
-	public function __construct() {
-		add_action( 'skeleton/init', [ $this, 'register' ] );
-	}
-
+class Skeleton_Service_Provider extends Service_Provider {
 	/**
-	 * Registers services on the given container.
-	 *
-	 * This method should only be used to configure services and parameters.
-	 *
-	 * @param Container $container Container instance.
+	 * Registers services on the AweBooking.
 	 */
-	public function register( $container ) {
-		$this->register_validator_rules();
+	public function register() {
+		$skeleton = $this->awebooking->make( Skeleton::class );
+		$field_manager = $skeleton->get_fields();
 
-		skeleton()->get_fields()->register_field( 'date_range', Date_Range_Field::class );
-		skeleton()->get_fields()->register_field( 'awebooking_services', Service_List_Field::class );
+		$field_manager->register_field( 'date_range', Date_Range_Field::class );
+		$field_manager->register_field( 'awebooking_services', Service_List_Field::class );
+
+		$this->register_validator_rules();
 	}
 
 	/**

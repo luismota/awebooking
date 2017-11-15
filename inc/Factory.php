@@ -35,7 +35,7 @@ class Factory {
 	 * @param  integer $default_state Default availability state.
 	 * @return Calendar
 	 */
-	public static function create_availability_calendar( array $rooms, $default_state = AweBooking::STATE_AVAILABLE ) {
+	public static function create_availability_calendar( array $rooms, $default_state = Constants::STATE_AVAILABLE ) {
 		return new Calendar( $rooms, awebooking( 'store.availability' ), $default_state );
 	}
 
