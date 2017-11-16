@@ -58,27 +58,6 @@ class Kernel extends Base_Kernel {
 	}
 
 	/**
-	 * Resolve the request.
-	 *
-	 * @param  mixed $request The request instance.
-	 * @return Request
-	 */
-	protected function resolve_request( $request ) {
-		$request = parent::resolve_request( $request );
-
-		// The the session on the request.
-		$request->set_wp_session(
-			$this->awebooking->make( 'session' )->get_store()
-		);
-
-		// Make this request instance on the awebooking.
-		$this->awebooking->instance( 'request', $request );
-		$this->awebooking->instance( Request::class, $request );
-
-		return $request;
-	}
-
-	/**
 	 * Get the exception messages.
 	 *
 	 * @param  \Exception|\Throwable $e       The Exception.

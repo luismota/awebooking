@@ -12,6 +12,8 @@ class Route_Service_Provider extends Service_Provider {
 	 * Registers services on the AweBooking.
 	 */
 	public function register() {
+		$this->register_request_binding();
+
 		$this->awebooking->singleton( Kernel::class );
 	}
 
@@ -25,6 +27,23 @@ class Route_Service_Provider extends Service_Provider {
 
 		add_action( 'awebooking/register_routes', [ $this, 'register_routes' ] );
 		add_action( 'parse_request', [ $this, 'dispatch' ], 0 );
+	}
+
+	/**
+	 * Register the request binding.
+	 *
+	 * @return void
+	 */
+	protected function register_request_binding() {
+		$this->awebooking->singleton( 'request', function( $awebooking ) {
+			$request = Request::capture();
+
+			$request->set_wp_session( $awebooking->make( 'session' )->get_store() );
+
+			return $request;
+		});
+
+		$this->awebooking->alias( 'request', Request::class );
 	}
 
 	public function register_endpoint() {
@@ -65,24 +84,6 @@ class Route_Service_Provider extends Service_Provider {
 		// Handle the awebooking-route endpoint requests.
 		awebooking()->make( Kernel::class )
 			->use_request_uri( $wp->query_vars['awebooking-route'] )
-			->handle( $this->create_request() );
-	}
-
-	/**
-	 * Create the request.
-	 *
-	 * @return Request
-	 */
-	public function create_request() {
-		Request::enableHttpMethodParameterOverride();
-
-		$request = Request::createFromGlobals();
-
-		$request = $request->duplicate(
-			$request->query->all(), $request->request->all(), $request->attributes->all(),
-			$request->cookies->all(), $request->files->all(), $request->server->all()
-		);
-
-		return $request;
+			->handle( $this->awebooking->make( 'request' ) );
 	}
 }
