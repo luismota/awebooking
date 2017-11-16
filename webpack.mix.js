@@ -18,7 +18,8 @@ mix.js('assets/jssrc/admin/awebooking.js', 'assets/js/admin')
    .js('assets/jssrc/admin/edit-service.js', 'assets/js/admin')
    .js('assets/jssrc/admin/edit-room-type.js', 'assets/js/admin')
    .js('assets/jssrc/admin/manager-pricing.js', 'assets/js/admin')
-   .js('assets/jssrc/admin/manager-availability.js', 'assets/js/admin');
+   .js('assets/jssrc/admin/manager-availability.js', 'assets/js/admin')
+   .js('assets/jssrc/admin/calendar/schedule-calendar.js', 'assets/js/admin');
 
 mix.extract(['vue', 'form-serialize', 'popper.js', 'tooltip.js']);
 

@@ -45,6 +45,7 @@ class Admin_Scripts {
 
 		wp_register_script( 'awebooking-manager-pricing', $awebooking_url . '/assets/js/admin/manager-pricing.js', [ 'awebooking-admin', 'awebooking-pricing-calendar' ], $version, true );
 		wp_register_script( 'awebooking-manager-availability', $awebooking_url . '/assets/js/admin/manager-availability.js', [ 'awebooking-admin', 'awebooking-yearly-calendar' ], $version, true );
+		wp_register_script( 'awebooking-schedule-calendar', $awebooking_url . '/assets/js/admin/schedule-calendar.js', [ 'wp-backbone' ], $version, true );
 
 		// Send AweBooking object.
 		wp_localize_script( 'awebooking-admin', '_awebookingSettings', array(
