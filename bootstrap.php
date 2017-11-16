@@ -5,14 +5,14 @@
  * @package AweBooking
  */
 
-if ( ! defined( 'WP_DEBUG' ) || WP_DEBUG ) {
-	require trailingslashit( __DIR__ ) . '/development.php';
-}
-
 /**
  * We need autoload via Composer to make everything works.
  */
 require trailingslashit( __DIR__ ) . 'vendor/autoload.php';
+
+if ( ! defined( 'WP_DEBUG' ) || WP_DEBUG ) {
+	require trailingslashit( __DIR__ ) . '/development.php';
+}
 
 // Try locate the Skeleton.
 if ( ! defined( 'AWETHEMES_SKELETON_LOADED' ) ) {
