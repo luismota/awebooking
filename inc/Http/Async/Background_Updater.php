@@ -53,7 +53,7 @@ class Background_Updater extends WP_Background_Process {
 			define( 'AWEBOOKING_UPDATING', true );
 		}
 
-		require_once trailingslashit( __DIR__ ) . '/../Migrations/update-functions.php';
+		require_once trailingslashit( __DIR__ ) . '/../../update-functions.php';
 
 		if ( is_callable( $callback ) ) {
 			$logger->info( sprintf( 'Running %s callback', $callback ), array( 'source' => 'db_updates' ) );
