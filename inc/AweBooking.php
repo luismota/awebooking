@@ -182,6 +182,9 @@ final class AweBooking extends Container {
 		$this->singleton( Multilingual::class );
 
 		$this->register_logger_bindings();
+
+		// Binding alias.
+		$this->alias( Multilingual::class, 'multilingual' );
 	}
 
 	/**
