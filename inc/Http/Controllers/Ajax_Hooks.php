@@ -1,5 +1,5 @@
 <?php
-namespace AweBooking;
+namespace AweBooking\Http\Controllers;
 
 use AweBooking\Booking\Request;
 use AweBooking\Support\Formatting;
@@ -7,7 +7,7 @@ use AweBooking\Support\Collection;
 use AweBooking\Support\Service_Hooks;
 use AweBooking\Pricing\Price_Calculator;
 
-class Ajax_Hooks extends Service_Hooks {
+class Ajax_Hooks {
 	/**
 	 * Init service provider.
 	 *
@@ -15,7 +15,7 @@ class Ajax_Hooks extends Service_Hooks {
 	 *
 	 * @param AweBooking $awebooking AweBooking Container instance.
 	 */
-	public function init( $awebooking ) {
+	public function __construct() {
 		add_action( 'wp_ajax_nopriv_awebooking/price_calculator', array( $this, 'price_calculator' ) );
 		add_action( 'wp_ajax_awebooking/price_calculator', array( $this, 'price_calculator' ) );
 	}

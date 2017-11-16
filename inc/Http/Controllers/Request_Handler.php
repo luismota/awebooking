@@ -1,6 +1,8 @@
 <?php
-namespace AweBooking;
+namespace AweBooking\Http\Controllers;
 
+use AweBooking\Concierge;
+use AweBooking\Factory;
 use AweBooking\AweBooking;
 use AweBooking\Hotel\Service;
 use AweBooking\Hotel\Room_Type;
@@ -17,7 +19,7 @@ use AweBooking\Cart\Cart;
 use AweBooking\Pricing\Price;
 use AweBooking\Support\Period;
 
-class Request_Handler extends Service_Hooks {
+class Request_Handler {
 	/**
 	 * Init service provider.
 	 *
@@ -25,7 +27,7 @@ class Request_Handler extends Service_Hooks {
 	 *
 	 * @param AweBooking $awebooking AweBooking Container instance.
 	 */
-	public function init( $awebooking ) {
+	public function __construct() {
 		add_action( 'template_redirect', array( $this, 'handle_add_booking' ) );
 		add_action( 'template_redirect', array( $this, 'handle_edit_booking' ) );
 		add_action( 'template_redirect', array( $this, 'handle_remove_booking' ) );

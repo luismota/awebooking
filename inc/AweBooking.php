@@ -250,6 +250,8 @@ final class AweBooking extends Container {
 		}
 
 		// TODO: Consider this.
+		new Http\Controllers\Ajax_Hooks;
+		new Http\Controllers\Request_Handler;
 		$this->trigger( Admin\Admin_Hooks::class );
 
 		do_action( 'awebooking/init', $this );
@@ -551,20 +553,11 @@ final class AweBooking extends Container {
 		return apply_filters( 'awebooking/is_running_multilanguage', $is_multilanguage, $multilingual );
 	}
 
-	/**
-	 * Deprecated method.
-	 *
-	 * @return boolean
-	 */
+	// Deprecated methods.
 	public function is_multi_language() {
 		return $this->is_running_multilanguage();
 	}
 
-	/**
-	 * Deprecated method.
-	 *
-	 * @return bool
-	 */
 	public function is_multi_location() {
 		return (bool) $this['setting']->get( 'enable_location' );
 	}
