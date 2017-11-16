@@ -365,10 +365,11 @@ class Installer {
 	 * Setup AweBooking environment - post-types, taxonomies, endpoints.
 	 */
 	protected function setup_environment() {
-		$setup_environment = new Setup_Environment;
+		$environment = new Setup_Environment;
 
-		$setup_environment->register_taxonomies();
-		$setup_environment->register_post_types();
+		$environment->register_taxonomies();
+		$environment->register_post_types();
+		$environment->register_endpoints();
 	}
 
 	/**

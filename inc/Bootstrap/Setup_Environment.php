@@ -17,12 +17,34 @@ class Setup_Environment {
 		add_action( 'init', [ $this, 'register_taxonomies' ], 5 );
 		add_action( 'init', [ $this, 'register_post_types' ], 5 );
 		add_action( 'init', [ $this, 'register_post_status' ], 10 );
-
+		add_action( 'init', [ $this, 'register_endpoints' ], 10 );
 		add_action( 'after_setup_theme', [ $this, 'register_sidebars' ] );
 	}
 
 	/**
+	 * Register the endpoints and the rewrite rules.
+	 *
+	 * @return void
+	 */
+	public function register_endpoints() {
+		global $wp, $wp_rewrite;
+
+		// Register "awebooking_route" in the query var.
+		$wp->add_query_var( 'awebooking_route' );
+
+		// Gets the endpoint name.
+		$endpoint_name = awebooking()->endpoint_name();
+
+		add_rewrite_rule( '^' . $endpoint_name . '/?$', 'index.php?awebooking_route=/', 'top' );
+		add_rewrite_rule( '^' . $endpoint_name . '/(.*)?', 'index.php?awebooking_route=/$matches[1]', 'top' );
+		add_rewrite_rule( '^' . $wp_rewrite->index . '/' . $endpoint_name . '/?$', 'index.php?awebooking_route=/', 'top' );
+		add_rewrite_rule( '^' . $wp_rewrite->index . '/' . $endpoint_name . '/(.*)?', 'index.php?awebooking_route=/$matches[1]', 'top' );
+	}
+
+	/**
 	 * Register WordPress sidebars.
+	 *
+	 * @return void
 	 */
 	public function register_sidebars() {
 		register_sidebar([

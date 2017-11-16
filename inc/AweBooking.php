@@ -508,12 +508,12 @@ final class AweBooking extends Container {
 	}
 
 	/**
-	 * Returns the relative template path.
+	 * Returns the default endpoint name.
 	 *
 	 * @return string
 	 */
 	public function endpoint_name() {
-		return apply_filters( 'awebooking/endpoint_name', 'awebooking-route/' );
+		return apply_filters( 'awebooking/endpoint_name', 'awebooking-route' );
 	}
 
 	/**
