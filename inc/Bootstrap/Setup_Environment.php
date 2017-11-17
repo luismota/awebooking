@@ -5,6 +5,7 @@ use Skeleton\Taxonomy;
 use Skeleton\Post_Type;
 use AweBooking\Constants;
 use AweBooking\AweBooking;
+use AweBooking\Support\Carbonate;
 
 class Setup_Environment {
 	/**
@@ -14,6 +15,10 @@ class Setup_Environment {
 	 * @return void
 	 */
 	public function bootstrap( AweBooking $awebooking ) {
+		// Correct the datetime starts and ends of week.
+		Carbonate::setWeekStartsAt( (int) get_option( 'start_of_week' ) );
+		Carbonate::setWeekEndsAt( (int) calendar_week_mod( Carbonate::getWeekStartsAt() - 1 ) );
+
 		add_action( 'init', [ $this, 'register_taxonomies' ], 5 );
 		add_action( 'init', [ $this, 'register_post_types' ], 5 );
 		add_action( 'init', [ $this, 'register_post_status' ], 10 );
