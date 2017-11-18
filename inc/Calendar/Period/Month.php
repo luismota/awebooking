@@ -15,7 +15,7 @@ class Month extends Period_Abstract implements \IteratorAggregate {
 	 * @param int|\DateTimeInterface $year  The year for the period.
 	 * @param int                    $month The month of year, optional.
 	 */
-	public function __construct( $year, $month = 1 ) {
+	public function __construct( $year, $month = null ) {
 		if ( $year instanceof \DateTimeInterface ) {
 			$month = (int) $year->format( 'n' );
 			$year  = (int) $year->format( 'Y' );
@@ -25,6 +25,16 @@ class Month extends Period_Abstract implements \IteratorAggregate {
 			static::validateYear( $year ),
 			static::validateRange( $month, 1, 12 )
 		) );
+	}
+
+	/**
+	 * Get number days in month.
+	 *
+	 * @return int
+	 */
+	public function get_number_days() {
+		// @codingStandardsIgnoreLine
+		return (int) $this->get_start_date()->daysInMonth;
 	}
 
 	/**
