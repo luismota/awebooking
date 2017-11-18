@@ -30,7 +30,6 @@ class Load_Configuration {
 	 */
 	public function bootstrap( AweBooking $awebooking ) {
 		$awebooking->instance( 'setting_key', $this->get_setting_key( $awebooking ) );
-		$awebooking->instance( 'setting_key', $this->get_setting_key( $awebooking ) );
 
 		$awebooking->singleton( 'setting', function ( $a ) {
 			return new Setting( $a['setting_key'] );
@@ -55,7 +54,7 @@ class Load_Configuration {
 			$active_language = $this->multilingual->get_active_language();
 
 			// If active language is not "en", "" or all, suffix with current language.
-			if ( ! in_array( $active_language , [ '', 'en', 'all' ] ) ) {
+			if ( ! in_array( $active_language, [ '', 'en', 'all' ] ) ) {
 				$setting_key .= '_' . $active_language;
 			}
 		}
