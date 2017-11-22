@@ -2,23 +2,45 @@
 namespace AweBooking\Providers;
 
 use Skeleton\Skeleton;
-use Valitron\Validator;
+use Valitron\Validator as V;
 use AweBooking\Support\Service_Provider;
-use AweBooking\Admin\Fields\Date_Range_Field;
-use AweBooking\Admin\Fields\Service_List_Field;
 
 class Skeleton_Service_Provider extends Service_Provider {
 	/**
 	 * Registers services on the AweBooking.
 	 */
 	public function register() {
-		$skeleton = $this->awebooking->make( Skeleton::class );
-		$field_manager = $skeleton->get_fields();
+		$this->register_skeleton_binding();
 
-		$field_manager->register_field( 'date_range', Date_Range_Field::class );
-		$field_manager->register_field( 'awebooking_services', Service_List_Field::class );
+		$this->register_skeleton_fields();
 
 		$this->register_validator_rules();
+	}
+
+	/**
+	 * Binding the Skeleton.
+	 *
+	 * @return void
+	 */
+	protected function register_skeleton_binding() {
+		$this->awebooking->instance( 'skeleton', Skeleton::get_instance() );
+		$this->awebooking->alias( 'skeleton', Skeleton::class );
+	}
+
+	/**
+	 * Register the Skeleton field.
+	 *
+	 * @return void
+	 */
+	protected function register_skeleton_fields() {
+		$field_manager = $this->awebooking['skeleton']->get_fields();
+
+		foreach ( [
+			'date_range'          => \AweBooking\Admin\Fields\Date_Range_Field::class,
+			'awebooking_services' => \AweBooking\Admin\Fields\Service_List_Field::class,
+		] as $key => $value ) {
+			$field_manager->register_field( $key, $value );
+		}
 	}
 
 	/**
@@ -27,7 +49,7 @@ class Skeleton_Service_Provider extends Service_Provider {
 	 * @return void
 	 */
 	protected function register_validator_rules() {
-		Validator::addRule( 'datePeriod', function( $field, $value, array $params ) {
+		V::addRule( 'datePeriod', function( $field, $value, array $params ) {
 			$strict = isset( $params[0] ) && $params[0];
 
 			$sanitized = awebooking_sanitize_period( $value, $strict );
@@ -35,7 +57,7 @@ class Skeleton_Service_Provider extends Service_Provider {
 			return ! empty( $sanitized );
 		});
 
-		Validator::addRule( 'price', function( $field, $value, array $params ) {
+		V::addRule( 'price', function( $field, $value, array $params ) {
 			if ( 0 == $value ) {
 				return true;
 			}
