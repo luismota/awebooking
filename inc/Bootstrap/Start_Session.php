@@ -28,11 +28,13 @@ class Start_Session {
 	 * @return void
 	 */
 	public function bootstrap() {
-		$this->register_session_bindings();
+		if ( $this->awebooking->is_request( 'frontend' ) ) {
+			$this->register_session_bindings();
 
-		$this->register_flash_bindings();
+			$this->register_flash_bindings();
 
-		$this->start_session();
+			$this->start_session();
+		}
 	}
 
 	/**

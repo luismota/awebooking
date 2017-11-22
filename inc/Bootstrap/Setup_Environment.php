@@ -5,7 +5,6 @@ use Skeleton\Taxonomy;
 use Skeleton\Post_Type;
 use AweBooking\Constants;
 use AweBooking\AweBooking;
-use AweBooking\Support\Carbonate;
 
 class Setup_Environment {
 	/**
@@ -15,15 +14,56 @@ class Setup_Environment {
 	 * @return void
 	 */
 	public function bootstrap( AweBooking $awebooking ) {
-		// Correct the datetime starts and ends of week.
-		Carbonate::setWeekStartsAt( (int) get_option( 'start_of_week' ) );
-		Carbonate::setWeekEndsAt( (int) calendar_week_mod( Carbonate::getWeekStartsAt() - 1 ) );
-
+		// The core things.
 		add_action( 'init', [ $this, 'register_taxonomies' ], 5 );
 		add_action( 'init', [ $this, 'register_post_types' ], 5 );
 		add_action( 'init', [ $this, 'register_post_status' ], 10 );
 		add_action( 'init', [ $this, 'register_endpoints' ], 10 );
+
+		// In frontend.
 		add_action( 'after_setup_theme', [ $this, 'register_sidebars' ] );
+		add_action( 'after_setup_theme', [ $this, 'add_image_sizes' ] );
+		add_action( 'after_setup_theme', [ $this, 'include_template_functions' ], 11 );
+	}
+
+	/**
+	 * Add AweBooking Image sizes to WP.
+	 *
+	 * TODO: Clean this!!!
+	 */
+	public function add_image_sizes() {
+		$awebooking_thumbnail = awebooking_get_image_size( 'awebooking_thumbnail' );
+		$awebooking_catalog   = awebooking_get_image_size( 'awebooking_catalog' );
+		$awebooking_single    = awebooking_get_image_size( 'awebooking_single' );
+
+		add_image_size( 'awebooking_thumbnail', $awebooking_thumbnail['width'], $awebooking_thumbnail['height'], $awebooking_thumbnail['crop'] );
+		add_image_size( 'awebooking_catalog', $awebooking_catalog['width'], $awebooking_catalog['height'], $awebooking_catalog['crop'] );
+		add_image_size( 'awebooking_single', $awebooking_single['width'], $awebooking_single['height'], $awebooking_single['crop'] );
+	}
+
+	/**
+	 * Load the AweBooking template functions.
+	 *
+	 * This makes them pluggable by plugins and themes.
+	 */
+	public function include_template_functions() {
+		include_once trailingslashit( __DIR__ ) . '/../template-functions.php';
+	}
+
+	/**
+	 * Register WordPress sidebars.
+	 *
+	 * @return void
+	 */
+	public function register_sidebars() {
+		register_sidebar([
+			'name'          => esc_html__( 'AweBooking', 'awebooking' ),
+			'id'            => 'awebooking-sidebar',
+			'before_widget' => '<section id="%1$s" class="awebooking-widget %2$s">',
+			'after_widget'  => '</section>',
+			'before_title'  => '<h2 class="widget-title">',
+			'after_title'   => '</h2>',
+		]);
 	}
 
 	/**
@@ -44,22 +84,6 @@ class Setup_Environment {
 		add_rewrite_rule( '^' . $endpoint_name . '/(.*)?', 'index.php?awebooking_route=/$matches[1]', 'top' );
 		add_rewrite_rule( '^' . $wp_rewrite->index . '/' . $endpoint_name . '/?$', 'index.php?awebooking_route=/', 'top' );
 		add_rewrite_rule( '^' . $wp_rewrite->index . '/' . $endpoint_name . '/(.*)?', 'index.php?awebooking_route=/$matches[1]', 'top' );
-	}
-
-	/**
-	 * Register WordPress sidebars.
-	 *
-	 * @return void
-	 */
-	public function register_sidebars() {
-		register_sidebar([
-			'name'          => esc_html__( 'AweBooking', 'awebooking' ),
-			'id'            => 'awebooking-sidebar',
-			'before_widget' => '<section id="%1$s" class="awebooking-widget %2$s">',
-			'after_widget'  => '</section>',
-			'before_title'  => '<h2 class="widget-title">',
-			'after_title'   => '</h2>',
-		]);
 	}
 
 	/**

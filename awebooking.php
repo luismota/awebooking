@@ -61,6 +61,8 @@ if ( version_compare( phpversion(), '5.6.4', '<' ) ) {
  */
 require trailingslashit( __DIR__ ) . 'bootstrap.php';
 
+require_once trailingslashit( __DIR__ ) . 'inc/functions.php';
+
 define( 'AWEBOOKING_VERSION', AweBooking::VERSION );
 
 $awebooking = new AweBooking( __FILE__ );

@@ -21,9 +21,6 @@ if ( file_exists( __DIR__ . '/vendor/awethemes/skeleton/skeleton.php' ) ) {
 	wp_die( 'AweBooking can\'t works without the Skeleton. Please double-check that everything is setup correctly!' );
 }
 
-require_once trailingslashit( __DIR__ ) . 'inc/functions.php';
-require_once trailingslashit( __DIR__ ) . 'inc/template-functions.php';
-
 // Make AweBooking\AweBooking as AweBooking alias.
 class_alias( 'AweBooking\\AweBooking', 'AweBooking' );
 

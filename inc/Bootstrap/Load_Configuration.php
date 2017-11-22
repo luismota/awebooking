@@ -4,6 +4,7 @@ namespace AweBooking\Bootstrap;
 use AweBooking\Setting;
 use AweBooking\AweBooking;
 use AweBooking\Multilingual;
+use AweBooking\Support\Carbonate;
 
 class Load_Configuration {
 	/**
@@ -29,6 +30,10 @@ class Load_Configuration {
 	 * @return void
 	 */
 	public function bootstrap( AweBooking $awebooking ) {
+		// Correct the datetime starts and ends of week.
+		Carbonate::setWeekStartsAt( (int) get_option( 'start_of_week' ) );
+		Carbonate::setWeekEndsAt( (int) calendar_week_mod( Carbonate::getWeekStartsAt() - 1 ) );
+
 		$awebooking->instance( 'setting_key', $this->get_setting_key( $awebooking ) );
 
 		$awebooking->singleton( 'setting', function ( $a ) {
