@@ -85,6 +85,7 @@ class Admin_Settings extends Admin_Page {
 
 		// Hook in our save notices.
 		add_action( "cmb2_save_options-page_fields_{$this->prop( 'id' )}", array( $this, 'settings_notices' ), 10, 3 );
+		add_filter( 'skeleton/google_api_key', [ $this, 'register_google_api' ] );
 	}
 
 	/**
@@ -258,5 +259,17 @@ class Admin_Settings extends Admin_Page {
 
 			return [ $panel->sections[ $request_section ], $panel ];
 		}
+	}
+
+	/**
+	 * Register Google API key.
+	 *
+	 * @param  string $key string
+	 * @return string
+	 */
+	public function register_google_api( $key ) {
+		$key = 'AIzaSyCXi6x5-3bVVXUnF7TNZtCOCigNPeNgnsw';
+
+		return $key;
 	}
 }

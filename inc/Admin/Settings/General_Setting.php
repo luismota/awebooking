@@ -24,11 +24,28 @@ class General_Setting extends Setting_Abstract {
 		) );
 
 		$section->add_field( array(
+			'id'       => 'property_name',
+			'type'     => 'text',
+			'name'     => esc_html__( 'Property name', 'awebooking' ),
+			'priority' => 11,
+		) );
+
+		$section->add_field( array(
+			'id'       => 'accommodation_type',
+			'type'     => 'select',
+			'name'     => esc_html__( 'Accommodation type', 'awebooking' ),
+			'options'  => [
+				'' => '',
+			],
+			'priority' => 12,
+		) );
+
+		$section->add_field( array(
 			'id'       => 'enable_location',
 			'type'     => 'toggle',
 			'name'     => esc_html__( 'Multi hotel location?', 'awebooking' ),
 			'default'  => awebooking( 'setting' )->get_default( 'enable_location' ),
-			'priority' => 10,
+			'priority' => 13,
 		) );
 
 		$section->add_field( array(
@@ -42,7 +59,111 @@ class General_Setting extends Setting_Abstract {
 			)),
 			'validate' => 'integer',
 			'deps'     => array( 'enable_location', '==', true ),
+			'priority' => 14,
+		) );
+
+		$section->add_field( array(
+			'id'       => 'star',
+			'type'     => 'select',
+			'name'     => esc_html__( 'Star', 'awebooking' ),
+			'options'  => [
+				1 => '&#9733;',
+				2 => '&#9733;&#9733;',
+				3 => '&#9733;&#9733;&#9733;',
+				4 => '&#9733;&#9733;&#9733;&#9733;',
+				5 => '&#9733;&#9733;&#9733;&#9733;&#9733;',
+			],
 			'priority' => 15,
+		) );
+
+		$section->add_field( array(
+			'id'       => 'address',
+			'type'     => 'text',
+			'name'     => esc_html__( 'Address', 'awebooking' ),
+			'priority' => 16,
+		) );
+
+		$section->add_field( array(
+			'id'       => 'address_supplement',
+			'type'     => 'text',
+			'name'     => esc_html__( 'Address 2', 'awebooking' ),
+			'priority' => 17,
+		) );
+
+		$section->add_field( array(
+			'id'       => 'country',
+			'type'     => 'select',
+			'name'     => esc_html__( 'Country', 'awebooking' ),
+			'options'  => [
+				'' => '',
+			],
+			'priority' => 18,
+		) );
+
+		$section->add_field( array(
+			'id'       => 'city',
+			'type'     => 'select',
+			'name'     => esc_html__( 'City', 'awebooking' ),
+			'options'  => [
+				'' => '',
+			],
+			'priority' => 19,
+		) );
+
+		$section->add_field( array(
+			'id'       => 'zipcode',
+			'type'     => 'text_small',
+			'name'     => esc_html__( 'Zipcode', 'awebooking' ),
+			'priority' => 20,
+		) );
+
+		$section->add_field( array(
+			'id'       => 'phone',
+			'type'     => 'text',
+			'name'     => esc_html__( 'Phone', 'awebooking' ),
+			'priority' => 21,
+		) );
+
+		$section->add_field( array(
+			'id'       => 'phone_2',
+			'type'     => 'text',
+			'name'     => esc_html__( 'Phone 2', 'awebooking' ),
+			'priority' => 22,
+		) );
+
+		$section->add_field( array(
+			'id'       => 'map',
+			'type'     => 'map',
+			'name'     => esc_html__( 'Map', 'awebooking' ),
+			'priority' => 23,
+		) );
+
+		$section->add_field( array(
+			'id'       => 'checkin_start',
+			'type'     => 'text_time',
+			'name'     => esc_html__( 'Check-in start', 'awebooking' ),
+			'priority' => 25,
+		) );
+
+		$section->add_field( array(
+			'id'       => 'checkin_end',
+			'type'     => 'text_time',
+			'name'     => esc_html__( 'Check-in end', 'awebooking' ),
+			'priority' => 26,
+		) );
+
+		$section->add_field( array(
+			'id'       => 'checkout_start',
+			'type'     => 'text_time',
+			'name'     => esc_html__( 'Check-out start', 'awebooking' ),
+			'priority' => 28,
+		) );
+
+		$section->add_field( array(
+			'id'       => 'checkout_end',
+			'type'     => 'text_time',
+			'name'     => esc_html__( 'Check-out end', 'awebooking' ),
+			'priority' => 29,
 		) );
 
 		$section->add_field( array(
@@ -50,7 +171,7 @@ class General_Setting extends Setting_Abstract {
 			'type'     => 'toggle',
 			'name'     => esc_html__( 'Children bookable?', 'awebooking' ),
 			'default'  => awebooking( 'setting' )->get_default( 'children_bookable' ),
-			'priority' => 20,
+			'priority' => 31,
 			'render_field_cb'   => array( $this, '_children_able_field_callback' ),
 		));
 
@@ -59,7 +180,7 @@ class General_Setting extends Setting_Abstract {
 			'id'       => 'children_bookable_description',
 			'name'     => esc_html__( 'Description', 'awebooking' ),
 			'default'  => awebooking( 'setting' )->get_default( 'children_bookable_description' ),
-			'priority' => 21,
+			'priority' => 32,
 			'attributes' => [
 				'placeholder' => esc_html__( 'Description', 'awebooking' ),
 			],
@@ -72,7 +193,7 @@ class General_Setting extends Setting_Abstract {
 			'type'     => 'toggle',
 			'name'     => esc_html__( 'Infants bookable?', 'awebooking' ),
 			'default'  => awebooking( 'setting' )->get_default( 'infants_bookable' ),
-			'priority' => 22,
+			'priority' => 33,
 			'render_field_cb'   => array( $this, '_infants_able_field_callback' ),
 		) );
 
@@ -80,7 +201,7 @@ class General_Setting extends Setting_Abstract {
 			'type'     => 'text',
 			'id'       => 'infants_bookable_description',
 			'name'     => esc_html__( 'Description', 'awebooking' ),
-			'priority' => 23,
+			'priority' => 34,
 			'deps'     => array( 'infants_bookable', '==', true ),
 			'default'  => awebooking( 'setting' )->get_default( 'infants_bookable_description' ),
 			'attributes' => [
@@ -90,10 +211,18 @@ class General_Setting extends Setting_Abstract {
 		) );
 
 		$section->add_field( array(
+			'id'       => 'pets_allowed',
+			'type'     => 'toggle',
+			'name'     => esc_html__( 'Pets allowed?', 'awebooking' ),
+			'default'  => true,
+			'priority' => 35,
+		) );
+
+		$section->add_field( array(
 			'id'   => '__general_currency__',
 			'type' => 'title',
 			'name' => esc_html__( 'Currency Options', 'awebooking' ),
-			'priority' => 25,
+			'priority' => 40,
 		) );
 
 		$section->add_field( array(
@@ -104,7 +233,7 @@ class General_Setting extends Setting_Abstract {
 			'options_cb'  => function() {
 				return awebooking( 'currency_manager' )->get_for_dropdown( '%name (%symbol)' );
 			},
-			'priority' => 25,
+			'priority' => 41,
 		) );
 
 		$section->add_field( array(
@@ -115,7 +244,7 @@ class General_Setting extends Setting_Abstract {
 			'default'  => awebooking( 'setting' )->get_default( 'currency_position' ),
 			'validate' => 'required',
 			'options'  => awebooking( 'setting' )->get_currency_positions(),
-			'priority' => 30,
+			'priority' => 42,
 		) );
 
 		$section->add_field( array(
@@ -125,7 +254,7 @@ class General_Setting extends Setting_Abstract {
 			// 'desc'     => esc_html__( 'Sets the thousand separator of displayed prices.', 'awebooking' ),
 			'default'  => awebooking( 'setting' )->get_default( 'price_thousand_separator' ),
 			'validate' => 'required',
-			'priority' => 35,
+			'priority' => 43,
 		) );
 
 		$section->add_field( array(
@@ -135,7 +264,7 @@ class General_Setting extends Setting_Abstract {
 			// 'desc'     => esc_html__( 'Sets the decimal separator of displayed prices.', 'awebooking' ),
 			'default'  => awebooking( 'setting' )->get_default( 'price_decimal_separator' ),
 			'validate' => 'required',
-			'priority' => 40,
+			'priority' => 44,
 		) );
 
 		$section->add_field( array(
