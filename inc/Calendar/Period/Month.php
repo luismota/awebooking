@@ -1,7 +1,7 @@
 <?php
 namespace AweBooking\Calendar\Period;
 
-class Month extends Period_Abstract implements \IteratorAggregate {
+class Month extends Period_Abstract implements Period_Interface, \IteratorAggregate {
 	/**
 	 * The date interval specification for the period.
 	 *

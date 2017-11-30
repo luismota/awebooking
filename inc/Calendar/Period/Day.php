@@ -3,7 +3,7 @@ namespace AweBooking\Calendar\Period;
 
 use AweBooking\Support\Carbonate;
 
-class Day extends Period_Abstract {
+class Day extends Period_Abstract implements Period_Interface {
 	/**
 	 * The date interval specification for the period.
 	 *
