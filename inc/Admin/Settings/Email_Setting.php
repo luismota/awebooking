@@ -46,7 +46,7 @@ class Email_Setting extends Setting_Abstract {
 	}
 
 	/**
-	 * Regsuetr email general settings.
+	 * Register email general settings.
 	 *
 	 * @param  Skeleton\CMB2\Section $email_general Section instance.
 	 * @return void
@@ -131,7 +131,7 @@ class Email_Setting extends Setting_Abstract {
 		) );
 	}
 	/**
-	 * Regsuetr email new booking settings.
+	 * Register email new booking settings.
 	 *
 	 * @param  Skeleton\CMB2\Section $new_booking Section instance.
 	 * @return void
@@ -172,7 +172,7 @@ class Email_Setting extends Setting_Abstract {
 	}
 
 	/**
-	 * Regsuetr email cancelled booking settings.
+	 * Register email cancelled booking settings.
 	 *
 	 * @param  Skeleton\CMB2\Section $cancelled_booking Section instance.
 	 * @return void
@@ -213,7 +213,7 @@ class Email_Setting extends Setting_Abstract {
 	}
 
 	/**
-	 * Regsuetr email processing booking settings.
+	 * Register email processing booking settings.
 	 *
 	 * @param  Skeleton\CMB2\Section $processing_booking Section instance.
 	 * @return void
@@ -253,7 +253,7 @@ class Email_Setting extends Setting_Abstract {
 	}
 
 	/**
-	 * Regsuetr email completed booking settings.
+	 * Register email completed booking settings.
 	 *
 	 * @param  Skeleton\CMB2\Section $completed_booking Section instance.
 	 * @return void

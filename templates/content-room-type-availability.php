@@ -64,7 +64,7 @@ $room_type_id = $result->get_room_type()->get_id();
 		</p>
 
 		<div class="awebooking-loop-room-type__desc">
-			<?php print wp_trim_words( $result->get_room_type()->get_description(), 25, '...' ); // WPCS: xss ok. ?>
+			<?php print wp_trim_words( $result->get_room_type()->get_short_description(), 25, '...' ); // WPCS: xss ok. ?>
 		</div>
 
 		<?php

@@ -15,10 +15,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 global $room_type;
 
-if ( ! $room_type->get_description() ) {
+if ( ! $room_type->get_short_description() ) {
 	return;
 }
 ?>
 <div class="awebooking-loop-room-type__desc">
-	<?php print wp_trim_words( $room_type->get_description(), 25, '...' ); // WPCS: xss ok. ?>
+	<?php print wp_trim_words( $room_type->get_short_description(), 25, '...' ); // WPCS: xss ok. ?>
 </div>
