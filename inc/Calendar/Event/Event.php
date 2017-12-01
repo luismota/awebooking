@@ -1,9 +1,8 @@
 <?php
 namespace AweBooking\Calendar\Event;
 
-use AweBooking\Support\Period;
 use AweBooking\Support\Carbonate;
-use AweBooking\Calendar\Period\Period_Interface;
+use AweBooking\Calendar\Period\Period;
 use AweBooking\Calendar\Resource\Resource_Interface;
 
 class Event implements Event_Interface {
@@ -337,20 +336,29 @@ class Event implements Event_Interface {
 	/**
 	 * Check if the given period is during the event.
 	 *
-	 * @param  Period_Interface $period The period given.
+	 * @param  Period $period The period given.
 	 * @return bool
 	 */
-	public function contains_period( Period_Interface $period ) {
+	public function contains_period( Period $period ) {
 		return $this->contains( $period );
 	}
 
 	/**
 	 * Check if the event is during the given period.
 	 *
-	 * @param  Period_Interface $period The period given.
+	 * @param  Period $period The period given.
 	 * @return bool
 	 */
-	public function is_during( Period_Interface $period ) {
+	public function is_during( Period $period ) {
 		// TODO: ...
+	}
+
+	/**
+	 * Determines if this event have untrusted resource.
+	 *
+	 * @return boolean
+	 */
+	public function is_untrusted_resource() {
+		return $this->get_resource()->get_id() < 1;
 	}
 }

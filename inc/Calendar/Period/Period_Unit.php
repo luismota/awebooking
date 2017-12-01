@@ -1,10 +1,7 @@
 <?php
 namespace AweBooking\Calendar\Period;
 
-use DateInterval;
-use AweBooking\Support\Period;
-
-abstract class Period_Abstract extends Period {
+abstract class Period_Unit extends Period {
 	/**
 	 * The date interval specification for the period.
 	 *
@@ -26,22 +23,12 @@ abstract class Period_Abstract extends Period {
 	}
 
 	/**
-	 * Format the period at start date point.
-	 *
-	 * @param  string $format The format string.
-	 * @return string
-	 */
-	public function format( $format ) {
-		return $this->get_start_date()->format( $format );
-	}
-
-	/**
 	 * The the DateInterval instance.
 	 *
 	 * @return \DateInterval
 	 */
 	public function get_interval() {
-		return new DateInterval( $this->interval );
+		return new \DateInterval( $this->interval );
 	}
 
 	/**

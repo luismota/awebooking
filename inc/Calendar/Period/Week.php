@@ -3,7 +3,7 @@ namespace AweBooking\Calendar\Period;
 
 use AweBooking\Support\Carbonate;
 
-class Week extends Period_Abstract implements Period_Interface, \IteratorAggregate {
+class Week extends Period_Unit implements \IteratorAggregate {
 	/**
 	 * The date interval specification for the period.
 	 *

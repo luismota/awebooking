@@ -2,7 +2,7 @@
 namespace AweBooking\Calendar\Event;
 
 use DateTimeInterface;
-use AweBooking\Calendar\Period\Period_Interface;
+use AweBooking\Calendar\Period\Period;
 
 interface Event_Interface {
 	/**
@@ -93,16 +93,16 @@ interface Event_Interface {
 	/**
 	 * Check if the given period is during the event.
 	 *
-	 * @param  Period_Interface $period The period given.
+	 * @param  Period $period The period given.
 	 * @return bool
 	 */
-	public function contains_period( Period_Interface $period );
+	public function contains_period( Period $period );
 
 	/**
 	 * Check if the event is during the given period.
 	 *
-	 * @param  Period_Interface $period The period given.
+	 * @param  Period $period The period given.
 	 * @return bool
 	 */
-	public function is_during( Period_Interface $period );
+	public function is_during( Period $period );
 }

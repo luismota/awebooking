@@ -1,5 +1,5 @@
 <?php
-namespace AweBooking\Calendar\Store;
+namespace AweBooking\Calendar\Provider;
 
 use AweBooking\Support\Carbonate;
 use AweBooking\Calendar\Event\Event_Interface;

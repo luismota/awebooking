@@ -1,9 +1,9 @@
 <?php
 namespace AweBooking\Calendar;
 
+use AweBooking\Calendar\Period\Period;
 use AweBooking\Calendar\Event\Event_Interface;
 use AweBooking\Calendar\Event\Event_Collection;
-use AweBooking\Calendar\Period\Period_Interface;
 use AweBooking\Calendar\Resource\Resource_Interface;
 use AweBooking\Calendar\Provider\Provider_Interface;
 
@@ -64,15 +64,20 @@ class Calendar {
 	/**
 	 * Get events available in a period.
 	 *
-	 * @param  Period_Interface $period  The period.
-	 * @param  array            $options Optional, something pass to provider to get events.
+	 * @param  Period $period  The period.
+	 * @param  array  $options Optional, something pass to provider to get events.
 	 * @return \AweBooking\Calendar\Event\Event_Collection
 	 */
-	public function get_events( Period_Interface $period, array $options = [] ) {
+	public function get_events( Period $period, array $options = [] ) {
 		// Get events from provider.
 		$events = $this->provider->get_events( $period->get_start_date(), $period->get_end_date(), $options );
 
 		return Event_Collection::make( $events )
+			->each(function( $e ) {
+				if ( $e->is_untrusted_resource() ) {
+					$e->set_resource( $this->resource );
+				}
+			})
 			->reject(function( $e ) {
 				return $this->resource->get_id() !== $e->get_resource()->get_id();
 			});
