@@ -1,0 +1,199 @@
+BEGIN:VCALENDAR
+PRODID:-//Google Inc//Google Calendar 70.9054//EN
+VERSION:2.0
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:anhsk.ohbo@gmail.com
+X-WR-TIMEZONE:Asia/Saigon
+BEGIN:VEVENT
+DTSTART;VALUE=DATE:20171025
+DTEND;VALUE=DATE:20171029
+DTSTAMP:20171026T092630Z
+UID:2c6nkluf6pbqecmep2ni34p5mc@google.com
+CREATED:20171026T092506Z
+DESCRIPTION:
+LAST-MODIFIED:20171026T092614Z
+LOCATION:
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:NNNNN
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20170909T090000Z
+DTEND:20170909T101500Z
+DTSTAMP:20171026T092630Z
+ORGANIZER;CN=unknownorganizer@calendar.google.com:mailto:unknownorganizer@c
+ alendar.google.com
+UID:7kukuqrfedlm2f9t0btba4nhq156o09lh86bfl20e7epsm625v6b89gh0hvv1d19k3m0
+ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=ACCEPTED;CN=Nguyen
+  Van Anh;X-NUM-GUESTS=0:mailto:anhsk.ohbo@gmail.com
+CLASS:PRIVATE
+CREATED:20170905T145935Z
+DESCRIPTION:To see detailed information for automatically created events li
+ ke this one\, use the official Google Calendar app. https://g.co/calendar\n
+ \nThis event was created from an email you received in Gmail. https://mail.
+ google.com/mail?extsrc=cal&plid=ACUX6DPnTnhSCpXW64RPW-6ca6mtqtoN069BsAs\n
+LAST-MODIFIED:20170912T030712Z
+LOCATION:Hà Nội HAN
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Flight to Đà Nẵng (VJ 511)
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20170912T105000Z
+DTEND:20170912T120500Z
+DTSTAMP:20171026T092630Z
+ORGANIZER;CN=unknownorganizer@calendar.google.com:mailto:unknownorganizer@c
+ alendar.google.com
+UID:7kukuqrfedlm2f9tg428n6pkah1r2lk99a8ht61jub1d33tditj3do72q5ca62hi7i80
+ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=ACCEPTED;CN=Nguyen
+  Van Anh;X-NUM-GUESTS=0:mailto:anhsk.ohbo@gmail.com
+CLASS:PRIVATE
+CREATED:20170905T145935Z
+DESCRIPTION:To see detailed information for automatically created events li
+ ke this one\, use the official Google Calendar app. https://g.co/calendar\n
+ \nThis event was created from an email you received in Gmail. https://mail.
+ google.com/mail?extsrc=cal&plid=ACUX6DPnTnhSCpXW64RPW-6ca6mtqtoN069BsAs\n
+LAST-MODIFIED:20170912T030712Z
+LOCATION:Đà Nẵng DAD
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Flight to Hà Nội (VJ 510)
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;VALUE=DATE:20170909
+DTEND;VALUE=DATE:20170913
+DTSTAMP:20171026T092630Z
+ORGANIZER;CN=unknownorganizer@calendar.google.com:mailto:unknownorganizer@c
+ alendar.google.com
+UID:7kukuqrfedlm2f9tvmnj57ever9h38nv15hs3ecjiegaqh5urjeu7u875p6sqjgdfb60
+ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=ACCEPTED;CN=Nguyen
+  Van Anh;X-NUM-GUESTS=0:mailto:anhsk.ohbo@gmail.com
+CLASS:PRIVATE
+CREATED:20170906T192905Z
+DESCRIPTION:To see detailed information for automatically created events li
+ ke this one\, use the official Google Calendar app. https://g.co/calendar\n
+ \nThis event was created from an email you received in Gmail. https://mail.
+ google.com/mail?extsrc=cal&plid=ACUX6DMvL3POOuNkPDev9MqY62pd0WEZjyu4soQ\n
+LAST-MODIFIED:20170906T192905Z
+LOCATION:Lê Văn Quý\, An Hải Bắc\, Sơn Trà\, Đà Nẵng\, Việt Nam
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Stay at Continent Hotel Da Nang
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20161210T000000Z
+DTEND:20161210T010000Z
+DTSTAMP:20171026T092630Z
+UID:coq38p9l6sr3ab9nc9gj4b9k6cp3cb9o6hhjeb9m6oo3apb3cgr6cc1mco@google.com
+CREATED:20161209T171044Z
+DESCRIPTION:To day\, we are together 599 love days. Your love is the sweete
+ st I've ever had and forever I love you. 😘😘😘 {wedding_e}
+LAST-MODIFIED:20161209T171044Z
+LOCATION:
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:599 Love days
+TRANSP:OPAQUE
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:This is an event reminder
+TRIGGER:-P0DT0H15M0S
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;VALUE=DATE:20161211
+DTEND;VALUE=DATE:20161212
+DTSTAMP:20171026T092630Z
+UID:cpi3ephmcoqm2b9l6dij2b9kcgs62b9p6koj4b9ic5j3aob2c8qmcdhj64@google.com
+CREATED:20161209T171043Z
+DESCRIPTION:To day\, we are together 600 love days. Your love is the sweete
+ st I've ever had and forever I love you. 😍😍😍 {rose_e}
+LAST-MODIFIED:20161209T171043Z
+LOCATION:
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:600 LOVE DAYS
+TRANSP:OPAQUE
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:This is an event reminder
+TRIGGER:-P0DT0H15M0S
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20141105T223000Z
+DTEND:20141105T233000Z
+DTSTAMP:20171026T092630Z
+ORGANIZER;CN=107788310598566199882@profile.calendar.google.com:https://plus
+ .google.com/107788310598566199882
+UID:9ua3t35no1degmfgo80h6t169g@google.com
+ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=ACCEPTED;CN=anhsk.
+ ohbo@gmail.com;X-NUM-GUESTS=0:mailto:anhsk.ohbo@gmail.com
+ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=ACCEPTED;X-NUM-GUE
+ STS=0:https://plus.google.com/107788310598566199882
+URL:https://plus.google.com/events/c9ua3t35no1degmfgo80h6t169g
+CREATED:20141031T220044Z
+DESCRIPTION:Join the cast of Interstellar for a Google+ Hangout live from S
+ mithsonian’s National Air and Space Museum. Use the hashtag  #InterstellarH
+ angout  to share your thoughts and submit questions to the cast. \n\nView e
+ vent in Google+: https://plus.google.com/events/c9ua3t35no1degmfgo80h6t169g
+LAST-MODIFIED:20150619T100411Z
+LOCATION:
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:#InterstellarHangout - Cast LIVE from Smithsonian’s Air and Space M
+ useum
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20130810T233000Z
+DTEND:20130811T003000Z
+DTSTAMP:20171026T092630Z
+ORGANIZER;CN=114635553671833442612@profile.calendar.google.com:https://plus
+ .google.com/114635553671833442612
+UID:s6l0br3f7nrl298k1dtu723prg@google.com
+ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=ACCEPTED;X-NUM-GUE
+ STS=0:https://plus.google.com/114635553671833442612
+ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=ACCEPTED;CN=anhsk.
+ ohbo@gmail.com;X-NUM-GUESTS=0:mailto:anhsk.ohbo@gmail.com
+URL:https://plus.google.com/events/cs6l0br3f7nrl298k1dtu723prg
+CREATED:20130809T031841Z
+DESCRIPTION:Join elementary for the last 30 minutes of our countdown\, the 
+ reveal\, and some Q&A.\n\n#TheCountdownBegins #elementary #elementaryos\n\n
+ View event in Google+: https://plus.google.com/events/cs6l0br3f7nrl298k1dtu
+ 723prg
+LAST-MODIFIED:20130810T124642Z
+LOCATION:
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:The Countdown
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20121028T190000Z
+DTEND:20121028T210000Z
+DTSTAMP:20171026T092630Z
+ORGANIZER;CN=116838152096212363521@profile.calendar.google.com:https://plus
+ .google.com/116838152096212363521
+UID:np48vpomi5p7io1m1hc3srhrs0@google.com
+ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=DECLINED;X-NUM-GUE
+ STS=0:https://plus.google.com/116838152096212363521
+ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=an
+ hsk.ohbo@gmail.com;X-NUM-GUESTS=0:mailto:anhsk.ohbo@gmail.com
+URL:https://plus.google.com/events/cnp48vpomi5p7io1m1hc3srhrs0
+CREATED:20121028T011351Z
+DESCRIPTION:Ngay vui\n\nView event in Google+: https://plus.google.com/even
+ ts/cnp48vpomi5p7io1m1hc3srhrs0
+LAST-MODIFIED:20121122T163900Z
+LOCATION:Việt Nam
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Halowel
+TRANSP:OPAQUE
+END:VEVENT
+END:VCALENDAR

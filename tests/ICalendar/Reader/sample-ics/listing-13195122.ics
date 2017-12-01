@@ -1,0 +1,55 @@
+BEGIN:VCALENDAR
+PRODID;X-RICAL-TZSOURCE=TZINFO:-//Airbnb Inc//Hosting Calendar 0.8.8//EN
+CALSCALE:GREGORIAN
+VERSION:2.0
+BEGIN:VEVENT
+DTEND;VALUE=DATE:20170104
+DTSTART;VALUE=DATE:20170101
+UID:-7mpydd22rbdy-e0vs9ku2qmz0@airbnb.com
+DESCRIPTION:CHECKIN: 01/01/2017\nCHECKOUT: 01/04/2017\nNIGHTS: 3\nPHONE: 
+ +61 420 212 337\nEMAIL: (no email alias available)\nPROPERTY: Temple Cab
+ ins on sunny hillside in Uluwatu Beach\n
+SUMMARY:Cecilia Mardones (KBPNHX)
+LOCATION:Temple Cabins on sunny hillside in Uluwatu Beach
+END:VEVENT
+BEGIN:VEVENT
+DTEND;VALUE=DATE:20170201
+DTSTART;VALUE=DATE:20170129
+UID:-7mpydd22rbdy--5fh9nigpnvhy@airbnb.com
+DESCRIPTION:CHECKIN: 01/29/2017\nCHECKOUT: 02/01/2017\nNIGHTS: 3\nPHONE: 
+ +262 692 25 79 26\nEMAIL: (no email alias available)\nPROPERTY: Temple C
+ abins on sunny hillside in Uluwatu Beach\n
+SUMMARY:DAvid Cabanes (HQ2YBW)
+LOCATION:Temple Cabins on sunny hillside in Uluwatu Beach
+END:VEVENT
+BEGIN:VEVENT
+DTEND;VALUE=DATE:20170319
+DTSTART;VALUE=DATE:20170318
+UID:-7mpydd22rbdy-cebspjf295hy@airbnb.com
+DESCRIPTION:CHECKIN: 03/18/2017\nCHECKOUT: 03/19/2017\nNIGHTS: 1\nPHONE: 
+ +61 497 828 835\nEMAIL: (no email alias available)\nPROPERTY: Temple Cab
+ ins on sunny hillside in Uluwatu Beach\n
+SUMMARY:Rach Eve Fisher (XXRFA5)
+LOCATION:Temple Cabins on sunny hillside in Uluwatu Beach
+END:VEVENT
+BEGIN:VEVENT
+DTEND;VALUE=DATE:20171023
+DTSTART;VALUE=DATE:20171021
+UID:-7mpydd22rbdy--ou1g41zvicr5@airbnb.com
+DESCRIPTION:CHECKIN: 10/21/2017\nCHECKOUT: 10/23/2017\nNIGHTS: 2\nPHONE: 
+ +1 (612) 716-1158\nEMAIL: tricia-y8e699oirg3uf4ss@guest.airbnb.com\nPROP
+ ERTY: Temple Cabins on sunny hillside in Uluwatu Beach\n
+SUMMARY:Tricia Bartholomay (HMN8Q5DB3K)
+LOCATION:Temple Cabins on sunny hillside in Uluwatu Beach
+END:VEVENT
+BEGIN:VEVENT
+DTEND;VALUE=DATE:20180822
+DTSTART;VALUE=DATE:20180818
+UID:-7mpydd22rbdy--h37hdppumio7@airbnb.com
+DESCRIPTION:CHECKIN: 08/18/2018\nCHECKOUT: 08/22/2018\nNIGHTS: 4\nPHONE: 
+ +65 9694 2501\nEMAIL: natalie-7btv8t7awook2ooq@guest.airbnb.com\nPROPERT
+ Y: Temple Cabins on sunny hillside in Uluwatu Beach\n
+SUMMARY:Natalie Edwards (HMZKRDDR5T)
+LOCATION:Temple Cabins on sunny hillside in Uluwatu Beach
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,287 @@
+BEGIN:VCALENDAR
+PRODID;X-RICAL-TZSOURCE=TZINFO:-//Airbnb Inc//Hosting Calendar 0.8.8//EN
+CALSCALE:GREGORIAN
+VERSION:2.0
+BEGIN:VEVENT
+DTEND;VALUE=DATE:20161230
+DTSTART;VALUE=DATE:20161229
+UID:vddxoxb6hwp--sejedvi67bfi@airbnb.com
+DESCRIPTION:CHECKIN: 12/29/2016\nCHECKOUT: 12/30/2016\nNIGHTS: 1\nPHONE:
+ +61 416 289 195\nEMAIL: (no email alias available)\nPROPERTY: Hillside B
+ alinese Cabins at the Temple doorstep #2\n
+SUMMARY:Leah Moulden (EPNSQ5)
+LOCATION:Hillside Balinese Cabins at the Temple doorstep #2
+END:VEVENT
+BEGIN:VEVENT
+DTEND;VALUE=DATE:20170206
+DTSTART;VALUE=DATE:20170204
+UID:vddxoxb6hwp-empzx8rhc6u6@airbnb.com
+DESCRIPTION:CHECKIN: 02/04/2017\nCHECKOUT: 02/06/2017\nNIGHTS: 2\nPHONE:
+ +420 777 593 231\nEMAIL: (no email alias available)\nPROPERTY: Hillside
+ Balinese Cabins at the Temple doorstep #2\n
+SUMMARY:Petr Pichrt (25ZTKD)
+LOCATION:Hillside Balinese Cabins at the Temple doorstep #2
+END:VEVENT
+BEGIN:VEVENT
+DTEND;VALUE=DATE:20170216
+DTSTART;VALUE=DATE:20170215
+UID:vddxoxb6hwp-pmhifdmkfn3w@airbnb.com
+DESCRIPTION:CHECKIN: 02/15/2017\nCHECKOUT: 02/16/2017\nNIGHTS: 1\nPHONE:
+ +44 7815 490856\nEMAIL: (no email alias available)\nPROPERTY: Hillside B
+ alinese Cabins at the Temple doorstep #2\n
+SUMMARY:Will Newell (H94CJX)
+LOCATION:Hillside Balinese Cabins at the Temple doorstep #2
+END:VEVENT
+BEGIN:VEVENT
+DTEND;VALUE=DATE:20170218
+DTSTART;VALUE=DATE:20170216
+UID:vddxoxb6hwp-ep9wolg72ef6@airbnb.com
+DESCRIPTION:CHECKIN: 02/16/2017\nCHECKOUT: 02/18/2017\nNIGHTS: 2\nPHONE:
+ +1 (602) 421-0044\nEMAIL: (no email alias available)\nPROPERTY: Hillside
+  Balinese Cabins at the Temple doorstep #2\n
+SUMMARY:Haley Fierro (X8THR4)
+LOCATION:Hillside Balinese Cabins at the Temple doorstep #2
+END:VEVENT
+BEGIN:VEVENT
+DTEND;VALUE=DATE:20170223
+DTSTART;VALUE=DATE:20170221
+UID:vddxoxb6hwp--oysr11o653o4@airbnb.com
+DESCRIPTION:CHECKIN: 02/21/2017\nCHECKOUT: 02/23/2017\nNIGHTS: 2\nPHONE:
+ +86 186 2158 3691\nEMAIL: (no email alias available)\nPROPERTY: Hillside
+  Balinese Cabins at the Temple doorstep #2\n
+SUMMARY:Jing Zhou (YPMYD3)
+LOCATION:Hillside Balinese Cabins at the Temple doorstep #2
+END:VEVENT
+BEGIN:VEVENT
+DTEND;VALUE=DATE:20170227
+DTSTART;VALUE=DATE:20170225
+UID:vddxoxb6hwp-lu0nxstt8vvu@airbnb.com
+DESCRIPTION:CHECKIN: 02/25/2017\nCHECKOUT: 02/27/2017\nNIGHTS: 2\nPHONE:
+ +49 176 6152 0688\nEMAIL: (no email alias available)\nPROPERTY: Hillside
+  Balinese Cabins at the Temple doorstep #2\n
+SUMMARY:Katrin Bengler (THW5NQ)
+LOCATION:Hillside Balinese Cabins at the Temple doorstep #2
+END:VEVENT
+BEGIN:VEVENT
+DTEND;VALUE=DATE:20170304
+DTSTART;VALUE=DATE:20170228
+UID:vddxoxb6hwp--7bwgweu03vvc@airbnb.com
+DESCRIPTION:CHECKIN: 02/28/2017\nCHECKOUT: 03/04/2017\nNIGHTS: 4\nPHONE:
+ +420 607 213 657\nEMAIL: (no email alias available)\nPROPERTY: Hillside
+ Balinese Cabins at the Temple doorstep #2\n
+SUMMARY:Milan Plaček (WJXQS4)
+LOCATION:Hillside Balinese Cabins at the Temple doorstep #2
+END:VEVENT
+BEGIN:VEVENT
+DTEND;VALUE=DATE:20170306
+DTSTART;VALUE=DATE:20170305
+UID:vddxoxb6hwp--ieh51tnddrza@airbnb.com
+DESCRIPTION:CHECKIN: 03/05/2017\nCHECKOUT: 03/06/2017\nNIGHTS: 1\nPHONE:
+ +1 (647) 688-3640\nEMAIL: (no email alias available)\nPROPERTY: Hillside
+  Balinese Cabins at the Temple doorstep #2\n
+SUMMARY:Amanda Laine (8JH4DJ)
+LOCATION:Hillside Balinese Cabins at the Temple doorstep #2
+END:VEVENT
+BEGIN:VEVENT
+DTEND;VALUE=DATE:20170310
+DTSTART;VALUE=DATE:20170308
+UID:vddxoxb6hwp-q03c1t8w39ia@airbnb.com
+DESCRIPTION:CHECKIN: 03/08/2017\nCHECKOUT: 03/10/2017\nNIGHTS: 2\nPHONE:
+ +1 (360) 927-4681\nEMAIL: (no email alias available)\nPROPERTY: Hillside
+  Balinese Cabins at the Temple doorstep #2\n
+SUMMARY:Jennifer Oato (HMCRJK35B3)
+LOCATION:Hillside Balinese Cabins at the Temple doorstep #2
+END:VEVENT
+BEGIN:VEVENT
+DTEND;VALUE=DATE:20170315
+DTSTART;VALUE=DATE:20170314
+UID:vddxoxb6hwp-58xpqpm03oec@airbnb.com
+DESCRIPTION:CHECKIN: 03/14/2017\nCHECKOUT: 03/15/2017\nNIGHTS: 1\nPHONE:
+ +62 812 8409 3737\nEMAIL: (no email alias available)\nPROPERTY: Hillside
+  Balinese Cabins at the Temple doorstep #2\n
+SUMMARY:Yumiko Rado (BY43A4)
+LOCATION:Hillside Balinese Cabins at the Temple doorstep #2
+END:VEVENT
+BEGIN:VEVENT
+DTEND;VALUE=DATE:20170318
+DTSTART;VALUE=DATE:20170316
+UID:vddxoxb6hwp-h7q398qeg388@airbnb.com
+DESCRIPTION:CHECKIN: 03/16/2017\nCHECKOUT: 03/18/2017\nNIGHTS: 2\nPHONE:
+ +1 (250) 808-1345\nEMAIL: (no email alias available)\nPROPERTY: Hillside
+  Balinese Cabins at the Temple doorstep #2\n
+SUMMARY:Brad Rendulic (AT952B)
+LOCATION:Hillside Balinese Cabins at the Temple doorstep #2
+END:VEVENT
+BEGIN:VEVENT
+DTEND;VALUE=DATE:20170328
+DTSTART;VALUE=DATE:20170320
+UID:vddxoxb6hwp-nfm6io9rdpd6@airbnb.com
+DESCRIPTION:CHECKIN: 03/20/2017\nCHECKOUT: 03/28/2017\nNIGHTS: 8\nPHONE:
+ +49 176 6280 3926\nEMAIL: (no email alias available)\nPROPERTY: Hillside
+  Balinese Cabins at the Temple doorstep #2\n
+SUMMARY:Leo Heschele (Z8FCJW)
+LOCATION:Hillside Balinese Cabins at the Temple doorstep #2
+END:VEVENT
+BEGIN:VEVENT
+DTEND;VALUE=DATE:20170403
+DTSTART;VALUE=DATE:20170402
+UID:vddxoxb6hwp-r44xzeznwatg@airbnb.com
+DESCRIPTION:CHECKIN: 04/02/2017\nCHECKOUT: 04/03/2017\nNIGHTS: 1\nPHONE:
+ +49 176 9096 5228\nEMAIL: (no email alias available)\nPROPERTY: Hillside
+  Balinese Cabins at the Temple doorstep #2\n
+SUMMARY:Julia Stöger (BW32P2)
+LOCATION:Hillside Balinese Cabins at the Temple doorstep #2
+END:VEVENT
+BEGIN:VEVENT
+DTEND;VALUE=DATE:20170425
+DTSTART;VALUE=DATE:20170406
+UID:vddxoxb6hwp-gfoaemdzuuum@airbnb.com
+DESCRIPTION:CHECKIN: 04/06/2017\nCHECKOUT: 04/25/2017\nNIGHTS: 19\nPHONE:
+  +1 (480) 459-9562\nEMAIL: (no email alias available)\nPROPERTY: Hillsid
+ e Balinese Cabins at the Temple doorstep #2\n
+SUMMARY:Kevin Bristol (FQDWFH)
+LOCATION:Hillside Balinese Cabins at the Temple doorstep #2
+END:VEVENT
+BEGIN:VEVENT
+DTEND;VALUE=DATE:20170504
+DTSTART;VALUE=DATE:20170502
+UID:vddxoxb6hwp-4tzfcrvbw3k@airbnb.com
+DESCRIPTION:CHECKIN: 05/02/2017\nCHECKOUT: 05/04/2017\nNIGHTS: 2\nPHONE:
+ +1 (514) 827-9339\nEMAIL: (no email alias available)\nPROPERTY: Hillside
+  Balinese Cabins at the Temple doorstep #2\n
+SUMMARY:Soulan Saeng (HMTC39CKJK)
+LOCATION:Hillside Balinese Cabins at the Temple doorstep #2
+END:VEVENT
+BEGIN:VEVENT
+DTEND;VALUE=DATE:20170506
+DTSTART;VALUE=DATE:20170504
+UID:vddxoxb6hwp-6tqam5dx0pug@airbnb.com
+DESCRIPTION:CHECKIN: 05/04/2017\nCHECKOUT: 05/06/2017\nNIGHTS: 2\nPHONE:
+ +1 (801) 577-6910\nEMAIL: (no email alias available)\nPROPERTY: Hillside
+  Balinese Cabins at the Temple doorstep #2\n
+SUMMARY:Michele Anderson (HM4KZYPFA5)
+LOCATION:Hillside Balinese Cabins at the Temple doorstep #2
+END:VEVENT
+BEGIN:VEVENT
+DTEND;VALUE=DATE:20170511
+DTSTART;VALUE=DATE:20170510
+UID:vddxoxb6hwp--qqir9t6lpcm@airbnb.com
+DESCRIPTION:CHECKIN: 05/10/2017\nCHECKOUT: 05/11/2017\nNIGHTS: 1\nPHONE:
+ +60 12 969 1399\nEMAIL: (no email alias available)\nPROPERTY: Hillside B
+ alinese Cabins at the Temple doorstep #2\n
+SUMMARY:Charmaine Yap (2A52ER)
+LOCATION:Hillside Balinese Cabins at the Temple doorstep #2
+END:VEVENT
+BEGIN:VEVENT
+DTEND;VALUE=DATE:20170514
+DTSTART;VALUE=DATE:20170512
+UID:vddxoxb6hwp--nopw6q7u3iim@airbnb.com
+DESCRIPTION:CHECKIN: 05/12/2017\nCHECKOUT: 05/14/2017\nNIGHTS: 2\nPHONE:
+ +1 (206) 973-9272\nEMAIL: (no email alias available)\nPROPERTY: Hillside
+  Balinese Cabins at the Temple doorstep #2\n
+SUMMARY:Paige Asbury (HMN4BAWB58)
+LOCATION:Hillside Balinese Cabins at the Temple doorstep #2
+END:VEVENT
+BEGIN:VEVENT
+DTEND;VALUE=DATE:20170515
+DTSTART;VALUE=DATE:20170514
+UID:vddxoxb6hwp-s41pwi2pbmt8@airbnb.com
+DESCRIPTION:CHECKIN: 05/14/2017\nCHECKOUT: 05/15/2017\nNIGHTS: 1\nPHONE:
+ +1 (949) 290-8744\nEMAIL: (no email alias available)\nPROPERTY: Hillside
+  Balinese Cabins at the Temple doorstep #2\n
+SUMMARY:Marlo Kirkham (HMQAYRTTHN)
+LOCATION:Hillside Balinese Cabins at the Temple doorstep #2
+END:VEVENT
+BEGIN:VEVENT
+DTEND;VALUE=DATE:20170622
+DTSTART;VALUE=DATE:20170621
+UID:vddxoxb6hwp-b813v40jzap2@airbnb.com
+DESCRIPTION:CHECKIN: 06/21/2017\nCHECKOUT: 06/22/2017\nNIGHTS: 1\nPHONE:
+ +63 917 8834846\nEMAIL: (no email alias available)\nPROPERTY: Hillside B
+ alinese Cabins at the Temple doorstep #2\n
+SUMMARY:Maureen Schrijvers (HM2YEXMHMM)
+LOCATION:Hillside Balinese Cabins at the Temple doorstep #2
+END:VEVENT
+BEGIN:VEVENT
+DTEND;VALUE=DATE:20170718
+DTSTART;VALUE=DATE:20170715
+UID:vddxoxb6hwp-f5epwh2uwwak@airbnb.com
+DESCRIPTION:CHECKIN: 07/15/2017\nCHECKOUT: 07/18/2017\nNIGHTS: 3\nPHONE:
+ +44 7814 777513\nEMAIL: (no email alias available)\nPROPERTY: Hillside B
+ alinese Cabins at the Temple doorstep #2\n
+SUMMARY:Ciara Littler (HMSR2J58DA)
+LOCATION:Hillside Balinese Cabins at the Temple doorstep #2
+END:VEVENT
+BEGIN:VEVENT
+DTEND;VALUE=DATE:20170724
+DTSTART;VALUE=DATE:20170723
+UID:vddxoxb6hwp--q4tiv2lzd1vg@airbnb.com
+DESCRIPTION:CHECKIN: 07/23/2017\nCHECKOUT: 07/24/2017\nNIGHTS: 1\nPHONE:
+ +1 (713) 376-1247\nEMAIL: (no email alias available)\nPROPERTY: Hillside
+  Balinese Cabins at the Temple doorstep #2\n
+SUMMARY:Hunter Durbin (HM9SEX5YXC)
+LOCATION:Hillside Balinese Cabins at the Temple doorstep #2
+END:VEVENT
+BEGIN:VEVENT
+DTEND;VALUE=DATE:20170804
+DTSTART;VALUE=DATE:20170802
+UID:vddxoxb6hwp-rhkno6xe8zgu@airbnb.com
+DESCRIPTION:CHECKIN: 08/02/2017\nCHECKOUT: 08/04/2017\nNIGHTS: 2\nPHONE:
+ +62 853 8749 2004\nEMAIL: (no email alias available)\nPROPERTY: Hillside
+  Balinese Cabins at the Temple doorstep #2\n
+SUMMARY:Dian Minulia (HMJHZ59EB5)
+LOCATION:Hillside Balinese Cabins at the Temple doorstep #2
+END:VEVENT
+BEGIN:VEVENT
+DTEND;VALUE=DATE:20170924
+DTSTART;VALUE=DATE:20170922
+UID:vddxoxb6hwp-gjk4e7sqfw6a@airbnb.com
+DESCRIPTION:CHECKIN: 09/22/2017\nCHECKOUT: 09/24/2017\nNIGHTS: 2\nPHONE:
+ +1 (306) 591-0449\nEMAIL: (no email alias available)\nPROPERTY: Hillside
+  Balinese Cabins at the Temple doorstep #2\n
+SUMMARY:Scott Perkins (HM3RSNTC2Z)
+LOCATION:Hillside Balinese Cabins at the Temple doorstep #2
+END:VEVENT
+BEGIN:VEVENT
+DTEND;VALUE=DATE:20171004
+DTSTART;VALUE=DATE:20170930
+UID:vddxoxb6hwp-68rhfr9igcfc@airbnb.com
+DESCRIPTION:CHECKIN: 09/30/2017\nCHECKOUT: 10/04/2017\nNIGHTS: 4\nPHONE:
+ +44 7775 437844\nEMAIL: elizabeth-lgynken42b0c7ekh@guest.airbnb.com\nPRO
+ PERTY: Hillside Balinese Cabins at the Temple doorstep #2\n
+SUMMARY:Elizabeth Humber (HMZKRETFFC)
+LOCATION:Hillside Balinese Cabins at the Temple doorstep #2
+END:VEVENT
+BEGIN:VEVENT
+DTEND;VALUE=DATE:20171031
+DTSTART;VALUE=DATE:20171030
+UID:vddxoxb6hwp--pehpy6n9rv64@airbnb.com
+DESCRIPTION:CHECKIN: 10/30/2017\nCHECKOUT: 10/31/2017\nNIGHTS: 1\nPHONE:
+ +49 172 8631 814\nEMAIL: laurids-zagujq5imo6rwoge@guest.airbnb.com\nPROP
+ ERTY: Hillside Balinese Cabins at the Temple doorstep #2\n
+SUMMARY:Laurids Weinelt (HMKNXCFXKF)
+LOCATION:Hillside Balinese Cabins at the Temple doorstep #2
+END:VEVENT
+BEGIN:VEVENT
+DTEND;VALUE=DATE:20180102
+DTSTART;VALUE=DATE:20171230
+UID:vddxoxb6hwp-huyo6mp420fm@airbnb.com
+DESCRIPTION:CHECKIN: 12/30/2017\nCHECKOUT: 01/02/2018\nNIGHTS: 3\nPHONE:
+ +65 9101 7593\nEMAIL: himanshu-z02ixw25zn7pyzeu@guest.airbnb.com\nPROPER
+ TY: Hillside Balinese Cabins at the Temple doorstep #2\n
+SUMMARY:Himanshu Grover (HMBAHJT9M2)
+LOCATION:Hillside Balinese Cabins at the Temple doorstep #2
+END:VEVENT
+BEGIN:VEVENT
+DTEND;VALUE=DATE:20170103
+DTSTART;VALUE=DATE:20170102
+UID:bhrgrvhpavm1--q1rl954n32xh@airbnb.com
+SUMMARY:Not available
+END:VEVENT
+BEGIN:VEVENT
+DTEND;VALUE=DATE:20170402
+DTSTART;VALUE=DATE:20170331
+UID:bhrgrvhpavm1-9qi7hb09mdmf@airbnb.com
+SUMMARY:Not available
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,837 @@
+BEGIN:VCALENDAR
+PRODID;X-RICAL-TZSOURCE=TZINFO:-//Airbnb Inc//Hosting Calendar 0.8.8//EN
+CALSCALE:GREGORIAN
+VERSION:2.0
+BEGIN:VEVENT
+DTEND;VALUE=DATE:20170312
+DTSTART;VALUE=DATE:20170311
+UID:aq2eek7nmlc9-o10hq3vn9sy4@airbnb.com
+DESCRIPTION:CHECKIN: 03/11/2017\nCHECKOUT: 03/12/2017\nNIGHTS: 1\nPHONE: 
+ +49 176 8114 9252\nEMAIL: (no email alias available)\nPROPERTY: Authenti
+ c Balinese Temple Cabin\, Uluwatu Beach #2\n
+SUMMARY:Tanja Stich (HMZ99EPBZC)
+LOCATION:Authentic Balinese Temple Cabin\, Uluwatu Beach #2
+END:VEVENT
+BEGIN:VEVENT
+DTEND;VALUE=DATE:20170320
+DTSTART;VALUE=DATE:20170319
+UID:aq2eek7nmlc9-9n5h9n6lquce@airbnb.com
+DESCRIPTION:CHECKIN: 03/19/2017\nCHECKOUT: 03/20/2017\nNIGHTS: 1\nPHONE: 
+ +1 (403) 608-9563\nEMAIL: (no email alias available)\nPROPERTY: Authenti
+ c Balinese Temple Cabin\, Uluwatu Beach #2\n
+SUMMARY:Sue Catalano (HMQRH2XBWX)
+LOCATION:Authentic Balinese Temple Cabin\, Uluwatu Beach #2
+END:VEVENT
+BEGIN:VEVENT
+DTEND;VALUE=DATE:20170331
+DTSTART;VALUE=DATE:20170329
+UID:aq2eek7nmlc9--xu4s80rgous0@airbnb.com
+DESCRIPTION:CHECKIN: 03/29/2017\nCHECKOUT: 03/31/2017\nNIGHTS: 2\nPHONE: 
+ +1 (224) 659-4147\nEMAIL: (no email alias available)\nPROPERTY: Authenti
+ c Balinese Temple Cabin\, Uluwatu Beach #2\n
+SUMMARY:Annika Johnson (HMQ2XHS8Z5)
+LOCATION:Authentic Balinese Temple Cabin\, Uluwatu Beach #2
+END:VEVENT
+BEGIN:VEVENT
+DTEND;VALUE=DATE:20170405
+DTSTART;VALUE=DATE:20170403
+UID:aq2eek7nmlc9--c0sl639su14m@airbnb.com
+DESCRIPTION:CHECKIN: 04/03/2017\nCHECKOUT: 04/05/2017\nNIGHTS: 2\nPHONE: 
+ +7 915 385-28-05\nEMAIL: (no email alias available)\nPROPERTY: Authentic
+  Balinese Temple Cabin\, Uluwatu Beach #2\n
+SUMMARY:Valeria Mushak (HM8Y2FRA9H)
+LOCATION:Authentic Balinese Temple Cabin\, Uluwatu Beach #2
+END:VEVENT
+BEGIN:VEVENT
+DTEND;VALUE=DATE:20170406
+DTSTART;VALUE=DATE:20170405
+UID:aq2eek7nmlc9-lsqdaxkthvuk@airbnb.com
+DESCRIPTION:CHECKIN: 04/05/2017\nCHECKOUT: 04/06/2017\nNIGHTS: 1\nPHONE: 
+ +86 188 0106 8843\nEMAIL: (no email alias available)\nPROPERTY: Authenti
+ c Balinese Temple Cabin\, Uluwatu Beach #2\n
+SUMMARY:Xue Yu (HMZTRW3JEM)
+LOCATION:Authentic Balinese Temple Cabin\, Uluwatu Beach #2
+END:VEVENT
+BEGIN:VEVENT
+DTEND;VALUE=DATE:20170426
+DTSTART;VALUE=DATE:20170425
+UID:aq2eek7nmlc9-y8fsvpv16ly6@airbnb.com
+DESCRIPTION:CHECKIN: 04/25/2017\nCHECKOUT: 04/26/2017\nNIGHTS: 1\nPHONE: 
+ +1 (201) 572-9057\nEMAIL: (no email alias available)\nPROPERTY: Authenti
+ c Balinese Temple Cabin\, Uluwatu Beach #2\n
+SUMMARY:Jonathan Cohen (HMWFTMMB9X)
+LOCATION:Authentic Balinese Temple Cabin\, Uluwatu Beach #2
+END:VEVENT
+BEGIN:VEVENT
+DTEND;VALUE=DATE:20170427
+DTSTART;VALUE=DATE:20170426
+UID:aq2eek7nmlc9-7s66scekz3bm@airbnb.com
+DESCRIPTION:CHECKIN: 04/26/2017\nCHECKOUT: 04/27/2017\nNIGHTS: 1\nPHONE: 
+ +27 74 381 8964\nEMAIL: (no email alias available)\nPROPERTY: Authentic 
+ Balinese Temple Cabin\, Uluwatu Beach #2\n
+SUMMARY:Ludwig Chambers (HMRQMXJXTH)
+LOCATION:Authentic Balinese Temple Cabin\, Uluwatu Beach #2
+END:VEVENT
+BEGIN:VEVENT
+DTEND;VALUE=DATE:20170428
+DTSTART;VALUE=DATE:20170427
+UID:aq2eek7nmlc9-lr65ur4aqpki@airbnb.com
+DESCRIPTION:CHECKIN: 04/27/2017\nCHECKOUT: 04/28/2017\nNIGHTS: 1\nPHONE: 
+ +61 467 575 267\nEMAIL: (no email alias available)\nPROPERTY: Authentic 
+ Balinese Temple Cabin\, Uluwatu Beach #2\n
+SUMMARY:Nicola Young (HM5WZZRQHE)
+LOCATION:Authentic Balinese Temple Cabin\, Uluwatu Beach #2
+END:VEVENT
+BEGIN:VEVENT
+DTEND;VALUE=DATE:20170429
+DTSTART;VALUE=DATE:20170428
+UID:aq2eek7nmlc9-88e0kuhfftt0@airbnb.com
+DESCRIPTION:CHECKIN: 04/28/2017\nCHECKOUT: 04/29/2017\nNIGHTS: 1\nPHONE: 
+ +61 467 575 267\nEMAIL: (no email alias available)\nPROPERTY: Authentic 
+ Balinese Temple Cabin\, Uluwatu Beach #2\n
+SUMMARY:Nicola Young (HMJQ5RWP8Z)
+LOCATION:Authentic Balinese Temple Cabin\, Uluwatu Beach #2
+END:VEVENT
+BEGIN:VEVENT
+DTEND;VALUE=DATE:20170501
+DTSTART;VALUE=DATE:20170429
+UID:aq2eek7nmlc9-k925yhvls88y@airbnb.com
+DESCRIPTION:CHECKIN: 04/29/2017\nCHECKOUT: 05/01/2017\nNIGHTS: 2\nPHONE: 
+ +86 138 4041 8357\nEMAIL: (no email alias available)\nPROPERTY: Authenti
+ c Balinese Temple Cabin\, Uluwatu Beach #2\n
+SUMMARY:文 刘 (HMZKB5B2BT)
+LOCATION:Authentic Balinese Temple Cabin\, Uluwatu Beach #2
+END:VEVENT
+BEGIN:VEVENT
+DTEND;VALUE=DATE:20170502
+DTSTART;VALUE=DATE:20170501
+UID:aq2eek7nmlc9-bysa0b3xnhzw@airbnb.com
+DESCRIPTION:CHECKIN: 05/01/2017\nCHECKOUT: 05/02/2017\nNIGHTS: 1\nPHONE: 
+ +86 188 0144 3847\nEMAIL: (no email alias available)\nPROPERTY: Authenti
+ c Balinese Temple Cabin\, Uluwatu Beach #2\n
+SUMMARY:Yentl Oomens (HMSZJC3TMF)
+LOCATION:Authentic Balinese Temple Cabin\, Uluwatu Beach #2
+END:VEVENT
+BEGIN:VEVENT
+DTEND;VALUE=DATE:20170510
+DTSTART;VALUE=DATE:20170509
+UID:aq2eek7nmlc9--l9vrx8t75cx6@airbnb.com
+DESCRIPTION:CHECKIN: 05/09/2017\nCHECKOUT: 05/10/2017\nNIGHTS: 1\nPHONE: 
+ +49 174 1416 112\nEMAIL: (no email alias available)\nPROPERTY: Authentic
+  Balinese Temple Cabin\, Uluwatu Beach #2\n
+SUMMARY:Melanie Schneider (HMPYARMYHR)
+LOCATION:Authentic Balinese Temple Cabin\, Uluwatu Beach #2
+END:VEVENT
+BEGIN:VEVENT
+DTEND;VALUE=DATE:20170512
+DTSTART;VALUE=DATE:20170511
+UID:aq2eek7nmlc9-9znyhsfy8czy@airbnb.com
+DESCRIPTION:CHECKIN: 05/11/2017\nCHECKOUT: 05/12/2017\nNIGHTS: 1\nPHONE: 
+ +64 22 486 9152\nEMAIL: (no email alias available)\nPROPERTY: Authentic 
+ Balinese Temple Cabin\, Uluwatu Beach #2\n
+SUMMARY:Jannik Besen (HMRK9AKD3P)
+LOCATION:Authentic Balinese Temple Cabin\, Uluwatu Beach #2
+END:VEVENT
+BEGIN:VEVENT
+DTEND;VALUE=DATE:20170517
+DTSTART;VALUE=DATE:20170515
+UID:aq2eek7nmlc9--hpqcbs6iah6s@airbnb.com
+DESCRIPTION:CHECKIN: 05/15/2017\nCHECKOUT: 05/17/2017\nNIGHTS: 2\nPHONE: 
+ +1 (270) 485-2092\nEMAIL: (no email alias available)\nPROPERTY: Authenti
+ c Balinese Temple Cabin\, Uluwatu Beach #2\n
+SUMMARY:Meg Underwood (HMPPWPWJP8)
+LOCATION:Authentic Balinese Temple Cabin\, Uluwatu Beach #2
+END:VEVENT
+BEGIN:VEVENT
+DTEND;VALUE=DATE:20170521
+DTSTART;VALUE=DATE:20170517
+UID:aq2eek7nmlc9--nhu54fsiy436@airbnb.com
+DESCRIPTION:CHECKIN: 05/17/2017\nCHECKOUT: 05/21/2017\nNIGHTS: 4\nPHONE: 
+ +1 (253) 358-6824\nEMAIL: (no email alias available)\nPROPERTY: Authenti
+ c Balinese Temple Cabin\, Uluwatu Beach #2\n
+SUMMARY:Emily Duppenthaler (HMEMFZMFD3)
+LOCATION:Authentic Balinese Temple Cabin\, Uluwatu Beach #2
+END:VEVENT
+BEGIN:VEVENT
+DTEND;VALUE=DATE:20170523
+DTSTART;VALUE=DATE:20170522
+UID:aq2eek7nmlc9--lis5744fcq52@airbnb.com
+DESCRIPTION:CHECKIN: 05/22/2017\nCHECKOUT: 05/23/2017\nNIGHTS: 1\nPHONE: 
+ +1 (808) 937-1997\nEMAIL: (no email alias available)\nPROPERTY: Authenti
+ c Balinese Temple Cabin\, Uluwatu Beach #2\n
+SUMMARY:Tara Binek (HM389JBFMA)
+LOCATION:Authentic Balinese Temple Cabin\, Uluwatu Beach #2
+END:VEVENT
+BEGIN:VEVENT
+DTEND;VALUE=DATE:20170525
+DTSTART;VALUE=DATE:20170524
+UID:aq2eek7nmlc9-wtv4u6smsaxo@airbnb.com
+DESCRIPTION:CHECKIN: 05/24/2017\nCHECKOUT: 05/25/2017\nNIGHTS: 1\nPHONE: 
+ +44 7557 194093\nEMAIL: (no email alias available)\nPROPERTY: Authentic 
+ Balinese Temple Cabin\, Uluwatu Beach #2\n
+SUMMARY:Lewis Firth (HMNJTHASC2)
+LOCATION:Authentic Balinese Temple Cabin\, Uluwatu Beach #2
+END:VEVENT
+BEGIN:VEVENT
+DTEND;VALUE=DATE:20170607
+DTSTART;VALUE=DATE:20170525
+UID:aq2eek7nmlc9--h4kbr5xf6ola@airbnb.com
+DESCRIPTION:CHECKIN: 05/25/2017\nCHECKOUT: 06/07/2017\nNIGHTS: 13\nPHONE:
+  +1 (608) 354-6251\nEMAIL: (no email alias available)\nPROPERTY: Authent
+ ic Balinese Temple Cabin\, Uluwatu Beach #2\n
+SUMMARY:Brittany Bernier (HMJW8S5DR5)
+LOCATION:Authentic Balinese Temple Cabin\, Uluwatu Beach #2
+END:VEVENT
+BEGIN:VEVENT
+DTEND;VALUE=DATE:20170611
+DTSTART;VALUE=DATE:20170607
+UID:aq2eek7nmlc9-65hzq6v0b6lg@airbnb.com
+DESCRIPTION:CHECKIN: 06/07/2017\nCHECKOUT: 06/11/2017\nNIGHTS: 4\nPHONE: 
+ +1 (760) 688-8007\nEMAIL: (no email alias available)\nPROPERTY: Authenti
+ c Balinese Temple Cabin\, Uluwatu Beach #2\n
+SUMMARY:Ashlee Banuelos (HMNP25XNWC)
+LOCATION:Authentic Balinese Temple Cabin\, Uluwatu Beach #2
+END:VEVENT
+BEGIN:VEVENT
+DTEND;VALUE=DATE:20170614
+DTSTART;VALUE=DATE:20170611
+UID:aq2eek7nmlc9-fqzxx1vd3f20@airbnb.com
+DESCRIPTION:CHECKIN: 06/11/2017\nCHECKOUT: 06/14/2017\nNIGHTS: 3\nPHONE: 
+ +49 178 1891 982\nEMAIL: (no email alias available)\nPROPERTY: Authentic
+  Balinese Temple Cabin\, Uluwatu Beach #2\n
+SUMMARY:Twan Pelzers (HMNPRRTQTM)
+LOCATION:Authentic Balinese Temple Cabin\, Uluwatu Beach #2
+END:VEVENT
+BEGIN:VEVENT
+DTEND;VALUE=DATE:20170617
+DTSTART;VALUE=DATE:20170614
+UID:aq2eek7nmlc9--hhraus4alyg0@airbnb.com
+DESCRIPTION:CHECKIN: 06/14/2017\nCHECKOUT: 06/17/2017\nNIGHTS: 3\nPHONE: 
+ +44 7956 434301\nEMAIL: (no email alias available)\nPROPERTY: Authentic 
+ Balinese Temple Cabin\, Uluwatu Beach #2\n
+SUMMARY:Lucy Hendrie (HMHFRN5F94)
+LOCATION:Authentic Balinese Temple Cabin\, Uluwatu Beach #2
+END:VEVENT
+BEGIN:VEVENT
+DTEND;VALUE=DATE:20170618
+DTSTART;VALUE=DATE:20170617
+UID:aq2eek7nmlc9--wsyq4sfyhme2@airbnb.com
+DESCRIPTION:CHECKIN: 06/17/2017\nCHECKOUT: 06/18/2017\nNIGHTS: 1\nPHONE: 
+ +852 6370 3823\nEMAIL: (no email alias available)\nPROPERTY: Authentic B
+ alinese Temple Cabin\, Uluwatu Beach #2\n
+SUMMARY:Philly Kerr (HMYMR235ZB)
+LOCATION:Authentic Balinese Temple Cabin\, Uluwatu Beach #2
+END:VEVENT
+BEGIN:VEVENT
+DTEND;VALUE=DATE:20170620
+DTSTART;VALUE=DATE:20170618
+UID:aq2eek7nmlc9--cx21wdx6wio@airbnb.com
+DESCRIPTION:CHECKIN: 06/18/2017\nCHECKOUT: 06/20/2017\nNIGHTS: 2\nPHONE: 
+ +1 (609) 204-0952\nEMAIL: (no email alias available)\nPROPERTY: Authenti
+ c Balinese Temple Cabin\, Uluwatu Beach #2\n
+SUMMARY:Bill Hassall (HMN4NDJEK9)
+LOCATION:Authentic Balinese Temple Cabin\, Uluwatu Beach #2
+END:VEVENT
+BEGIN:VEVENT
+DTEND;VALUE=DATE:20170621
+DTSTART;VALUE=DATE:20170620
+UID:aq2eek7nmlc9-wqw64dq6297c@airbnb.com
+DESCRIPTION:CHECKIN: 06/20/2017\nCHECKOUT: 06/21/2017\nNIGHTS: 1\nPHONE: 
+ +48 511 320 953\nEMAIL: (no email alias available)\nPROPERTY: Authentic 
+ Balinese Temple Cabin\, Uluwatu Beach #2\n
+SUMMARY:Mariusz Szczawinski (HMC9RKNTBB)
+LOCATION:Authentic Balinese Temple Cabin\, Uluwatu Beach #2
+END:VEVENT
+BEGIN:VEVENT
+DTEND;VALUE=DATE:20170624
+DTSTART;VALUE=DATE:20170622
+UID:aq2eek7nmlc9-ztudlxxafe8@airbnb.com
+DESCRIPTION:CHECKIN: 06/22/2017\nCHECKOUT: 06/24/2017\nNIGHTS: 2\nPHONE: 
+ +44 7730 563331\nEMAIL: (no email alias available)\nPROPERTY: Authentic 
+ Balinese Temple Cabin\, Uluwatu Beach #2\n
+SUMMARY:Vicki Stevenson (HMY4CFSH4Y)
+LOCATION:Authentic Balinese Temple Cabin\, Uluwatu Beach #2
+END:VEVENT
+BEGIN:VEVENT
+DTEND;VALUE=DATE:20170702
+DTSTART;VALUE=DATE:20170624
+UID:aq2eek7nmlc9--ab1t5ahn3iog@airbnb.com
+DESCRIPTION:CHECKIN: 06/24/2017\nCHECKOUT: 07/02/2017\nNIGHTS: 8\nPHONE: 
+ +61 450 810 115\nEMAIL: (no email alias available)\nPROPERTY: Authentic 
+ Balinese Temple Cabin\, Uluwatu Beach #2\n
+SUMMARY:Paula Xiong (HMFBQFF4KD)
+LOCATION:Authentic Balinese Temple Cabin\, Uluwatu Beach #2
+END:VEVENT
+BEGIN:VEVENT
+DTEND;VALUE=DATE:20170715
+DTSTART;VALUE=DATE:20170703
+UID:aq2eek7nmlc9-rtwixf4uabmq@airbnb.com
+DESCRIPTION:CHECKIN: 07/03/2017\nCHECKOUT: 07/15/2017\nNIGHTS: 12\nPHONE:
+  +49 174 3960 545\nEMAIL: (no email alias available)\nPROPERTY: Authenti
+ c Balinese Temple Cabin\, Uluwatu Beach #2\n
+SUMMARY:Isabelle Völz (HMYF9FZDH4)
+LOCATION:Authentic Balinese Temple Cabin\, Uluwatu Beach #2
+END:VEVENT
+BEGIN:VEVENT
+DTEND;VALUE=DATE:20170719
+DTSTART;VALUE=DATE:20170718
+UID:aq2eek7nmlc9-533t3ho9i1da@airbnb.com
+DESCRIPTION:CHECKIN: 07/18/2017\nCHECKOUT: 07/19/2017\nNIGHTS: 1\nPHONE: 
+ +1 (469) 626-8143\nEMAIL: (no email alias available)\nPROPERTY: Authenti
+ c Balinese Temple Cabin\, Uluwatu Beach #2\n
+SUMMARY:Mahfuz Rahman (HM8AC8NPXQ)
+LOCATION:Authentic Balinese Temple Cabin\, Uluwatu Beach #2
+END:VEVENT
+BEGIN:VEVENT
+DTEND;VALUE=DATE:20170721
+DTSTART;VALUE=DATE:20170719
+UID:aq2eek7nmlc9--kq8ul4smrj2o@airbnb.com
+DESCRIPTION:CHECKIN: 07/19/2017\nCHECKOUT: 07/21/2017\nNIGHTS: 2\nPHONE: 
+ +60 12 615 5751\nEMAIL: (no email alias available)\nPROPERTY: Authentic 
+ Balinese Temple Cabin\, Uluwatu Beach #2\n
+SUMMARY:Matthew Lee (HM9CFB8M2M)
+LOCATION:Authentic Balinese Temple Cabin\, Uluwatu Beach #2
+END:VEVENT
+BEGIN:VEVENT
+DTEND;VALUE=DATE:20170723
+DTSTART;VALUE=DATE:20170721
+UID:aq2eek7nmlc9--pg47ror83874@airbnb.com
+DESCRIPTION:CHECKIN: 07/21/2017\nCHECKOUT: 07/23/2017\nNIGHTS: 2\nPHONE: 
+ +1 (817) 944-8109\nEMAIL: (no email alias available)\nPROPERTY: Authenti
+ c Balinese Temple Cabin\, Uluwatu Beach #2\n
+SUMMARY:Giselle Urday (HMWY8KNAZ8)
+LOCATION:Authentic Balinese Temple Cabin\, Uluwatu Beach #2
+END:VEVENT
+BEGIN:VEVENT
+DTEND;VALUE=DATE:20170727
+DTSTART;VALUE=DATE:20170724
+UID:aq2eek7nmlc9--n4y3eugdseuy@airbnb.com
+DESCRIPTION:CHECKIN: 07/24/2017\nCHECKOUT: 07/27/2017\nNIGHTS: 3\nPHONE: 
+ +49 157 3617 7234\nEMAIL: (no email alias available)\nPROPERTY: Authenti
+ c Balinese Temple Cabin\, Uluwatu Beach #2\n
+SUMMARY:Lisa Hetzel (HMJ3EDQJ93)
+LOCATION:Authentic Balinese Temple Cabin\, Uluwatu Beach #2
+END:VEVENT
+BEGIN:VEVENT
+DTEND;VALUE=DATE:20170728
+DTSTART;VALUE=DATE:20170727
+UID:aq2eek7nmlc9-4w0nwk6u996e@airbnb.com
+DESCRIPTION:CHECKIN: 07/27/2017\nCHECKOUT: 07/28/2017\nNIGHTS: 1\nPHONE: 
+ +33 6 66 09 59 07\nEMAIL: (no email alias available)\nPROPERTY: Authenti
+ c Balinese Temple Cabin\, Uluwatu Beach #2\n
+SUMMARY:Florent Vovard (HM3CZYPWP8)
+LOCATION:Authentic Balinese Temple Cabin\, Uluwatu Beach #2
+END:VEVENT
+BEGIN:VEVENT
+DTEND;VALUE=DATE:20170731
+DTSTART;VALUE=DATE:20170728
+UID:aq2eek7nmlc9-j8vpc7ad3puo@airbnb.com
+DESCRIPTION:CHECKIN: 07/28/2017\nCHECKOUT: 07/31/2017\nNIGHTS: 3\nPHONE: 
+ +31 6 53 21 82 02\nEMAIL: (no email alias available)\nPROPERTY: Authenti
+ c Balinese Temple Cabin\, Uluwatu Beach #2\n
+SUMMARY:Louis Van Den Bogaard (HM34FHDHAE)
+LOCATION:Authentic Balinese Temple Cabin\, Uluwatu Beach #2
+END:VEVENT
+BEGIN:VEVENT
+DTEND;VALUE=DATE:20170802
+DTSTART;VALUE=DATE:20170731
+UID:aq2eek7nmlc9-6i4jf37n0u4g@airbnb.com
+DESCRIPTION:CHECKIN: 07/31/2017\nCHECKOUT: 08/02/2017\nNIGHTS: 2\nPHONE: 
+ +39 392 857 5745\nEMAIL: (no email alias available)\nPROPERTY: Authentic
+  Balinese Temple Cabin\, Uluwatu Beach #2\n
+SUMMARY:Tiffany Nassimi (HMNP8DT84H)
+LOCATION:Authentic Balinese Temple Cabin\, Uluwatu Beach #2
+END:VEVENT
+BEGIN:VEVENT
+DTEND;VALUE=DATE:20170805
+DTSTART;VALUE=DATE:20170804
+UID:aq2eek7nmlc9--wzspd14x4llc@airbnb.com
+DESCRIPTION:CHECKIN: 08/04/2017\nCHECKOUT: 08/05/2017\nNIGHTS: 1\nPHONE: 
+ +34 628 571 780\nEMAIL: (no email alias available)\nPROPERTY: Authentic 
+ Balinese Temple Cabin\, Uluwatu Beach #2\n
+SUMMARY:Jose Carrion (HMS4SW2PAD)
+LOCATION:Authentic Balinese Temple Cabin\, Uluwatu Beach #2
+END:VEVENT
+BEGIN:VEVENT
+DTEND;VALUE=DATE:20170808
+DTSTART;VALUE=DATE:20170805
+UID:aq2eek7nmlc9-bra7v8ms1ols@airbnb.com
+DESCRIPTION:CHECKIN: 08/05/2017\nCHECKOUT: 08/08/2017\nNIGHTS: 3\nPHONE: 
+ +1 (778) 266-1244\nEMAIL: (no email alias available)\nPROPERTY: Authenti
+ c Balinese Temple Cabin\, Uluwatu Beach #2\n
+SUMMARY:Kim Krahulec (HMWTHAP3NZ)
+LOCATION:Authentic Balinese Temple Cabin\, Uluwatu Beach #2
+END:VEVENT
+BEGIN:VEVENT
+DTEND;VALUE=DATE:20170812
+DTSTART;VALUE=DATE:20170809
+UID:aq2eek7nmlc9--v5ajphmjf1xk@airbnb.com
+DESCRIPTION:CHECKIN: 08/09/2017\nCHECKOUT: 08/12/2017\nNIGHTS: 3\nPHONE: 
+ +39 348 126 8499\nEMAIL: (no email alias available)\nPROPERTY: Authentic
+  Balinese Temple Cabin\, Uluwatu Beach #2\n
+SUMMARY:Michele Favaro (HMZSFRYK5P)
+LOCATION:Authentic Balinese Temple Cabin\, Uluwatu Beach #2
+END:VEVENT
+BEGIN:VEVENT
+DTEND;VALUE=DATE:20170813
+DTSTART;VALUE=DATE:20170812
+UID:aq2eek7nmlc9-g4y5mrdgh6aw@airbnb.com
+DESCRIPTION:CHECKIN: 08/12/2017\nCHECKOUT: 08/13/2017\nNIGHTS: 1\nPHONE: 
+ +63 956 6451517\nEMAIL: (no email alias available)\nPROPERTY: Authentic 
+ Balinese Temple Cabin\, Uluwatu Beach #2\n
+SUMMARY:Ira Natasha G Tan (HMRJBD9YND)
+LOCATION:Authentic Balinese Temple Cabin\, Uluwatu Beach #2
+END:VEVENT
+BEGIN:VEVENT
+DTEND;VALUE=DATE:20170817
+DTSTART;VALUE=DATE:20170813
+UID:aq2eek7nmlc9--vk5nob7gt3mq@airbnb.com
+DESCRIPTION:CHECKIN: 08/13/2017\nCHECKOUT: 08/17/2017\nNIGHTS: 4\nPHONE: 
+ +1 (514) 886-5758\nEMAIL: (no email alias available)\nPROPERTY: Authenti
+ c Balinese Temple Cabin\, Uluwatu Beach #2\n
+SUMMARY:Lauriane Andria (HM8A5Z52RM)
+LOCATION:Authentic Balinese Temple Cabin\, Uluwatu Beach #2
+END:VEVENT
+BEGIN:VEVENT
+DTEND;VALUE=DATE:20170818
+DTSTART;VALUE=DATE:20170817
+UID:aq2eek7nmlc9--fm1224l8q066@airbnb.com
+DESCRIPTION:CHECKIN: 08/17/2017\nCHECKOUT: 08/18/2017\nNIGHTS: 1\nPHONE: 
+ +44 7436 553804\nEMAIL: (no email alias available)\nPROPERTY: Authentic 
+ Balinese Temple Cabin\, Uluwatu Beach #2\n
+SUMMARY:Inakshi Das (HMSTWWM5FT)
+LOCATION:Authentic Balinese Temple Cabin\, Uluwatu Beach #2
+END:VEVENT
+BEGIN:VEVENT
+DTEND;VALUE=DATE:20170826
+DTSTART;VALUE=DATE:20170818
+UID:aq2eek7nmlc9--jeq036z7q9r4@airbnb.com
+DESCRIPTION:CHECKIN: 08/18/2017\nCHECKOUT: 08/26/2017\nNIGHTS: 8\nPHONE: 
+ +49 176 6502 7787\nEMAIL: (no email alias available)\nPROPERTY: Authenti
+ c Balinese Temple Cabin\, Uluwatu Beach #2\n
+SUMMARY:Annalisa S. (HMC5D9SP3R)
+LOCATION:Authentic Balinese Temple Cabin\, Uluwatu Beach #2
+END:VEVENT
+BEGIN:VEVENT
+DTEND;VALUE=DATE:20170828
+DTSTART;VALUE=DATE:20170826
+UID:aq2eek7nmlc9--cq0v3rt5ltz2@airbnb.com
+DESCRIPTION:CHECKIN: 08/26/2017\nCHECKOUT: 08/28/2017\nNIGHTS: 2\nPHONE: 
+ +31 6 57 61 12 61\nEMAIL: (no email alias available)\nPROPERTY: Authenti
+ c Balinese Temple Cabin\, Uluwatu Beach #2\n
+SUMMARY:John Verhage (HMP8RYRSQT)
+LOCATION:Authentic Balinese Temple Cabin\, Uluwatu Beach #2
+END:VEVENT
+BEGIN:VEVENT
+DTEND;VALUE=DATE:20170901
+DTSTART;VALUE=DATE:20170828
+UID:aq2eek7nmlc9-emj4td24tnus@airbnb.com
+DESCRIPTION:CHECKIN: 08/28/2017\nCHECKOUT: 09/01/2017\nNIGHTS: 4\nPHONE: 
+ +49 151 1965 1023\nEMAIL: (no email alias available)\nPROPERTY: Authenti
+ c Balinese Temple Cabin\, Uluwatu Beach #2\n
+SUMMARY:Karola Landwehr (HM5RZQFDWS)
+LOCATION:Authentic Balinese Temple Cabin\, Uluwatu Beach #2
+END:VEVENT
+BEGIN:VEVENT
+DTEND;VALUE=DATE:20170902
+DTSTART;VALUE=DATE:20170901
+UID:aq2eek7nmlc9--njpnehkzy0sw@airbnb.com
+DESCRIPTION:CHECKIN: 09/01/2017\nCHECKOUT: 09/02/2017\nNIGHTS: 1\nPHONE: 
+ +31 6 53 34 42 89\nEMAIL: (no email alias available)\nPROPERTY: Authenti
+ c Balinese Temple Cabin\, Uluwatu Beach #2\n
+SUMMARY:Marjon L (HMWJP3DYFT)
+LOCATION:Authentic Balinese Temple Cabin\, Uluwatu Beach #2
+END:VEVENT
+BEGIN:VEVENT
+DTEND;VALUE=DATE:20170905
+DTSTART;VALUE=DATE:20170902
+UID:aq2eek7nmlc9-tszaymvo97us@airbnb.com
+DESCRIPTION:CHECKIN: 09/02/2017\nCHECKOUT: 09/05/2017\nNIGHTS: 3\nPHONE: 
+ +49 176 6434 5123\nEMAIL: (no email alias available)\nPROPERTY: Authenti
+ c Balinese Temple Cabin\, Uluwatu Beach #2\n
+SUMMARY:Melissa Estrella (HMY55XWJNY)
+LOCATION:Authentic Balinese Temple Cabin\, Uluwatu Beach #2
+END:VEVENT
+BEGIN:VEVENT
+DTEND;VALUE=DATE:20170908
+DTSTART;VALUE=DATE:20170905
+UID:aq2eek7nmlc9-c7j9kb3lr992@airbnb.com
+DESCRIPTION:CHECKIN: 09/05/2017\nCHECKOUT: 09/08/2017\nNIGHTS: 3\nPHONE: 
+ +44 7890 808199\nEMAIL: (no email alias available)\nPROPERTY: Authentic 
+ Balinese Temple Cabin\, Uluwatu Beach #2\n
+SUMMARY:Stuart Taylor (HM5KRX5JMZ)
+LOCATION:Authentic Balinese Temple Cabin\, Uluwatu Beach #2
+END:VEVENT
+BEGIN:VEVENT
+DTEND;VALUE=DATE:20170910
+DTSTART;VALUE=DATE:20170908
+UID:aq2eek7nmlc9--pg36bfpbs3ba@airbnb.com
+DESCRIPTION:CHECKIN: 09/08/2017\nCHECKOUT: 09/10/2017\nNIGHTS: 2\nPHONE: 
+ +351 91 841 2589\nEMAIL: (no email alias available)\nPROPERTY: Authentic
+  Balinese Temple Cabin\, Uluwatu Beach #2\n
+SUMMARY:Sérgio Gonçalves (HMBQ3HFKBC)
+LOCATION:Authentic Balinese Temple Cabin\, Uluwatu Beach #2
+END:VEVENT
+BEGIN:VEVENT
+DTEND;VALUE=DATE:20170913
+DTSTART;VALUE=DATE:20170910
+UID:aq2eek7nmlc9-pi1grv2vyp8o@airbnb.com
+DESCRIPTION:CHECKIN: 09/10/2017\nCHECKOUT: 09/13/2017\nNIGHTS: 3\nPHONE: 
+ +1 (804) 239-8161\nEMAIL: (no email alias available)\nPROPERTY: Authenti
+ c Balinese Temple Cabin\, Uluwatu Beach #2\n
+SUMMARY:Kari Smith (HMKJZBCYPC)
+LOCATION:Authentic Balinese Temple Cabin\, Uluwatu Beach #2
+END:VEVENT
+BEGIN:VEVENT
+DTEND;VALUE=DATE:20170915
+DTSTART;VALUE=DATE:20170913
+UID:aq2eek7nmlc9--f74nw8zpsrpy@airbnb.com
+DESCRIPTION:CHECKIN: 09/13/2017\nCHECKOUT: 09/15/2017\nNIGHTS: 2\nPHONE: 
+ +44 7592 377284\nEMAIL: (no email alias available)\nPROPERTY: Authentic 
+ Balinese Temple Cabin\, Uluwatu Beach #2\n
+SUMMARY:Jodie Worsey (HMPEPDC54H)
+LOCATION:Authentic Balinese Temple Cabin\, Uluwatu Beach #2
+END:VEVENT
+BEGIN:VEVENT
+DTEND;VALUE=DATE:20170918
+DTSTART;VALUE=DATE:20170916
+UID:aq2eek7nmlc9-txh3vvovicga@airbnb.com
+DESCRIPTION:CHECKIN: 09/16/2017\nCHECKOUT: 09/18/2017\nNIGHTS: 2\nPHONE: 
+ +61 466 803 637\nEMAIL: (no email alias available)\nPROPERTY: Authentic 
+ Balinese Temple Cabin\, Uluwatu Beach #2\n
+SUMMARY:Ralph Gifford (HMPRMHFCJT)
+LOCATION:Authentic Balinese Temple Cabin\, Uluwatu Beach #2
+END:VEVENT
+BEGIN:VEVENT
+DTEND;VALUE=DATE:20170920
+DTSTART;VALUE=DATE:20170918
+UID:aq2eek7nmlc9--oh5qgtrfzh26@airbnb.com
+DESCRIPTION:CHECKIN: 09/18/2017\nCHECKOUT: 09/20/2017\nNIGHTS: 2\nPHONE: 
+ +31 6 22 99 91 33\nEMAIL: (no email alias available)\nPROPERTY: Authenti
+ c Balinese Temple Cabin\, Uluwatu Beach #2\n
+SUMMARY:Gino Van Zolingen (HM5ZDK4XZ8)
+LOCATION:Authentic Balinese Temple Cabin\, Uluwatu Beach #2
+END:VEVENT
+BEGIN:VEVENT
+DTEND;VALUE=DATE:20170922
+DTSTART;VALUE=DATE:20170920
+UID:aq2eek7nmlc9--u88la52g6mj4@airbnb.com
+DESCRIPTION:CHECKIN: 09/20/2017\nCHECKOUT: 09/22/2017\nNIGHTS: 2\nPHONE: 
+ +49 177 2901 411\nEMAIL: (no email alias available)\nPROPERTY: Authentic
+  Balinese Temple Cabin\, Uluwatu Beach #2\n
+SUMMARY:Thomas Rueegg (HMDY52ZCZ3)
+LOCATION:Authentic Balinese Temple Cabin\, Uluwatu Beach #2
+END:VEVENT
+BEGIN:VEVENT
+DTEND;VALUE=DATE:20170926
+DTSTART;VALUE=DATE:20170924
+UID:aq2eek7nmlc9--qobyns3q8q3u@airbnb.com
+DESCRIPTION:CHECKIN: 09/24/2017\nCHECKOUT: 09/26/2017\nNIGHTS: 2\nPHONE: 
+ +1 (305) 794-8731\nEMAIL: (no email alias available)\nPROPERTY: Authenti
+ c Balinese Temple Cabin\, Uluwatu Beach #2\n
+SUMMARY:Armando Gutierrez (HMYBNXFYRE)
+LOCATION:Authentic Balinese Temple Cabin\, Uluwatu Beach #2
+END:VEVENT
+BEGIN:VEVENT
+DTEND;VALUE=DATE:20170928
+DTSTART;VALUE=DATE:20170927
+UID:aq2eek7nmlc9--geh0fxkwk3i8@airbnb.com
+DESCRIPTION:CHECKIN: 09/27/2017\nCHECKOUT: 09/28/2017\nNIGHTS: 1\nPHONE: 
+ +30 697 187 4475\nEMAIL: (no email alias available)\nPROPERTY: Authentic
+  Balinese Temple Cabin\, Uluwatu Beach #2\n
+SUMMARY:Taru Tuomi (HMS9BPMW34)
+LOCATION:Authentic Balinese Temple Cabin\, Uluwatu Beach #2
+END:VEVENT
+BEGIN:VEVENT
+DTEND;VALUE=DATE:20171007
+DTSTART;VALUE=DATE:20171004
+UID:aq2eek7nmlc9-pq56l3yveroq@airbnb.com
+DESCRIPTION:CHECKIN: 10/04/2017\nCHECKOUT: 10/07/2017\nNIGHTS: 3\nPHONE: 
+ +49 151 7080 2517\nEMAIL: lilja-y2b0cxbeix3gbbmc@guest.airbnb.com\nPROPE
+ RTY: Authentic Balinese Temple Cabin\, Uluwatu Beach #2\n
+SUMMARY:Lilja Leonidowna (HM2ZZRHSEQ)
+LOCATION:Authentic Balinese Temple Cabin\, Uluwatu Beach #2
+END:VEVENT
+BEGIN:VEVENT
+DTEND;VALUE=DATE:20171008
+DTSTART;VALUE=DATE:20171007
+UID:aq2eek7nmlc9-h8fdf602rlqi@airbnb.com
+DESCRIPTION:CHECKIN: 10/07/2017\nCHECKOUT: 10/08/2017\nNIGHTS: 1\nPHONE: 
+ +86 138 2331 5722\nEMAIL: jia-vzlqd2cglgkuvo6r@guest.airbnb.com\nPROPERT
+ Y: Authentic Balinese Temple Cabin\, Uluwatu Beach #2\n
+SUMMARY:Jia Cheng (HMEB3X2ZHF)
+LOCATION:Authentic Balinese Temple Cabin\, Uluwatu Beach #2
+END:VEVENT
+BEGIN:VEVENT
+DTEND;VALUE=DATE:20171013
+DTSTART;VALUE=DATE:20171011
+UID:aq2eek7nmlc9-n1crlx5dhjba@airbnb.com
+DESCRIPTION:CHECKIN: 10/11/2017\nCHECKOUT: 10/13/2017\nNIGHTS: 2\nPHONE: 
+ +1 (306) 914-3743\nEMAIL: mason-ijmtcjxjvw52abs3@guest.airbnb.com\nPROPE
+ RTY: Authentic Balinese Temple Cabin\, Uluwatu Beach #2\n
+SUMMARY:Mason Neufeld (HM2CQEFT38)
+LOCATION:Authentic Balinese Temple Cabin\, Uluwatu Beach #2
+END:VEVENT
+BEGIN:VEVENT
+DTEND;VALUE=DATE:20171020
+DTSTART;VALUE=DATE:20171013
+UID:aq2eek7nmlc9-tegpd3ztjii@airbnb.com
+DESCRIPTION:CHECKIN: 10/13/2017\nCHECKOUT: 10/20/2017\nNIGHTS: 7\nPHONE: 
+ +44 7872 184645\nEMAIL: adam-g3hf88ts2a163dol@guest.airbnb.com\nPROPERTY
+ : Authentic Balinese Temple Cabin\, Uluwatu Beach #2\n
+SUMMARY:Adam Morgan (HMJEWP44N8)
+LOCATION:Authentic Balinese Temple Cabin\, Uluwatu Beach #2
+END:VEVENT
+BEGIN:VEVENT
+DTEND;VALUE=DATE:20171021
+DTSTART;VALUE=DATE:20171020
+UID:aq2eek7nmlc9--7hx8r8rkic4q@airbnb.com
+DESCRIPTION:CHECKIN: 10/20/2017\nCHECKOUT: 10/21/2017\nNIGHTS: 1\nPHONE: 
+ +34 638 261 110\nEMAIL: marta-k9szrayffo67a5xu@guest.airbnb.com\nPROPERT
+ Y: Authentic Balinese Temple Cabin\, Uluwatu Beach #2\n
+SUMMARY:Marta Renalias (HM384AJW32)
+LOCATION:Authentic Balinese Temple Cabin\, Uluwatu Beach #2
+END:VEVENT
+BEGIN:VEVENT
+DTEND;VALUE=DATE:20171024
+DTSTART;VALUE=DATE:20171023
+UID:aq2eek7nmlc9--bh129w8p70ni@airbnb.com
+DESCRIPTION:CHECKIN: 10/23/2017\nCHECKOUT: 10/24/2017\nNIGHTS: 1\nPHONE: 
+ +41 78 936 51 84\nEMAIL: kathie-gc4him9niucue6sn@guest.airbnb.com\nPROPE
+ RTY: Authentic Balinese Temple Cabin\, Uluwatu Beach #2\n
+SUMMARY:Kathie Speidel (HMZYYDYYX2)
+LOCATION:Authentic Balinese Temple Cabin\, Uluwatu Beach #2
+END:VEVENT
+BEGIN:VEVENT
+DTEND;VALUE=DATE:20171030
+DTSTART;VALUE=DATE:20171024
+UID:aq2eek7nmlc9-yk9t3fv56c6e@airbnb.com
+DESCRIPTION:CHECKIN: 10/24/2017\nCHECKOUT: 10/30/2017\nNIGHTS: 6\nPHONE: 
+ +43 699 1817 8797\nEMAIL: christoph-9crxvcxuvfarqfcc@guest.airbnb.com\nP
+ ROPERTY: Authentic Balinese Temple Cabin\, Uluwatu Beach #2\n
+SUMMARY:Christoph Weber (HMC4X92945)
+LOCATION:Authentic Balinese Temple Cabin\, Uluwatu Beach #2
+END:VEVENT
+BEGIN:VEVENT
+DTEND;VALUE=DATE:20171103
+DTSTART;VALUE=DATE:20171031
+UID:aq2eek7nmlc9--ottejacyxme4@airbnb.com
+DESCRIPTION:CHECKIN: 10/31/2017\nCHECKOUT: 11/03/2017\nNIGHTS: 3\nPHONE: 
+ +1 (204) 898-1187\nEMAIL: morgan-juz52izgr7qwny15@guest.airbnb.com\nPROP
+ ERTY: Authentic Balinese Temple Cabin\, Uluwatu Beach #2\n
+SUMMARY:Morgan Hadlow (HM98BFHJHX)
+LOCATION:Authentic Balinese Temple Cabin\, Uluwatu Beach #2
+END:VEVENT
+BEGIN:VEVENT
+DTEND;VALUE=DATE:20171107
+DTSTART;VALUE=DATE:20171103
+UID:aq2eek7nmlc9--p9rcrf9vsoko@airbnb.com
+DESCRIPTION:CHECKIN: 11/03/2017\nCHECKOUT: 11/07/2017\nNIGHTS: 4\nPHONE: 
+ +64 21 128 1864\nEMAIL: rex-9jecdy1qmtto6tyg@guest.airbnb.com\nPROPERTY:
+  Authentic Balinese Temple Cabin\, Uluwatu Beach #2\n
+SUMMARY:Rex Pollock (HMSRHPYP5R)
+LOCATION:Authentic Balinese Temple Cabin\, Uluwatu Beach #2
+END:VEVENT
+BEGIN:VEVENT
+DTEND;VALUE=DATE:20171111
+DTSTART;VALUE=DATE:20171107
+UID:aq2eek7nmlc9--cyymjd3f3t82@airbnb.com
+DESCRIPTION:CHECKIN: 11/07/2017\nCHECKOUT: 11/11/2017\nNIGHTS: 4\nPHONE: 
+ +49 1522 889 2123\nEMAIL: eugen-jdjln5zipdha1aor@guest.airbnb.com\nPROPE
+ RTY: Authentic Balinese Temple Cabin\, Uluwatu Beach #2\n
+SUMMARY:Eugen Damm (HMWEPAHW3Q)
+LOCATION:Authentic Balinese Temple Cabin\, Uluwatu Beach #2
+END:VEVENT
+BEGIN:VEVENT
+DTEND;VALUE=DATE:20171113
+DTSTART;VALUE=DATE:20171111
+UID:aq2eek7nmlc9-y0jnkgv7bkbm@airbnb.com
+DESCRIPTION:CHECKIN: 11/11/2017\nCHECKOUT: 11/13/2017\nNIGHTS: 2\nPHONE: 
+ +49 1522 889 2123\nEMAIL: eugen-2zhogqsub410strt@guest.airbnb.com\nPROPE
+ RTY: Authentic Balinese Temple Cabin\, Uluwatu Beach #2\n
+SUMMARY:Eugen Damm (HMXF8SFYHE)
+LOCATION:Authentic Balinese Temple Cabin\, Uluwatu Beach #2
+END:VEVENT
+BEGIN:VEVENT
+DTEND;VALUE=DATE:20171115
+DTSTART;VALUE=DATE:20171113
+UID:aq2eek7nmlc9--m0fa8fy1m9v0@airbnb.com
+DESCRIPTION:CHECKIN: 11/13/2017\nCHECKOUT: 11/15/2017\nNIGHTS: 2\nPHONE: 
+ +44 7858 516832\nEMAIL: anna-p6dapb7gmwjemrzd@guest.airbnb.com\nPROPERTY
+ : Authentic Balinese Temple Cabin\, Uluwatu Beach #2\n
+SUMMARY:Anna Webb (HMSBTCK3TK)
+LOCATION:Authentic Balinese Temple Cabin\, Uluwatu Beach #2
+END:VEVENT
+BEGIN:VEVENT
+DTEND;VALUE=DATE:20171119
+DTSTART;VALUE=DATE:20171116
+UID:aq2eek7nmlc9--87v1t7hf1cq8@airbnb.com
+DESCRIPTION:CHECKIN: 11/16/2017\nCHECKOUT: 11/19/2017\nNIGHTS: 3\nPHONE: 
+ +1 (310) 974-2926\nEMAIL: alyson-vze8fi7oeff071ty@guest.airbnb.com\nPROP
+ ERTY: Authentic Balinese Temple Cabin\, Uluwatu Beach #2\n
+SUMMARY:Alyson Fishbein (HM8RA9ZDC4)
+LOCATION:Authentic Balinese Temple Cabin\, Uluwatu Beach #2
+END:VEVENT
+BEGIN:VEVENT
+DTEND;VALUE=DATE:20171121
+DTSTART;VALUE=DATE:20171119
+UID:aq2eek7nmlc9--j85w20w7tvu0@airbnb.com
+DESCRIPTION:CHECKIN: 11/19/2017\nCHECKOUT: 11/21/2017\nNIGHTS: 2\nPHONE: 
+ +60 17 312 6758\nEMAIL: khaichien-9n7x5rq42jew3w33@guest.airbnb.com\nPRO
+ PERTY: Authentic Balinese Temple Cabin\, Uluwatu Beach #2\n
+SUMMARY:Khai Chien Tan (HMASCWCZ9K)
+LOCATION:Authentic Balinese Temple Cabin\, Uluwatu Beach #2
+END:VEVENT
+BEGIN:VEVENT
+DTEND;VALUE=DATE:20171126
+DTSTART;VALUE=DATE:20171121
+UID:aq2eek7nmlc9-19uinnr6kb0a@airbnb.com
+DESCRIPTION:CHECKIN: 11/21/2017\nCHECKOUT: 11/26/2017\nNIGHTS: 5\nPHONE: 
+ +1 (716) 930-4551\nEMAIL: madalyn-l3jb7xqcmxb29dzc@guest.airbnb.com\nPRO
+ PERTY: Authentic Balinese Temple Cabin\, Uluwatu Beach #2\n
+SUMMARY:Madalyn Borek (HMZ5J8MWQK)
+LOCATION:Authentic Balinese Temple Cabin\, Uluwatu Beach #2
+END:VEVENT
+BEGIN:VEVENT
+DTEND;VALUE=DATE:20171129
+DTSTART;VALUE=DATE:20171128
+UID:aq2eek7nmlc9--21vsuo5k34yi@airbnb.com
+DESCRIPTION:CHECKIN: 11/28/2017\nCHECKOUT: 11/29/2017\nNIGHTS: 1\nPHONE: 
+ +1 (210) 364-7127\nEMAIL: julia-hnalp9i4mg8r2yye@guest.airbnb.com\nPROPE
+ RTY: Authentic Balinese Temple Cabin\, Uluwatu Beach #2\n
+SUMMARY:Julia Mascorro (HMB3XDH5AX)
+LOCATION:Authentic Balinese Temple Cabin\, Uluwatu Beach #2
+END:VEVENT
+BEGIN:VEVENT
+DTEND;VALUE=DATE:20171202
+DTSTART;VALUE=DATE:20171201
+UID:aq2eek7nmlc9-drogkl22f5f0@airbnb.com
+DESCRIPTION:CHECKIN: 12/01/2017\nCHECKOUT: 12/02/2017\nNIGHTS: 1\nPHONE: 
+ +44 7779 583225\nEMAIL: emily-ae7lvpmv021y3o29@guest.airbnb.com\nPROPERT
+ Y: Authentic Balinese Temple Cabin\, Uluwatu Beach #2\n
+SUMMARY:Emily Corner (HM3MFPCABP)
+LOCATION:Authentic Balinese Temple Cabin\, Uluwatu Beach #2
+END:VEVENT
+BEGIN:VEVENT
+DTEND;VALUE=DATE:20171206
+DTSTART;VALUE=DATE:20171203
+UID:aq2eek7nmlc9-6romyrts1l2u@airbnb.com
+DESCRIPTION:CHECKIN: 12/03/2017\nCHECKOUT: 12/06/2017\nNIGHTS: 3\nPHONE: 
+ +27 73 653 6802\nEMAIL: ushenta-rfy6kmoiwn9pvsr4@guest.airbnb.com\nPROPE
+ RTY: Authentic Balinese Temple Cabin\, Uluwatu Beach #2\n
+SUMMARY:Ushenta Naidoo (HMKNY98BKS)
+LOCATION:Authentic Balinese Temple Cabin\, Uluwatu Beach #2
+END:VEVENT
+BEGIN:VEVENT
+DTEND;VALUE=DATE:20171213
+DTSTART;VALUE=DATE:20171210
+UID:aq2eek7nmlc9-mph6ngp8ieau@airbnb.com
+DESCRIPTION:CHECKIN: 12/10/2017\nCHECKOUT: 12/13/2017\nNIGHTS: 3\nPHONE: 
+ +1 (480) 206-6106\nEMAIL: brittny-rb1jd6ry65udfetg@guest.airbnb.com\nPRO
+ PERTY: Authentic Balinese Temple Cabin\, Uluwatu Beach #2\n
+SUMMARY:Brittny Nagle (HMADANNKYZ)
+LOCATION:Authentic Balinese Temple Cabin\, Uluwatu Beach #2
+END:VEVENT
+BEGIN:VEVENT
+DTEND;VALUE=DATE:20171215
+DTSTART;VALUE=DATE:20171213
+UID:aq2eek7nmlc9-x99xl82gzri0@airbnb.com
+DESCRIPTION:CHECKIN: 12/13/2017\nCHECKOUT: 12/15/2017\nNIGHTS: 2\nPHONE: 
+ +49 157 8377 0392\nEMAIL: paulina-q4s5swvwt6gkjcgj@guest.airbnb.com\nPRO
+ PERTY: Authentic Balinese Temple Cabin\, Uluwatu Beach #2\n
+SUMMARY:Paulina Schwick (HMJMBKHYZK)
+LOCATION:Authentic Balinese Temple Cabin\, Uluwatu Beach #2
+END:VEVENT
+BEGIN:VEVENT
+DTEND;VALUE=DATE:20171217
+DTSTART;VALUE=DATE:20171216
+UID:aq2eek7nmlc9--m7qc6i96abbu@airbnb.com
+DESCRIPTION:CHECKIN: 12/16/2017\nCHECKOUT: 12/17/2017\nNIGHTS: 1\nPHONE: 
+ +41 79 650 58 98\nEMAIL: roberto-pkgo6z705fnpycuv@guest.airbnb.com\nPROP
+ ERTY: Authentic Balinese Temple Cabin\, Uluwatu Beach #2\n
+SUMMARY:Roberto Pagnamenta (HM94SXCFFP)
+LOCATION:Authentic Balinese Temple Cabin\, Uluwatu Beach #2
+END:VEVENT
+BEGIN:VEVENT
+DTEND;VALUE=DATE:20171225
+DTSTART;VALUE=DATE:20171222
+UID:aq2eek7nmlc9--8cimzfqcclhm@airbnb.com
+DESCRIPTION:CHECKIN: 12/22/2017\nCHECKOUT: 12/25/2017\nNIGHTS: 3\nPHONE: 
+ +86 186 1403 2253\nEMAIL: kelly-elal6olw6m30k6sy@guest.airbnb.com\nPROPE
+ RTY: Authentic Balinese Temple Cabin\, Uluwatu Beach #2\n
+SUMMARY:Kelly Kluvers (HM2NRZRMQQ)
+LOCATION:Authentic Balinese Temple Cabin\, Uluwatu Beach #2
+END:VEVENT
+BEGIN:VEVENT
+DTEND;VALUE=DATE:20180104
+DTSTART;VALUE=DATE:20180102
+UID:aq2eek7nmlc9-svl0kdusvkty@airbnb.com
+DESCRIPTION:CHECKIN: 01/02/2018\nCHECKOUT: 01/04/2018\nNIGHTS: 2\nPHONE: 
+ +213 55 852 4843\nEMAIL: ramzy-mhrnngkecl8o6haf@guest.airbnb.com\nPROPER
+ TY: Authentic Balinese Temple Cabin\, Uluwatu Beach #2\n
+SUMMARY:Ramzy Tranquillo (HM22FHY3P8)
+LOCATION:Authentic Balinese Temple Cabin\, Uluwatu Beach #2
+END:VEVENT
+BEGIN:VEVENT
+DTEND;VALUE=DATE:20180111
+DTSTART;VALUE=DATE:20180104
+UID:aq2eek7nmlc9--skqkrz63y50m@airbnb.com
+DESCRIPTION:CHECKIN: 01/04/2018\nCHECKOUT: 01/11/2018\nNIGHTS: 7\nPHONE: 
+ +61 488 444 211\nEMAIL: kemely-szdls8366dzdp1gl@guest.airbnb.com\nPROPER
+ TY: Authentic Balinese Temple Cabin\, Uluwatu Beach #2\n
+SUMMARY:Kemely Haveaux (HMCPZQ2FXT)
+LOCATION:Authentic Balinese Temple Cabin\, Uluwatu Beach #2
+END:VEVENT
+BEGIN:VEVENT
+DTEND;VALUE=DATE:20180117
+DTSTART;VALUE=DATE:20180114
+UID:aq2eek7nmlc9--20vgadvtyzj0@airbnb.com
+DESCRIPTION:CHECKIN: 01/14/2018\nCHECKOUT: 01/17/2018\nNIGHTS: 3\nPHONE: 
+ +1 (530) 219-9048\nEMAIL: cameron-s3tloj1a6lrs56f2@guest.airbnb.com\nPRO
+ PERTY: Authentic Balinese Temple Cabin\, Uluwatu Beach #2\n
+SUMMARY:Cameron Dunstan (HMSBBZKDNY)
+LOCATION:Authentic Balinese Temple Cabin\, Uluwatu Beach #2
+END:VEVENT
+BEGIN:VEVENT
+DTEND;VALUE=DATE:20180121
+DTSTART;VALUE=DATE:20180118
+UID:aq2eek7nmlc9--rjrlgcu6zbno@airbnb.com
+DESCRIPTION:CHECKIN: 01/18/2018\nCHECKOUT: 01/21/2018\nNIGHTS: 3\nPHONE: 
+ +1 (307) 256-2432\nEMAIL: wes-rrhdjwipvzjvk0jl@guest.airbnb.com\nPROPERT
+ Y: Authentic Balinese Temple Cabin\, Uluwatu Beach #2\n
+SUMMARY:Wes English (HMYSFDQBP3)
+LOCATION:Authentic Balinese Temple Cabin\, Uluwatu Beach #2
+END:VEVENT
+BEGIN:VEVENT
+DTEND;VALUE=DATE:20180127
+DTSTART;VALUE=DATE:20180125
+UID:aq2eek7nmlc9-kek0atucb5sa@airbnb.com
+DESCRIPTION:CHECKIN: 01/25/2018\nCHECKOUT: 01/27/2018\nNIGHTS: 2\nPHONE: 
+ +1 (907) 248-2493\nEMAIL: kim-7qpk7uekekyqzfn0@guest.airbnb.com\nPROPERT
+ Y: Authentic Balinese Temple Cabin\, Uluwatu Beach #2\n
+SUMMARY:Kim Ciccone (HMY5MKQXR3)
+LOCATION:Authentic Balinese Temple Cabin\, Uluwatu Beach #2
+END:VEVENT
+BEGIN:VEVENT
+DTEND;VALUE=DATE:20180312
+DTSTART;VALUE=DATE:20180310
+UID:aq2eek7nmlc9--3t759iwudvo0@airbnb.com
+DESCRIPTION:CHECKIN: 03/10/2018\nCHECKOUT: 03/12/2018\nNIGHTS: 2\nPHONE: 
+ +1 (443) 791-8134\nEMAIL: donald-cd4bl0xs8aqpecpl@guest.airbnb.com\nPROP
+ ERTY: Authentic Balinese Temple Cabin\, Uluwatu Beach #2\n
+SUMMARY:Donald Hohne (HMEPXKNAEY)
+LOCATION:Authentic Balinese Temple Cabin\, Uluwatu Beach #2
+END:VEVENT
+BEGIN:VEVENT
+DTEND;VALUE=DATE:20170509
+DTSTART;VALUE=DATE:20170508
+UID:-7oqsldbsdnp7-a7865nn65zw5@airbnb.com
+SUMMARY:Not available
+END:VEVENT
+BEGIN:VEVENT
+DTEND;VALUE=DATE:20171011
+DTSTART;VALUE=DATE:20171009
+UID:-7oqsldbsdnp7--4uh8bu8ght6c@airbnb.com
+SUMMARY:Not available
+END:VEVENT
+END:VCALENDAR
