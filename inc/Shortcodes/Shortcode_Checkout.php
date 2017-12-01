@@ -42,6 +42,7 @@ class Shortcode_Checkout {
 		$cart_collection = $cart->get_contents();
 
 		if ( 0 === count( $cart_collection ) ) {
+			Template::get_template( 'cart-empty.php' );
 			return;
 		}
 
