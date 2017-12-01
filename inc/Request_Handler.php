@@ -248,8 +248,13 @@ class Request_Handler extends Service_Hooks {
 				}
 				return;
 			}
+			$services = $room_type->get_services();
+			$mandatory_services = collect( $services )->where( 'type', Service::MANDATORY );
+			$mandatory_services_ids = $mandatory_services->pluck( 'id' )->toArray();
 
+			// TODO: validate extra services.
 			$extra_services = isset( $_POST['awebooking_services'] ) && is_array( $_POST['awebooking_services'] ) ? $_POST['awebooking_services'] : [];
+			$extra_services = array_unique( array_merge( $extra_services, $mandatory_services_ids ) );
 
 			$cart_item->options['extra_services'] = $extra_services;
 			$cart_item->set_price( $room_type->get_buyable_price( $cart_item->options ) );
