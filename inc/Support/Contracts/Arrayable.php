@@ -1,5 +1,5 @@
 <?php
-namespace AweBooking\Support;
+namespace AweBooking\Support\Contracts;
 
 use Illuminate\Contracts\Support\Arrayable as Illuminate_Arrayable;
 

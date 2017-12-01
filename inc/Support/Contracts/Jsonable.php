@@ -1,5 +1,5 @@
 <?php
-namespace AweBooking\Support;
+namespace AweBooking\Support\Contracts;
 
 use Illuminate\Contracts\Support\Jsonable as Illuminate_Jsonable;
 
