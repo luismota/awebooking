@@ -359,6 +359,6 @@ class Event implements Event_Interface {
 	 * @return boolean
 	 */
 	public function is_untrusted_resource() {
-		return $this->get_resource()->get_id() < 1;
+		return $this->resource && $this->resource->get_id() < 1;
 	}
 }

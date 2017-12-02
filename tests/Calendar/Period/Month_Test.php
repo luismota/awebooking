@@ -8,7 +8,6 @@ class Calendar_Month_Test extends \WP_UnitTestCase {
 	 */
 	public function testConstructValid( $year, $month ) {
 		$year = new Month( $year, $month );
-		$this->assertInstanceOf('AweBooking\Support\Period', $year );
 		$this->assertEquals( '2017-11-01', $year->format( 'Y-m-d' ) );
 	}
 

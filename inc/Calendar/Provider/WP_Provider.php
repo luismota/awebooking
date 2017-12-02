@@ -74,7 +74,23 @@ class WP_Provider implements Provider_Interface, Contracts\Storable {
 	 * {@inheritdoc}
 	 */
 	public function store_event( Event_Interface $event ) {
-		return false;
+		if ( $event->is_untrusted_resource() ) {
+			throw new Exceptions\Untrusted_Resource_Exception( 'Cannot store an event have untrusted source' );
+		}
+
+		// Transform resource to BAT Unit.
+		$resource = $event->get_resource();
+		$unit = new Unit( $resource->get_id(), $resource->get_value() );
+
+		// Transform event to BAT Event.
+		$bat_event = new BAT_Event(
+			$event->get_start_date(), $event->get_end_date(),
+			$unit, $event->get_value()
+		);
+
+		return U::rescue( function() use ( $bat_event ) {
+			return $this->get_store()->storeEvent( $bat_event, null );
+		}, false );
 	}
 
 	/**

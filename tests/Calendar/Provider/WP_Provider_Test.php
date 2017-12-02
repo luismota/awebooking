@@ -1,6 +1,7 @@
 <?php
 
 use AweBooking\Support\Carbonate;
+use AweBooking\Calendar\Event\Event;
 use AweBooking\Calendar\Resource\Resource;
 use AweBooking\Calendar\Resource\Resource_Collection;
 use AweBooking\Calendar\Provider\WP_Provider;
@@ -61,5 +62,42 @@ class Calendar_Store_WP_Store_Test extends WP_UnitTestCase {
 
 		$events = $provider->get_events(new Carbonate( '2017-11-10' ), new Carbonate( '2017-12-30' ));
 		$this->assertEmpty($events);
+	}
+
+	public function testStoreEvent() {
+		$resource  = new Resource( 100 );
+		$resource2 = new Resource( 101 );
+		$provider  = new WP_Provider( [ $resource, $resource2 ], 'awebooking_booking', 'room_id' );
+
+		$event1 = new Event( $resource, new DateTime( '2017-11-10' ), new DateTime( '2017-11-29' ), 150 );
+		$event2 = new Event( $resource2, new DateTime( '2017-12-10' ), new DateTime( '2017-12-15' ), 250 );
+
+		$this->assertTrue( $provider->store_event( $event1 ) );
+		$this->assertTrue( $provider->store_event( $event2 ) );
+
+		$events = $provider->get_events(new Carbonate( '2017-11-01' ), new Carbonate( '2017-12-30' ));
+		$this->assertCount(6, $events );
+	}
+
+	/**
+	 * @expectedException AweBooking\Calendar\Provider\Exceptions\Untrusted_Resource_Exception
+	 */
+	public function testStoreUntrustedEvent1() {
+		$resource  = new Resource( 0 );
+		$provider  = new WP_Provider( [ $resource ], 'awebooking_booking', 'room_id' );
+
+		$event1 = new Event( $resource, new DateTime( '2017-11-10' ), new DateTime( '2017-11-29' ), 150 );
+		$provider->store_event( $event1 );
+	}
+
+	/**
+	 * @expectedException AweBooking\Calendar\Provider\Exceptions\Untrusted_Resource_Exception
+	 */
+	public function testStoreUntrustedEvent2() {
+		$resource  = new Resource( -10 );
+		$provider  = new WP_Provider( [ $resource ], 'awebooking_booking', 'room_id' );
+
+		$event1 = new Event( $resource, new DateTime( '2017-11-10' ), new DateTime( '2017-11-29' ), 150 );
+		$provider->store_event( $event1 );
 	}
 }

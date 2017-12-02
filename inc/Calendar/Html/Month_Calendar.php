@@ -5,6 +5,10 @@ use AweBooking\Support\Carbonate;
 use AweBooking\Calendar\Calendar;
 use AweBooking\Calendar\Period\Month;
 
+use AweBooking\Calendar\Event\State_Event;
+use AweBooking\Calendar\Event\Booking_Event;
+use AweBooking\Calendar\Event\Pricing_Event;
+
 class Month_Calendar {
 	/**
 	 * The month to generate HTML.
@@ -89,21 +93,32 @@ class Month_Calendar {
 			);*/
 		}
 
+		// Get all events and reject events have empty value.
+		$events = $this->retrieve_events()->indexes();
+
 		foreach ( $month as $week ) {
 			$output .= '<ul class="' . $this->get_html_class( '&__week' ) . '">';
 
 			foreach ( $week as $day ) {
+				$index = $day->format( 'Y-m-d' );
+
 				if ( ! $month->contains( $day ) ) {
 					$output .= "\n\t\t" . $this->generate_cell_pad();
 				} else {
-					$output .= "\n\t\t" . $this->generate_cell_date( $day );
+					$day_events = [];
+
+					if ( $events->has( $index ) ) {
+						$day_events = $events->get( $index );
+					}
+
+					$output .= "\n\t\t" . $this->generate_cell_date( $day, $day_events );
 				}
 			}
 
 			$output .= '</ul>';
 		}
 
-		echo $output;
+		return $output;
 	}
 
 	/**
@@ -118,15 +133,49 @@ class Month_Calendar {
 	}
 
 	/**
+	 * [retrieve_events description]
+	 *
+	 * @return [type]
+	 */
+	protected function retrieve_events() {
+		if ( ! $this->calendar ) {
+			return;
+		}
+
+		return $this->calendar->get_events( $this->month )
+			->reject(function( $e ) {
+				return $this->should_reject_event( $e );
+			});
+	}
+
+	/**
+	 * Determines if event should reject.
+	 *
+	 * @param  [type] $e [description]
+	 * @return [type]
+	 */
+	protected function should_reject_event( $e ) {
+		return $e->get_value() && (
+			$e instanceof State_Event ||
+			$e instanceof Booking_Event ||
+			$e instanceof Pricing_Event );
+	}
+
+	/**
 	 * Generate HTML cell of a day.
 	 *
 	 * @param  Carbonate $date    Current day instance.
 	 * @return string
 	 */
-	protected function generate_cell_date( $day ) {
+	protected function generate_cell_date( $day, $events ) {
 		$day = $day->get_start_date();
 
-		return sprintf( '<li class="%6$s" data-day="%1$d" data-month="%2$d" data-year="%3$d" data-date="%4$s" title="%5$s">%1$s</li>',
+		$html_events = '';
+		foreach ( $events as $event ) {
+			$html_events .= '<span>' . $event->get_start_date()->toDateString() . $event->get_summary() . '</span>';
+		}
+
+		$output = sprintf( '<li class="%6$s" data-day="%1$d" data-month="%2$d" data-year="%3$d" data-date="%4$s" title="%5$s">',
 			esc_attr( $day->day ),
 			esc_attr( $day->month ),
 			esc_attr( $day->year ),
@@ -134,6 +183,13 @@ class Month_Calendar {
 			esc_attr( $day->format( $this->get_option( 'date_title' ) ) ),
 			esc_attr( implode( ' ', $this->get_date_classes( $day ) ) )
 		);
+
+		$output .= $day->format( 'd' );
+		$output .= '<div>' . $html_events . '</div>';
+
+		$output .= '</li>';
+
+		return $output;
 	}
 
 	/**

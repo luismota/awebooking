@@ -1,6 +1,5 @@
 <?php
 
-use AweBooking\Calendar\Period\Day;
 use AweBooking\Calendar\Period\Year;
 
 class Calendar_Year_Test extends \WP_UnitTestCase {
@@ -9,7 +8,6 @@ class Calendar_Year_Test extends \WP_UnitTestCase {
 	 */
 	public function testConstructValid( $year ) {
 		$year = new Year( $year );
-		$this->assertInstanceOf('AweBooking\Support\Period', $year );
 		$this->assertEquals( '2017-01-01', $year->format( 'Y-m-d' ) );
 	}
 
