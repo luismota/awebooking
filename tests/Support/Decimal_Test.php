@@ -2,7 +2,13 @@
 
 use AweBooking\Support\Decimal;
 
+Decimal::set_default_scale( 4 );
+
 class DecimalTest extends WP_UnitTestCase {
+
+	public function setUp() {
+		parent::setUp();
+	}
 
 	public function testRepresentations() {
 		$value = Decimal::create( 10.0, 4 );

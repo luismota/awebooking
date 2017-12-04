@@ -1,0 +1,25 @@
+1	Airport view
+2	Bay view
+3	City view
+4	Courtyard view
+5	Golf view
+6	Harbor view
+7	Intercoastal view
+8	Lake view
+9	Marina view
+10	Mountain view
+11	Ocean view
+12	Pool view
+13	River view
+14	Water view
+15	Beach view
+16	Garden view
+17	Park view
+18	Forest view
+19	Rain forest view
+20	Various views
+21	Limited view
+22	Slope view
+23	Strip view
+24	Countryside view
+25	Sea view

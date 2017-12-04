@@ -54,7 +54,11 @@ class Kernel extends Base_Kernel {
 		 *
 		 * @param \FastRoute\RouteCollector $route The route collector.
 		 */
-		do_action( 'awebooking/register_routes', $route );
+		if ( is_admin() ) {
+			do_action( 'awebooking/register_admin_routes', $route );
+		} else {
+			do_action( 'awebooking/register_routes', $route );
+		}
 	}
 
 	/**

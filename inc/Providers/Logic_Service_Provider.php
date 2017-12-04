@@ -16,6 +16,7 @@ class Logic_Service_Provider extends Service_Provider {
 		add_action( 'pre_delete_term', [ $this, 'pre_delete_location' ], 10, 2 );
 
 		add_action( 'delete_post', [ $this, 'delete_room_type' ] );
+
 		add_action( 'before_delete_post', [ $this, 'delete_booking_items' ] );
 	}
 

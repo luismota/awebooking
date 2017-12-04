@@ -4,8 +4,10 @@ namespace AweBooking\Admin\Pages;
 use WP_List_Table;
 use AweBooking\Concierge;
 use AweBooking\Hotel\Room;
+use AweBooking\Hotel\Room_Type;
 use AweBooking\Booking\Calendar;
 use AweBooking\Admin\Calendar\Yearly_Calendar;
+use AweBooking\Admin\Calendar\Availability_Calendar;
 use AweBooking\Support\Period;
 use AweBooking\Support\Carbonate;
 
@@ -39,7 +41,10 @@ class Availability_Management extends WP_List_Table {
 			require_once ABSPATH . 'wp-admin/admin-header.php';
 		}
 
-		include_once trailingslashit( __DIR__ ) . 'views/html-page-availability-management.php';
+		// include_once trailingslashit( __DIR__ ) . 'views/html-page-availability-management.php';
+
+		$calendar = new Availability_Calendar( new Room_Type( 83 ) );
+		echo '<div class="wrap">', $calendar->display(), '</div>';
 	}
 
 	/**

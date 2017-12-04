@@ -1,8 +1,6 @@
 <?php
 namespace AweBooking\Support;
 
-use Parsedown;
-
 class Markdown {
 	/**
 	 * Parse the given Markdown text into HTML.
@@ -15,6 +13,6 @@ class Markdown {
 			return '';
 		}
 
-		return (new Parsedown)->text( $text );
+		return ( new \Parsedown )->text( $text );
 	}
 }

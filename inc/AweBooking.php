@@ -6,16 +6,18 @@ use Psr\Log\LoggerInterface;
 use Monolog\Handler\StreamHandler;
 use Monolog\Formatter\LineFormatter;
 use Illuminate\Container\Container;
+use AweBooking\Support\Utils as U;
 use AweBooking\Support\Addon;
-use Skeleton\Skeleton;
 
 final class AweBooking extends Container {
+	use Deprecated\AweBooking_Deprecated;
+
 	/**
 	 * The AweBooking version.
 	 *
 	 * @var string
 	 */
-	const VERSION = '3.0.0-beta-12';
+	const VERSION = '3.0.0-beta-13-dev';
 
 	// Deprecated constants, use class \AweBooking\Constants instead.
 	const DATE_FORMAT    = 'Y-m-d';
@@ -76,6 +78,13 @@ final class AweBooking extends Container {
 	protected $failed_addons = [];
 
 	/**
+	 * Log the exceptions during booting of core or addons.
+	 *
+	 * @var array
+	 */
+	protected $exceptions = [];
+
+	/**
 	 * The bootstrap classes.
 	 *
 	 * @var array
@@ -84,7 +93,7 @@ final class AweBooking extends Container {
 		\AweBooking\Bootstrap\Load_Textdomain::class,
 		\AweBooking\Bootstrap\Load_Configuration::class,
 		\AweBooking\Bootstrap\Setup_Environment::class,
-		\AweBooking\Bootstrap\Enqueue_Scripts::class,
+		\AweBooking\Bootstrap\Register_Scripts::class,
 		\AweBooking\Bootstrap\Start_Session::class,
 	];
 
@@ -94,15 +103,15 @@ final class AweBooking extends Container {
 	 * @var array
 	 */
 	protected $service_providers = [
-		\AweBooking\Cart\Cart_Service_Provider::class,
-		\AweBooking\Currency\Currency_Service_Provider::class,
 		\AweBooking\Providers\Skeleton_Service_Provider::class,
+		\AweBooking\Providers\Core_Service_Provider::class,
 		\AweBooking\Providers\WP_Query_Service_Provider::class,
 		\AweBooking\Providers\Logic_Service_Provider::class,
+		\AweBooking\Providers\Admin_Service_Provider::class,
+		\AweBooking\Providers\Frontend_Service_Provider::class,
 		\AweBooking\Providers\Route_Service_Provider::class,
-		\AweBooking\Booking\Booking_Service_Provider::class,
-		\AweBooking\Shortcodes\Shortcode_Service_Provider::class,
-		\AweBooking\Widgets\Widget_Service_Provider::class,
+		// \AweBooking\Shortcodes\Shortcode_Service_Provider::class,
+		// \AweBooking\Widgets\Widget_Service_Provider::class,
 	];
 
 	/**
@@ -151,7 +160,7 @@ final class AweBooking extends Container {
 		register_deactivation_hook( $this->plugin_file(), [ $installer, 'deactivation' ] );
 
 		// Hooks the AweBooking into WordPress.
-		add_action( 'plugins_loaded', [ $this, 'bootstrap' ] );
+		add_action( 'skeleton/loaded', [ $this, 'bootstrap' ] );
 		add_action( 'skeleton/init', [ $this, 'boot' ] );
 	}
 
@@ -175,16 +184,10 @@ final class AweBooking extends Container {
 		static::setInstance( $this );
 		$this->instance( static::class, $this );
 
-		$this->instance( 'skeleton', Skeleton::get_instance() );
-		$this->instance( Skeleton::class, Skeleton::get_instance() );
-
-		$this->singleton( Installer::class );
-		$this->singleton( Multilingual::class );
-
 		$this->register_logger_bindings();
 
-		// Binding alias.
-		$this->alias( Multilingual::class, 'multilingual' );
+		$this->singleton( Installer::class );
+		$this->singleton( 'multilingual', Multilingual::class );
 	}
 
 	/**
@@ -233,9 +236,15 @@ final class AweBooking extends Container {
 		do_action( 'awebooking/bootstrapping', $this );
 
 		// Run the list of bootstrap classes.
-		array_walk( $this->bootstrappers, function( $bootstrapper ) {
-			$this->make( $bootstrapper )->bootstrap( $this );
-		});
+		try {
+			array_walk( $this->bootstrappers, function( $bootstrapper ) {
+				$this->make( $bootstrapper )->bootstrap( $this );
+			});
+		} catch ( \Exception $e ) {
+			return $this->report_exception( $e );
+		} catch ( \Throwable $e ) {
+			return $this->report_exception( $e );
+		}
 
 		$this->bootstrapped = true;
 
@@ -251,11 +260,6 @@ final class AweBooking extends Container {
 				$this->register( $provider );
 			}
 		}
-
-		// TODO: Consider this.
-		new Http\Controllers\Ajax_Hooks;
-		new Http\Controllers\Request_Handler;
-		$this->trigger( Admin\Admin_Hooks::class );
 
 		do_action( 'awebooking/init', $this );
 	}
@@ -275,7 +279,7 @@ final class AweBooking extends Container {
 	 * @access private
 	 */
 	public function boot() {
-		if ( $this->is_booted() ) {
+		if ( ! $this->is_bootstrapped() || $this->is_booted() ) {
 			return;
 		}
 
@@ -354,6 +358,35 @@ final class AweBooking extends Container {
 	}
 
 	/**
+	 * Report an exception during booting the AweBooking.
+	 *
+	 * @param  \Exception|\Throwable $e The exception.
+	 * @return void
+	 */
+	protected function report_exception( $e ) {
+		$this->exceptions['awebooking'] = $e;
+
+		if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
+			throw $e;
+		}
+
+		add_action( 'admin_notices', [ $this, 'handle_booting_exception' ] );
+	}
+
+	/**
+	 * Just add an notice in admin dashboard then deactive the plugin.
+	 *
+	 * @access private
+	 */
+	public function handle_booting_exception() {
+		$message = esc_html__( 'Sorry, something went wrong. The AweBooking has been deactivated to ensure your website is safe.', 'awebooking' );
+
+		printf( '<div class="error"><p>%s</p> <pre>' . (string) $this->exceptions['awebooking'] . '</pre> </div>', $message ); // WPCS: XSS OK.
+
+		deactivate_plugins( array( $this->plugin_basename() ) );
+	}
+
+	/**
 	 * Alias of $this->register() method.
 	 *
 	 * @param  Service_Provider|string $provider The provider class instance or class name.
@@ -423,9 +456,17 @@ final class AweBooking extends Container {
 			return false;
 		}
 
+		try {
+			$this->register( $addon );
+		} catch ( \Exception $e ) {
+			$addon->log_error( $e->getMessage() );
+		} catch ( \Throwable $e ) {
+			$addon->log_error( $e->getMessage() );
+		}
+
 		$this->loaded_addons[ $addon_id ] = get_class( $addon );
 
-		return $this->register( $addon );
+		return $addon;
 	}
 
 	/**
@@ -556,12 +597,22 @@ final class AweBooking extends Container {
 		return apply_filters( 'awebooking/is_running_multilanguage', $is_multilanguage, $multilingual );
 	}
 
-	// Deprecated methods.
-	public function is_multi_language() {
-		return $this->is_running_multilanguage();
-	}
-
-	public function is_multi_location() {
-		return (bool) $this['setting']->get( 'enable_location' );
+	/**
+	 * What type of request is this?
+	 *
+	 * @param  string $type admin, ajax, cron or frontend.
+	 * @return bool
+	 */
+	public function is_request( $type ) {
+		switch ( $type ) {
+			case 'admin':
+				return is_admin();
+			case 'ajax':
+				return defined( 'DOING_AJAX' );
+			case 'cron':
+				return defined( 'DOING_CRON' );
+			case 'frontend':
+				return ( ! is_admin() || defined( 'DOING_AJAX' ) ) && ! defined( 'DOING_CRON' );
+		}
 	}
 }

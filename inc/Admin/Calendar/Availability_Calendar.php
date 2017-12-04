@@ -23,7 +23,14 @@ class Availability_Calendar extends Schedule_Calendar {
 	public function display() {
 		$rooms = U::collect($this->room_type->get_rooms())->map->only( 'id', 'name' );
 
-		echo $this->generate_scheduler_calendar( $this->today, $rooms );
+		// echo $this->generate_scheduler_calendar( $this->today, $rooms );
+
+		// $calendar = new \AweBooking\Calendar\Period\Year( 2017 );
+		$month = new \AweBooking\Calendar\Period\Month( 2017, 11 );
+
+		$cal = Factory::create_availability_calendar( [ Factory::get_room_unit( 1 ), Factory::get_room_unit( 2 ) ] );
+
+		dd($cal->getEvents( new \DateTime( '2017-09-01' ), new \DateTime('2017-12-01')));
 	}
 
 	/**

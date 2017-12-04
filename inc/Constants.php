@@ -5,6 +5,7 @@ class Constants {
 	const DATE_FORMAT    = 'Y-m-d';
 	const JS_DATE_FORMAT = 'yy-mm-dd';
 
+	// The room-type defined.
 	const BOOKING        = 'awebooking';
 	const ROOM_TYPE      = 'room_type';
 	const PRICING_RATE   = 'pricing_rate';
@@ -12,8 +13,15 @@ class Constants {
 	const HOTEL_AMENITY  = 'hotel_amenity';
 	const HOTEL_SERVICE  = 'hotel_extra_service';
 
+	// The availability state.
 	const STATE_AVAILABLE   = 0;
 	const STATE_UNAVAILABLE = 1;
 	const STATE_PENDING     = 2;
 	const STATE_BOOKED      = 3;
+
+	// The cache group.
+	const CACHE_ROOM_UNIT          = 'awebooking_cache_room';
+	const CACHE_ROOM_TYPE          = 'awebooking_cache_room_type';
+	const CACHE_ROOMS_IN_ROOM_TYPE = 'awebooking_cache_rooms_in_room_type';
+	const CACHE_BOOKING            = 'awebooking_cache_booking';
 }

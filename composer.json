@@ -31,6 +31,9 @@
         "nesbot/carbon": "^1.22",
         "pelago/emogrifier": "^1.2",
         "roomify/bat": "dev-master",
+        "sabre/uri": "^1.2",
+        "sabre/vobject": "^4.0",
+        "sabre/xml": "^1.5",
         "tightenco/collect": "5.4.*",
         "webdevstudios/taxonomy_single_term": "dev-master"
     },

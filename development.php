@@ -2,6 +2,7 @@
 
 $packages = [
 	__DIR__ . '/awethemes/skeleton/skeleton.php',
+	__DIR__ . '/awethemes/skeleton/vendor/autoload.php',
 	__DIR__ . '/awethemes/container/vendor/autoload.php',
 	__DIR__ . '/awethemes/wp-http/vendor/autoload.php',
 	__DIR__ . '/awethemes/wp-object/vendor/autoload.php',
@@ -9,7 +10,9 @@ $packages = [
 ];
 
 foreach ( $packages as $path ) {
-	if ( file_exists( $path ) ) {
-		require $path;
-	}
+	require $path;
 }
+
+add_action( 'awebooking/booted', function () {
+
+});

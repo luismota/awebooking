@@ -23,8 +23,11 @@ class Route_Service_Provider extends Service_Provider {
 	 * @param AweBooking $awebooking AweBooking instance.
 	 */
 	public function init( $awebooking ) {
-		add_action( 'awebooking/register_routes', [ $this, 'register_routes' ] );
 		add_action( 'parse_request', [ $this, 'dispatch' ], 0 );
+		add_action( 'awebooking/register_routes', [ $this, 'register_routes' ] );
+
+		add_action( 'admin_init', [ $this, 'admin_dispatch' ], 0 );
+		add_action( 'awebooking/register_admin_routes', [ $this, 'register_admin_routes' ] );
 	}
 
 	/**
@@ -33,7 +36,7 @@ class Route_Service_Provider extends Service_Provider {
 	 * @return void
 	 */
 	protected function register_request_binding() {
-		$this->awebooking->singleton( 'request', function( $awebooking ) {
+		$this->awebooking->singleton( Request::class, function( $awebooking ) {
 			$request = Request::capture();
 
 			$request->set_wp_session( $awebooking->make( 'session' )->get_store() );
@@ -41,20 +44,31 @@ class Route_Service_Provider extends Service_Provider {
 			return $request;
 		});
 
-		$this->awebooking->alias( 'request', Request::class );
+		$this->awebooking->alias( Request::class, 'request' );
 	}
 
 	/**
-	 * [register_routes description]
+	 * Register the routes.
 	 *
-	 * @return [type]
+	 * @param \FastRoute\RouteCollector $route The route collector.
+	 * @return void
 	 */
 	public function register_routes( $route ) {
-		require trailingslashit( __DIR__ ) . '../Http/routes.php';
+		require trailingslashit( __DIR__ ) . '/../Http/routes.php';
 	}
 
 	/**
-	 * Dispatch the incoming request.
+	 * Register the admin routes.
+	 *
+	 * @param \FastRoute\RouteCollector $route The route collector.
+	 * @return void
+	 */
+	public function register_admin_routes( $route ) {
+		require trailingslashit( __DIR__ ) . '/../Admin/routes.php';
+	}
+
+	/**
+	 * Dispatch the incoming request (on front-end).
 	 *
 	 * @access private
 	 */
@@ -68,6 +82,21 @@ class Route_Service_Provider extends Service_Provider {
 		// Handle the awebooking_route endpoint requests.
 		awebooking()->make( Kernel::class )
 			->use_request_uri( $wp->query_vars['awebooking_route'] )
-			->handle( $this->awebooking->make( 'request' ) );
+			->handle( $this->awebooking->make( Request::class ) );
+	}
+
+	/**
+	 * Dispatch the incoming request (on admin).
+	 *
+	 * @access private
+	 */
+	public function admin_dispatch() {
+		if ( empty( $_REQUEST['awebooking'] ) ) {
+			return;
+		}
+
+		awebooking()->make( Kernel::class )
+			->use_request_uri( $_REQUEST['awebooking'] )
+			->handle( $this->awebooking->make( Request::class ) );
 	}
 }
