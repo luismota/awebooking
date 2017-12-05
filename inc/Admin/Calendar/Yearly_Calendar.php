@@ -2,7 +2,7 @@
 namespace AweBooking\Admin\Calendar;
 
 use AweBooking\AweBooking;
-use AweBooking\Hotel\Room;
+use AweBooking\Model\Room;
 use AweBooking\Booking\Events\Room_State;
 use AweBooking\Booking\Calendar;
 use AweBooking\Support\Period;

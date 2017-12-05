@@ -41,6 +41,8 @@ tests_add_filter( 'setup_theme', function () {
 	define( 'AWEBOOKING_REMOVE_ALL_DATA', true );
 
 	require dirname( __DIR__ ) . '/uninstall.php';
+
+	AweBooking\Support\Decimal::set_default_scale( 4 );
 });
 
 // Start up the WP testing environment.

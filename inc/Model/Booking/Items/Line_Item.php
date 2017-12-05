@@ -3,7 +3,7 @@ namespace AweBooking\Booking\Items;
 
 use AweBooking\Factory;
 use AweBooking\Concierge;
-use AweBooking\Pricing\Price;
+use AweBooking\Money\Price;
 use AweBooking\Support\Period;
 
 class Line_Item extends Booking_Item {
@@ -95,7 +95,7 @@ class Line_Item extends Booking_Item {
 	/**
 	 * Returns instance of room unit.
 	 *
-	 * @return \AweBooking\Hotel\Room
+	 * @return \AweBooking\Model\Room
 	 */
 	public function get_room_unit() {
 		return Factory::get_room_unit( $this->get_room_id() );

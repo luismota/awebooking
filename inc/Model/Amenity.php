@@ -1,7 +1,7 @@
 <?php
 namespace AweBooking\Model;
 
-use AweBooking\Pricing\Price;
+use AweBooking\Money\Price;
 use AweBooking\Support\WP_Object;
 
 class Amenity extends WP_Object {

@@ -1,8 +1,8 @@
 <?php
 namespace AweBooking;
 
-use AweBooking\Hotel\Room;
-use AweBooking\Hotel\Room_Type;
+use AweBooking\Model\Room;
+use AweBooking\Model\Room_Type;
 use AweBooking\Booking\Booking;
 use AweBooking\Booking\Request;
 use AweBooking\Booking\Availability;
@@ -12,7 +12,7 @@ use AweBooking\Booking\Events\Room_Booking;
 use Roomify\Bat\Valuator\IntervalValuator;
 
 use AweBooking\Pricing\Rate;
-use AweBooking\Pricing\Price;
+use AweBooking\Money\Price;
 use AweBooking\Support\Period;
 use AweBooking\Support\Collection;
 use Roomify\Bat\Calendar\CalendarResponse;

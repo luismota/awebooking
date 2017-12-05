@@ -2,7 +2,7 @@
 namespace AweBooking\Model;
 
 use AweBooking\AweBooking;
-use AweBooking\Hotel\Room_Type;
+use AweBooking\Model\Room_Type;
 
 class Rate extends WP_Object {
 

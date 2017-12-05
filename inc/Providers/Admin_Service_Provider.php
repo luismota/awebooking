@@ -18,6 +18,17 @@ class Admin_Service_Provider extends Service_Provider {
 	];
 
 	/**
+	 * The core List_Tables classes.
+	 *
+	 * @var array
+	 */
+	protected $list_tables = [
+		\AweBooking\Admin\List_Tables\Booking_List_Table::class,
+		\AweBooking\Admin\List_Tables\Room_Type_List_Table::class,
+		\AweBooking\Admin\List_Tables\Service_List_Table::class,
+	];
+
+	/**
 	 * Registers services on the AweBooking.
 	 */
 	public function register() {
@@ -34,6 +45,15 @@ class Admin_Service_Provider extends Service_Provider {
 	public function init() {
 		if ( ! is_admin() ) {
 			return;
+		}
+
+		// Wake-up the metaboxes.
+		foreach ( $this->metaboxes as $class ) {
+			$this->awebooking->make( $class );
+		}
+
+		foreach ( $this->list_tables as $class ) {
+			$this->awebooking->make( $class );
 		}
 
 		add_action( 'admin_init', array( $this, 'handle_admin_init' ) );

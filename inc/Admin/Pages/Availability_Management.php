@@ -3,8 +3,8 @@ namespace AweBooking\Admin\Pages;
 
 use WP_List_Table;
 use AweBooking\Concierge;
-use AweBooking\Hotel\Room;
-use AweBooking\Hotel\Room_Type;
+use AweBooking\Model\Room;
+use AweBooking\Model\Room_Type;
 use AweBooking\Booking\Calendar;
 use AweBooking\Admin\Calendar\Yearly_Calendar;
 use AweBooking\Admin\Calendar\Availability_Calendar;

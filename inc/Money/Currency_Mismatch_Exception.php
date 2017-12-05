@@ -1,4 +1,4 @@
 <?php
-namespace AweBooking\Pricing;
+namespace AweBooking\Money;
 
 class Currency_Mismatch_Exception extends \RuntimeException {}

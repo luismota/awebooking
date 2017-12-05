@@ -2,15 +2,16 @@
 namespace AweBooking\Notification;
 
 use AweBooking\AweBooking;
-use AweBooking\Hotel\Room_Type;
+use AweBooking\Model\Room_Type;
 use AweBooking\Support\Mailable;
 use AweBooking\Support\Formatting;
 use AweBooking\Support\Carbonate;
 use AweBooking\Booking\Items\Line_Item;
 use AweBooking\Booking\Items\Service_Item;
 
-class Admin_Booking_Created extends Mailable {
+class Booking_Cancelled extends Mailable {
 	protected $booking;
+	protected $avai;
 
 	public function __construct( $booking ) {
 		$this->booking = $booking;
@@ -39,7 +40,7 @@ class Admin_Booking_Created extends Mailable {
 		$this->booking->add_item( $service_item );
 		$booking_room_units = $this->booking->get_line_items();
 
-		return $this->get_template( 'admin-new-booking', apply_filters( 'awebooking/new_email_dummy_data', [
+		return $this->get_template( 'cancelled-booking', apply_filters( 'awebooking/cancelled_email_dummy_data', [
 			'booking_id'           => 1,
 			'booking'              => $this->booking,
 			'booking_room_units'   => $booking_room_units,
@@ -59,7 +60,7 @@ class Admin_Booking_Created extends Mailable {
 	 * @return mixed
 	 */
 	public function build() {
-		return $this->get_template( 'admin-new-booking', [
+		return $this->get_template( 'cancelled-booking', [
 			'booking_id'           => $this->booking->get_id(),
 			'booking'              => $this->booking,
 			'booking_room_units'   => $this->booking->get_line_items(),
@@ -79,7 +80,7 @@ class Admin_Booking_Created extends Mailable {
 	 * @return void
 	 */
 	public function get_subject() {
-		$subject = awebooking_option( 'email_new_subject' );
+		$subject = awebooking_option( 'email_cancelled_subject' );
 		return $this->format_string( $subject );
 	}
 
