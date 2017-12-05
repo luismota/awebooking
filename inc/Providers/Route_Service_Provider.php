@@ -2,9 +2,10 @@
 namespace AweBooking\Providers;
 
 use Awethemes\Http\Request;
+use AweBooking\Http\Kernel;
+use AweBooking\Http\Router\Binding_Resolver;
 use Awethemes\WP_Session\WP_Session;
 use AweBooking\Support\Service_Provider;
-use AweBooking\Http\Kernel;
 use Psr\Log\LoggerInterface;
 
 class Route_Service_Provider extends Service_Provider {
@@ -15,6 +16,8 @@ class Route_Service_Provider extends Service_Provider {
 		$this->register_request_binding();
 
 		$this->awebooking->singleton( Kernel::class );
+
+		$this->awebooking->singleton( Binding_Resolver::class );
 	}
 
 	/**
@@ -23,11 +26,35 @@ class Route_Service_Provider extends Service_Provider {
 	 * @param AweBooking $awebooking AweBooking instance.
 	 */
 	public function init( $awebooking ) {
+		$this->setup_router_binding();
+
 		add_action( 'parse_request', [ $this, 'dispatch' ], 0 );
 		add_action( 'awebooking/register_routes', [ $this, 'register_routes' ] );
 
 		add_action( 'admin_init', [ $this, 'admin_dispatch' ], 0 );
 		add_action( 'awebooking/register_admin_routes', [ $this, 'register_admin_routes' ] );
+	}
+
+	/**
+	 * Setup router binding.
+	 *
+	 * @return void
+	 */
+	protected function setup_router_binding() {
+		$router = $this->awebooking->make( Binding_Resolver::class );
+
+		$models = apply_filters( 'awebooking/route_models_binding', [
+			'rate'      => \AweBooking\Model\Rate::class,
+			'room'      => \AweBooking\Model\Room::class,
+			'room_type' => \AweBooking\Model\Room_Type::class,
+			'amenity'   => \AweBooking\Model\Amenity::class,
+			'service'   => \AweBooking\Model\Service::class,
+			'booking'   => \AweBooking\Model\Booking\Booking::class,
+		]);
+
+		foreach ( $models as $key => $model ) {
+			$router->model( $key, $model );
+		}
 	}
 
 	/**
