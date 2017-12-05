@@ -3,7 +3,7 @@ namespace AweBooking\Providers;
 
 use Awethemes\Http\Request;
 use AweBooking\Http\Kernel;
-use AweBooking\Http\Router\Binding_Resolver;
+use AweBooking\Http\Routing\Binding_Resolver;
 use Awethemes\WP_Session\WP_Session;
 use AweBooking\Support\Service_Provider;
 use Psr\Log\LoggerInterface;

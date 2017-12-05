@@ -1,8 +1,7 @@
 <?php
 
 use AweBooking\AweBooking;
-use AweBooking\Http\Router;
-use AweBooking\Http\Router\Binding_Resolver;
+use AweBooking\Http\Routing\Binding_Resolver;
 
 class Binding_Resolver_Test extends WP_UnitTestCase {
 	public function setUp() {

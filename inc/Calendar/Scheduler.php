@@ -1,5 +1,7 @@
 <?php
 namespace AweBooking\Calendar;
 
-class Scheduler {
+use AweBooking\Support\Collection;
+
+class Scheduler extends Collection {
 }

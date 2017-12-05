@@ -4,7 +4,7 @@ namespace AweBooking\Http;
 use AweBooking\AweBooking;
 use Awethemes\Http\Request;
 use Awethemes\Http\Kernel as Base_Kernel;
-use AweBooking\Http\Router\Binding_Resolver;
+use AweBooking\Http\Routing\Binding_Resolver;
 use Awethemes\Http\Resolver\Container_Resolver;
 use Symfony\Component\HttpFoundation\Request as SymfonyRequest;
 use Psr\Log\LoggerInterface;
