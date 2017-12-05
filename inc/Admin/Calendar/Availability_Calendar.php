@@ -2,7 +2,7 @@
 namespace AweBooking\Admin\Calendar;
 
 use AweBooking\Factory;
-use AweBooking\Hotel\Room_Type;
+use AweBooking\Model\Room_Type;
 use AweBooking\Support\Utils as U;
 use AweBooking\Support\Abstract_Calendar;
 

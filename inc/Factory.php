@@ -1,5 +1,5 @@
 <?php
-namespace AweBooking\Model;
+namespace AweBooking;
 
 use AweBooking\Model\Room;
 use AweBooking\Model\Room_Type;

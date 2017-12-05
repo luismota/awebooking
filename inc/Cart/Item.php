@@ -1,7 +1,7 @@
 <?php
 namespace AweBooking\Cart;
 
-use AweBooking\Pricing\Price;
+use AweBooking\Money\Price;
 use AweBooking\Support\Optional;
 use Illuminate\Contracts\Support\Jsonable;
 use Illuminate\Contracts\Support\Arrayable;

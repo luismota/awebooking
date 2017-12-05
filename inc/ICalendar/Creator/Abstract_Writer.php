@@ -3,7 +3,7 @@ namespace AweBooking\ICalendar\Writer;
 
 use AweBooking\Factory;
 use AweBooking\AweBooking;
-use AweBooking\Hotel\Room_Type;
+use AweBooking\Model\Room_Type;
 use AweBooking\Booking\Booking;
 use AweBooking\Booking\Items\Line_Item;
 

@@ -1,7 +1,7 @@
 <?php
-namespace AweBooking\Currency;
+namespace AweBooking\Money;
 
-class Currency_Manager {
+class Currencies {
 	/**
 	 * List all currency.
 	 *
@@ -14,7 +14,7 @@ class Currency_Manager {
 	 */
 	public function __construct() {
 		$this->currencies = apply_filters( 'awebooking/currencies',
-			include( trailingslashit( __DIR__ ) . '/currencies.php' )
+			include( trailingslashit( __DIR__ ) . 'resources/currencies.php' )
 		);
 	}
 

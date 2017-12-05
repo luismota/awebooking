@@ -2,9 +2,9 @@
 namespace AweBooking;
 
 use Skeleton\WP_Option;
-use AweBooking\Hotel\Service;
+use AweBooking\Model\Service;
 use AweBooking\Booking\Booking;
-use AweBooking\Currency\Currency;
+use AweBooking\Money\Currency;
 use Illuminate\Support\Arr;
 
 class Setting extends WP_Option {

@@ -4,8 +4,8 @@ namespace AweBooking\Http\Controllers;
 use AweBooking\Concierge;
 use AweBooking\Factory;
 use AweBooking\AweBooking;
-use AweBooking\Hotel\Service;
-use AweBooking\Hotel\Room_Type;
+use AweBooking\Model\Service;
+use AweBooking\Model\Room_Type;
 use AweBooking\Booking\Request;
 use AweBooking\Booking\Booking;
 use AweBooking\Booking\Items\Line_Item;
@@ -16,7 +16,7 @@ use AweBooking\Support\Mailer;
 use Skeleton\Support\Validator;
 use AweBooking\Support\Service_Hooks;
 use AweBooking\Cart\Cart;
-use AweBooking\Pricing\Price;
+use AweBooking\Money\Price;
 use AweBooking\Support\Period;
 
 class Request_Handler {

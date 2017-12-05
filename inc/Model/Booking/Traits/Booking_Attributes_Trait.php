@@ -1,8 +1,8 @@
 <?php
 namespace AweBooking\Booking\Traits;
 
-use AweBooking\Pricing\Price;
-use AweBooking\Currency\Currency;
+use AweBooking\Money\Price;
+use AweBooking\Money\Currency;
 use AweBooking\Support\Carbonate;
 
 trait Booking_Attributes_Trait {

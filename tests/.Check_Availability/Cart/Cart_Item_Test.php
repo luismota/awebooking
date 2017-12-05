@@ -1,6 +1,6 @@
 <?php
 
-use AweBooking\Pricing\Price;
+use AweBooking\Money\Price;
 use AweBooking\Cart\Item as Cart_Item;
 
 class Cart_Item_Test extends WP_UnitTestCase {
@@ -55,9 +55,9 @@ class Cart_Item_Test extends WP_UnitTestCase {
 
 	public function testWithAssociate() {
 		$item = new Cart_Item(100, new Price(99));
-		$item->associate(AweBooking\Hotel\Service::class);
+		$item->associate(AweBooking\Model\Service::class);
 
-		$this->assertInstanceOf(AweBooking\Hotel\Service::class, $item->model());
+		$this->assertInstanceOf(AweBooking\Model\Service::class, $item->model());
 		$this->assertEquals($item->model()->get_id(), 100);
 	}
 

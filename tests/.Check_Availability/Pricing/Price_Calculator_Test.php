@@ -1,6 +1,6 @@
 <?php
 
-use AweBooking\Pricing\Price;
+use AweBooking\Money\Price;
 use AweBooking\Pricing\Price_Calculator;
 use AweBooking\Pricing\Calculator_Handle;
 

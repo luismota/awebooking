@@ -1,6 +1,6 @@
 <?php
 
-use AweBooking\Hotel\Room_Type;
+use AweBooking\Model\Room_Type;
 
 class Room_Type_Test extends WP_UnitTestCase {
 	/**

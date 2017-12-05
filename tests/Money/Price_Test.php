@@ -1,9 +1,9 @@
 <?php
 
-use AweBooking\Pricing\Price;
-use AweBooking\Currency\Currency;
+use AweBooking\Money\Price;
+use AweBooking\Money\Currency;
 
-class Price_Test extends WP_UnitTestCase {
+class Money_Price_Test extends WP_UnitTestCase {
 	function test_price() {
 		$price1 = new Price( 100.00 );
 		$price1 = $price1->subtract( new Price( 49.00 ) );
@@ -26,7 +26,7 @@ class Price_Test extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @expectedException \AweBooking\Pricing\Currency_Mismatch_Exception
+	 * @expectedException \AweBooking\Money\Currency_Mismatch_Exception
 	 */
 	function test_price_exception() {
 		$price1 = new Price( 100.00, new Currency( 'USD' ) );
@@ -39,8 +39,7 @@ class Price_Test extends WP_UnitTestCase {
 	}
 
 	public function testFromAmountAndCurrency() {
-		// TODO: Set `price_number_decimals` before.
-		$money = Price::from_integer( 1099 );
+		$money = Price::from_integer( 109900 );
 		$this->assertInstanceOf( Price::class, $money );
 		$this->assertEquals( $money->get_amount(), 10.99 );
 	}
@@ -90,7 +89,7 @@ class Price_Test extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @expectedException \AweBooking\Pricing\Currency_Mismatch_Exception
+	 * @expectedException \AweBooking\Money\Currency_Mismatch_Exception
 	 */
 	public function testDifferentCurrenciesCannotBeAdded() {
 		$m1 = new Price( '100', new Currency( 'EUR' ) );
@@ -121,7 +120,7 @@ class Price_Test extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @expectedException \AweBooking\Pricing\Currency_Mismatch_Exception
+	 * @expectedException \AweBooking\Money\Currency_Mismatch_Exception
 	 */
 	public function testDifferentCurrenciesCannotBeSubtracted() {
 		$m1 = new Price( '100', new Currency( 'EUR' ) );
@@ -245,7 +244,7 @@ class Price_Test extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @expectedException \AweBooking\Pricing\Currency_Mismatch_Exception
+	 * @expectedException \AweBooking\Money\Currency_Mismatch_Exception
 	 */
 	public function testDifferentCurrenciesCannotBeCompared() {
 		Price::EUR( 1 )->equals( Price::USD( 1 ) );

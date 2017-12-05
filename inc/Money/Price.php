@@ -1,8 +1,8 @@
 <?php
-namespace AweBooking\Pricing;
+namespace AweBooking\Money;
 
 use InvalidArgumentException;
-use AweBooking\Currency\Currency;
+use AweBooking\Support\Decimal;
 use AweBooking\Support\Formatting;
 
 class Price {
@@ -19,11 +19,27 @@ class Price {
 	protected $amount;
 
 	/**
-	 * The price currency.
+	 * The currency instance.
 	 *
 	 * @var Currency
 	 */
 	protected $currency;
+
+	/**
+	 * The default currency code.
+	 *
+	 * @var string
+	 */
+	protected static $default_currency_code = 'USD';
+
+	/**
+	 * Set default currency code.
+	 *
+	 * @param string $currency_code The currency code.
+	 */
+	public static function set_default_currency_code( $currency_code ) {
+		static::$default_currency_code = $currency_code;
+	}
 
 	/**
 	 * Creates a Price instance.
@@ -32,8 +48,8 @@ class Price {
 	 * @param Currency $currency Optinal, the currency if null given default currency will be used.
 	 */
 	public function __construct( $amount, Currency $currency = null ) {
+		$this->currency = $currency ?: new Currency( static::$default_currency_code );
 		$this->set_amount( $amount );
-		$this->currency = $currency ?: awebooking()->make( 'currency' );
 	}
 
 	/**
@@ -54,7 +70,9 @@ class Price {
 	 * @return static
 	 */
 	public static function from_integer( $amount ) {
-		return new static( Formatting::amount_to_decimal( $amount ) );
+		$amount = Decimal::from_raw_value( $amount );
+
+		return new static( $amount->as_numeric() );
 	}
 
 	/**

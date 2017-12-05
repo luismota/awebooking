@@ -5,8 +5,7 @@
  * @package AweBooking
  */
 
-use AweBooking\Config;
-use AweBooking\Currency;
+use AweBooking\Money\Currency;
 
 /**
  * Room test case.

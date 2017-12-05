@@ -1,7 +1,7 @@
 <?php
 
 use AweBooking\AweBooking;
-use AweBooking\Pricing\Price;
+use AweBooking\Money\Price;
 use AweBooking\Support\Period;
 use AweBooking\Support\Template;
 use AweBooking\Support\Formatting;

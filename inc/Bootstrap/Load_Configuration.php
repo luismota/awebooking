@@ -6,6 +6,7 @@ use AweBooking\AweBooking;
 use AweBooking\Multilingual;
 use AweBooking\Support\Decimal;
 use AweBooking\Support\Carbonate;
+use AweBooking\Money\Price;
 
 class Load_Configuration {
 	/**
@@ -45,6 +46,7 @@ class Load_Configuration {
 		Carbonate::setWeekEndsAt( (int) calendar_week_mod( Carbonate::getWeekStartsAt() - 1 ) );
 
 		// Set the default scale for Decimal.
+		Price::set_default_currency_code( $awebooking['setting']->get( 'currency' ) );
 		Decimal::set_default_scale( $awebooking['setting']->get( 'price_number_decimals' ) );
 	}
 

@@ -2,7 +2,7 @@
 namespace AweBooking\Cart;
 
 use Closure;
-use AweBooking\Pricing\Price;
+use AweBooking\Money\Price;
 use AweBooking\Support\Collection;
 use Awethemes\WP_Session\WP_Session;
 use AweBooking\Cart\Exceptions\Unknown_Model_Exception;

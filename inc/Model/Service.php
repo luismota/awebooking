@@ -2,7 +2,7 @@
 namespace AweBooking\Model;
 
 use AweBooking\AweBooking;
-use AweBooking\Pricing\Price;
+use AweBooking\Money\Price;
 
 class Service extends WP_Object {
 	/* Constants */

@@ -184,7 +184,7 @@ class Setup_Environment {
 			'show_in_admin_bar'   => false,
 			'exclude_from_search' => true,
 			'show_ui'             => true,
-			'show_in_menu'        => false,
+			'show_in_menu'        => true,
 			'supports'            => [ 'comments' ],
 			'labels'              => [
 				'all_items' => esc_html__( 'Bookings', 'awebooking' ),
