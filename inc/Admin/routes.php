@@ -2,14 +2,9 @@
 
 use AweBooking\Http\Router\Binding_Resolver;
 
-$route->get( '/', function () {
-	$binding = new Binding_Resolver( awebooking() );
+$route->get( '/save-setting', 'AweBooking\Admin\Controllers\Setting_Controller@save' );
+$route->get( '/check-availability', 'AweBooking\Admin\Controllers\Check_Availability_Controller@check' );
 
-	$binding->bind( 'room_type', function() {
-
-	} );
-
-	dd($binding->resolve_bindings([ 'room_type' => 1 ]));
-
-	return '~.~';
-});
+// $route->get( '/room/{room}', function( $room ) {
+// 	dd($room);
+// });
