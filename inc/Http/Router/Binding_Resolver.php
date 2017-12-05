@@ -1,14 +1,11 @@
 <?php
 namespace AweBooking\Http\Router;
 
-use Exception;
-use InvalidArgumentException;
+use Closure;
 use AweBooking\AweBooking;
+use InvalidArgumentException;
+use AweBooking\Model\Exceptions\Model_Not_Found_Exception;
 
-/**
- *
- * @link https://github.com/mmghv/lumen-route-binding
- */
 class Binding_Resolver {
 	/**
 	 * The awebooking instance.
@@ -18,18 +15,11 @@ class Binding_Resolver {
 	protected $awebooking;
 
 	/**
-	 * Explicit bindings.
+	 * The registered route value binders.
 	 *
 	 * @var array
 	 */
-	protected $bindings = [];
-
-	/**
-	 * Composite wildcards bindings.
-	 *
-	 * @var array
-	 */
-	protected $composite_bindings = [];
+	protected $binders = [];
 
 	/**
 	 * Constructor.
@@ -41,159 +31,123 @@ class Binding_Resolver {
 	}
 
 	/**
-	 * Explicit bind a model (name or closure) to a wildcard key.
-	 *
-	 * @param  string          $key           The wildcard key.
-	 * @param  string|callable $binder        The model name, Class_Name@method or resolver callable.
-	 * @param  null|callable   $error_handler The handler to be called on exceptions (mostly ModelNotFoundException).
-	 * @return void
-	 */
-	public function bind( $key, $binder, callable $error_handler = null ) {
-		$this->bindings[ $key ] = [ $binder, $error_handler ];
-	}
-
-	/**
-	 * Register a composite binding (more than one model) with a specific order
-	 *
-	 * @param  array                                                                                                          $keys          wildcards composite
-	 * @param  string|callable binder         resolver callable or Class@method callable, will be passed the wildcards values
-	 *                                        and should return an array of resolved values of the same count and order
-	 * @param  null|callable                                                                                                  $error_handler  handler to be called on exceptions (which is thrown in the resolver callable)
-	 *
-	 * @throws InvalidArgumentException
-	 *
-	 * @example (bind 2 wildcards composite {oneToMany relation})
-	 * ->compositeBind(['post', 'comment'], function($post, $comment) {
-	 *     $post = \App\Post::findOrFail($post);
-	 *     $comment = $post->comments()->findOrFail($comment);
-	 *     return [$post, $comment];
-	 * });
-	 *
-	 * @example (using Class@method callable style)
-	 * ->compositeBind(['post', 'comment'], 'App\Managers\PostManager@findPostComment');
-	 */
-	public function composite_bind( $keys, $binder, callable $error_handler = null ) {
-		if ( ! is_array( $keys ) ) {
-			throw new InvalidArgumentException( 'Route-Model-Binding : Invalid $keys value, Expected array of wildcards names' );
-		}
-
-		if ( count( $keys ) < 2 ) {
-			throw new InvalidArgumentException( 'Route-Model-Binding : Invalid $keys value, Expected array of more than one wildcard' );
-		}
-
-		if ( is_callable( $binder ) ) {
-			// normal callable is acceptable
-		} elseif ( is_string( $binder ) && strpos( $binder, '@' ) !== false ) {
-			// Class@method callable is acceptable
-		} else {
-			throw new InvalidArgumentException( "Route-Model-Binding : Binder must be a callable or a 'Class@method' string" );
-		}
-
-		$this->composite_bindings[] = [ $keys, $binder, $error_handler ];
-	}
-
-	/**
 	 * Resolve bindings for route parameters.
 	 *
-	 * @param  array $vars  The route parameters.
-	 * @return array        Route parameters with bindings resolved.
+	 * @param  array $parameters The route parameters.
+	 * @return array
 	 */
-	public function resolve_bindings( array $vars ) {
-		// First check if the route $vars as a whole matches any registered composite binding.
-		if ( count( $vars ) > 1 && ! empty( $this->composite_bindings ) ) {
-			if ( $r = $this->resolve_composite_binding( $vars ) ) {
-				return $r;
+	public function resolve( array $parameters ) {
+		foreach ( $parameters as $key => $value ) {
+			if ( $callback = $this->get_binding_callback( $key ) ) {
+				$parameters[ $key ] = call_user_func( $callback, $value );
 			}
 		}
 
-		// If no composite binding found, check for explicit bindings.
-		if ( ! empty( $this->bindings ) ) {
-			foreach ( $vars as $var => $value ) {
-				$vars[ $var ] = $this->resolve_binding( $var, $value );
-			}
-		}
-
-		return $vars;
+		return $parameters;
 	}
 
 	/**
-	 * Check for and resolve the composite bindings if a match found
+	 * Add a new route parameter binder.
 	 *
-	 * @param  array $vars  the wildcards array
-	 * @return array|null   the wildcards array after been resolved, or NULL if no match found
+	 * @param  string          $key    The wildcard key.
+	 * @param  string|callable $binder The binder, class@method or resolver callable.
+	 * @return void
 	 */
-	protected function resolve_composite_binding( array $vars ) {
-		$keys = array_keys( $vars );
-
-		foreach ( $this->composite_bindings as $binding ) {
-			if ( $keys === $binding[0] ) {
-				$binder = $binding[1];
-				$error_handler = $binding[2];
-
-				$callable = $this->get_binding_callable( $binder, null );
-				$r = $this->call_binding_callable( $callable, $vars, $error_handler, true );
-
-				if ( ! is_array( $r ) || count( $r ) !== count( $vars ) ) {
-					throw new Exception( 'Route-Model-Binding (composite-bind) : Return value should be an array and should be of the same count as the wildcards!' );
-				}
-
-				// Combine the binding results with the keys.
-				return array_combine( $keys, array_values( $r ) );
-			}
-		}
+	public function bind( $key, $binder ) {
+		$this->binders[ str_replace( '-', '_', $key ) ] = $this->binding_for_callback( $binder );
 	}
 
 	/**
-	 * Resolve binding for the given wildcard.
+	 * Register a model binder for a wildcard.
 	 *
-	 * @param  string $key    The wildcard key.
-	 * @param  string $value  The wildcard value.
-	 * @return mixed
+	 * @param  string        $key      The wildcard key.
+	 * @param  string        $class    The model class name.
+	 * @param  \Closure|null $callback The callback when model not found.
+	 * @return void
+	 *
+	 * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
 	 */
-	protected function resolve_binding( $key, $value ) {
-		// Handle binding if found.
-		if ( isset( $this->bindings[ $key ] ) ) {
-			list( $binder, $error_handler ) = $this->bindings[ $key ];
-
-			return $this->call_the_binding( $binder, $value, $error_handler );
-		}
-
-		// Return the value unchanged if no binding found.
-		return $value;
+	public function model( $key, $class, Closure $callback = null ) {
+		$this->bind( $key, $this->binding_for_model( $class, $callback ) );
 	}
 
 	/**
-	 * Get the callable for the binding.
+	 * Get the binding callback for a given binding.
 	 *
-	 * @param  mixed    $binder        The binder.
-	 * @param  string   $value         The value.
-	 * @param  callable $error_handler The error_handler.
-	 * @return callable
-	 *
-	 * @throws \Exception
+	 * @param  string $key  The binding key.
+	 * @return \Closure|null
 	 */
-	protected function call_the_binding( $binder, $value, callable $error_handler = null ) {
-		try {
-			$resolved = $this->awebooking->make( $binder, [ $value ] );
+	public function get_binding_callback( $key ) {
+		$key = str_replace( '-', '_', $key );
 
-			return $resolved;
-		} catch ( \Exception $e ) {
-			if ( ! is_null( $error_handler ) ) {
-				return call_user_func( $error_handler, $e );
-			} else {
-				throw $e;
-			}
+		if ( isset( $this->binders[ $key ] ) ) {
+			return $this->binders[ $key ];
 		}
 	}
 
 	/**
-	 * Get the default binding resolver callable
+	 * Create a Route model binding for a given callback.
 	 *
-	 * @param  string $instance
-	 * @param  string $value
-	 *
+	 * @param  \Closure|string $binder The binder.
 	 * @return \Closure
 	 */
-	protected function call_default_binding( $instance, $value ) {
+	protected function binding_for_callback( $binder ) {
+		if ( is_string( $binder ) ) {
+			return $this->create_class_binding( $binder );
+		}
+
+		return $binder;
+	}
+
+	/**
+	 * Create a class based binding using the IoC container.
+	 *
+	 * @param  string $binding The class or class@method binding.
+	 * @return \Closure
+	 */
+	protected function create_class_binding( $binding ) {
+		return function ( $value ) use ( $binding ) {
+			// If the binding has an @ sign, we will assume it's being used to delimit
+			// the class name from the bind method name. This allows for bindings
+			// to run multiple bind methods in a single class for convenience.
+			list( $class, $method ) = ( false !== strpos( $binding, '@' ) ) ? explode( '@', $binding, 2 ) : [ $binding, 'bind' ];
+
+			$callable = [ $this->awebooking->make( $class ), $method ];
+
+			return call_user_func( $callable, $value );
+		};
+	}
+
+	/**
+	 * Create a Route model binding for a model.
+	 *
+	 * @param  string        $class    The model class name.
+	 * @param  \Closure|null $callback The callback when model not found.
+	 * @return \Closure
+	 */
+	protected function binding_for_model( $class, $callback = null ) {
+		return function ( $value ) use ( $class, $callback ) {
+			if ( is_null( $value ) ) {
+				return;
+			}
+
+			// For model binders, we will attempt to retrieve the models using the first
+			// method on the model instance. If we cannot retrieve the models we'll
+			// throw a not found exception otherwise we will return the instance.
+			$model = new $class( $value );
+
+			if ( $model->exists() ) {
+				return $model;
+			}
+
+			// If a callback was supplied to the method we will call that to determine
+			// what we should do when the model is not found. This just gives these
+			// developer a little greater flexibility to decide what will happen.
+			if ( $callback instanceof Closure ) {
+				return call_user_func( $callback, $value );
+			}
+
+			throw (new Model_Not_Found_Exception())->set_model( $class );
+		};
 	}
 }
