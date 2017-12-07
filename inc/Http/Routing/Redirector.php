@@ -1,154 +1,181 @@
 <?php
 namespace AweBooking\Http\Routing;
 
-use AweBooking\Http\Redirect_Response;
+use Awethemes\WP_Session\Session;
+use Awethemes\Http\Redirect_Response;
 
 class Redirector {
 	/**
 	 * The URL generator instance.
 	 *
-	 * @var \Illuminate\Routing\UrlGenerator
+	 * @var Url_Generator
 	 */
 	protected $generator;
 
 	/**
 	 * The session store instance.
 	 *
-	 * @var \Illuminate\Session\Store
+	 * @var Awethemes\WP_Session\Session
 	 */
 	protected $session;
 
 	/**
 	 * Create a new Redirector instance.
 	 *
-	 * @param  \Illuminate\Routing\UrlGenerator $generator
+	 * @param  Url_Generator $generator The Url_Generator.
 	 * @return void
 	 */
-	public function __construct( UrlGenerator $generator ) {
+	public function __construct( Url_Generator $generator ) {
 		$this->generator = $generator;
-	}
-
-	/**
-	 * Create a new redirect response to the "home" route.
-	 *
-	 * @param  int $status
-	 * @return \Illuminate\Http\RedirectResponse
-	 */
-	public function home( $status = 302 ) {
-		return $this->to( $this->generator->route( 'home' ), $status );
-	}
-
-	/**
-	 * Create a new redirect response to the previous location.
-	 *
-	 * @param  int   $status
-	 * @param  array $headers
-	 * @param  mixed $fallback
-	 * @return \Illuminate\Http\RedirectResponse
-	 */
-	public function back( $status = 302, $headers = [], $fallback = false ) {
-		return $this->createRedirect( $this->generator->previous( $fallback ), $status, $headers );
-	}
-
-	/**
-	 * Create a new redirect response to the given path.
-	 *
-	 * @param  string $path
-	 * @param  int    $status
-	 * @param  array  $headers
-	 * @param  bool   $secure
-	 * @return \Illuminate\Http\RedirectResponse
-	 */
-	public function to( $path, $status = 302, $headers = [], $secure = null ) {
-		return $this->createRedirect( $this->generator->to( $path, [], $secure ), $status, $headers );
-	}
-
-	/**
-	 * Create a new redirect response to an external URL (no validation).
-	 *
-	 * @param  string $path
-	 * @param  int    $status
-	 * @param  array  $headers
-	 * @return \Illuminate\Http\RedirectResponse
-	 */
-	public function away( $path, $status = 302, $headers = [] ) {
-		return $this->createRedirect( $path, $status, $headers );
-	}
-
-	/**
-	 * Create a new redirect response to the given HTTPS path.
-	 *
-	 * @param  string $path
-	 * @param  int    $status
-	 * @param  array  $headers
-	 * @return \Illuminate\Http\RedirectResponse
-	 */
-	public function secure( $path, $status = 302, $headers = [] ) {
-		return $this->to( $path, $status, $headers, true );
-	}
-
-	/**
-	 * Create a new redirect response to a named route.
-	 *
-	 * @param  string $route
-	 * @param  array  $parameters
-	 * @param  int    $status
-	 * @param  array  $headers
-	 * @return \Illuminate\Http\RedirectResponse
-	 */
-	public function route( $route, $parameters = [], $status = 302, $headers = [] ) {
-		return $this->to( $this->generator->route( $route, $parameters ), $status, $headers );
-	}
-
-	/**
-	 * Create a new redirect response to a controller action.
-	 *
-	 * @param  string $action
-	 * @param  array  $parameters
-	 * @param  int    $status
-	 * @param  array  $headers
-	 * @return \Illuminate\Http\RedirectResponse
-	 */
-	public function action( $action, $parameters = [], $status = 302, $headers = [] ) {
-		return $this->to( $this->generator->action( $action, $parameters ), $status, $headers );
-	}
-
-	/**
-	 * Create a new redirect response.
-	 *
-	 * @param  string $path
-	 * @param  int    $status
-	 * @param  array  $headers
-	 * @return \Illuminate\Http\RedirectResponse
-	 */
-	protected function createRedirect( $path, $status, $headers ) {
-		return tap(
-			new RedirectResponse( $path, $status, $headers ), function ( $redirect ) {
-				if ( isset( $this->session ) ) {
-					$redirect->setSession( $this->session );
-				}
-
-				$redirect->setRequest( $this->generator->getRequest() );
-			}
-		);
-	}
-
-	/**
-	 * Get the URL generator instance.
-	 *
-	 * @return \Illuminate\Routing\UrlGenerator
-	 */
-	public function getUrlGenerator() {
-		return $this->generator;
 	}
 
 	/**
 	 * Set the active session store.
 	 *
-	 * @param  \Illuminate\Session\Store $session
+	 * @param  \Awethemes\WP_Session\Session $session The session store.
 	 * @return void
 	 */
-	public function setSession( SessionStore $session ) {
+	public function set_wp_session( Session $session ) {
 		$this->session = $session;
+	}
+
+	/**
+	 * Get the URL generator instance.
+	 *
+	 * @return Url_Generator
+	 */
+	public function get_url_generator() {
+		return $this->generator;
+	}
+
+	/**
+	 * Create a new redirect response to the given url.
+	 *
+	 * @param  string $url           The url redirect to.
+	 * @param  int    $status        The response status code.
+	 * @param  array  $headers       The response headers.
+	 * @param  bool   $safe_redirect Use safe redirect or not.
+	 * @return \AweBooking\Http\Redirect_Response
+	 */
+	public function to( $url, $status = 302, $headers = [], $safe_redirect = false ) {
+		// If the $url considered is a path, call it in home_url().
+		if ( ! $this->is_valid_path( $url ) ) {
+			$url = home_url( $url );
+		}
+
+		return $this->create_redirect( $url, $status, $headers, $safe_redirect );
+	}
+
+	/**
+	 * Create a new redirect response to the "home".
+	 *
+	 * @param  int $status The response status code.
+	 * @return \AweBooking\Http\Redirect_Response
+	 */
+	public function home( $status = 302 ) {
+		return $this->create_redirect( home_url(), $status, [], true );
+	}
+
+	/**
+	 * Create a new redirect response to the "admin" area.
+	 *
+	 * @param  string $path    Optional path relative to the admin URL.
+	 * @param  int    $status  The response status code.
+	 * @param  array  $headers The response headers.
+	 * @return \AweBooking\Http\Redirect_Response
+	 */
+	public function admin( $path = '', $status = 302, $headers = [] ) {
+		return $this->create_redirect( admin_url( $path ), $status, $headers, true );
+	}
+
+	/**
+	 * Create a new redirect response to the previous location.
+	 *
+	 * @param  int   $status   The response status code.
+	 * @param  array $headers  The response headers.
+	 * @param  mixed $fallback The fallback, if null it'll be admin_url() or home_url() depend by context.
+	 * @return \AweBooking\Http\Redirect_Response
+	 */
+	public function back( $status = 302, $headers = [], $fallback = null ) {
+		$previous = wp_get_referer();
+
+		if ( ! $previous && ! $fallback ) {
+			$fallback = is_admin() ? admin_url() : home_url();
+		}
+
+		return $this->to( $previous ?: $fallback, $status, $headers, true );
+	}
+
+	/**
+	 * Create a new redirect response to a public route area with a path.
+	 *
+	 * @param  string $path       The route path.
+	 * @param  array  $parameters The additional parameters.
+	 * @param  int    $status     The response status code.
+	 * @param  array  $headers    The response headers.
+	 * @return \AweBooking\Http\Redirect_Response
+	 */
+	public function site_route( $path = '/', $parameters = [], $status = 302, $headers = [] ) {
+		$to_url = $this->generator->site_route( $path );
+
+		if ( $parameters ) {
+			$to_url = add_query_arg( $parameters, $to_url );
+		}
+
+		return $this->create_redirect( $to_url, $status, $headers, true );
+	}
+
+	/**
+	 * Create a new redirect response to a admin route area with a path.
+	 *
+	 * @param  string $path       The route path.
+	 * @param  array  $parameters The additional parameters.
+	 * @param  int    $status     The response status code.
+	 * @param  array  $headers    The response headers.
+	 * @return \AweBooking\Http\Redirect_Response
+	 */
+	public function admin_route( $path = '/', $parameters = [], $status = 302, $headers = [] ) {
+		$to_url = $this->generator->admin_route( $path );
+
+		if ( $parameters ) {
+			$to_url = add_query_arg( $parameters, $to_url );
+		}
+
+		return $this->create_redirect( $to_url, $status, $headers, true );
+	}
+
+	/**
+	 * Create a new redirect response.
+	 *
+	 * @param  string $url           The url redirect to.
+	 * @param  int    $status        The response status code.
+	 * @param  array  $headers       The response headers.
+	 * @param  bool   $safe_redirect Use safe redirect or not.
+	 * @return \AweBooking\Http\Redirect_Response
+	 */
+	protected function create_redirect( $url, $status, $headers, $safe_redirect ) {
+		$redirect = new Redirect_Response( $url, $status, $headers, $safe_redirect );
+
+		$redirect->set_request( $this->generator->get_request() );
+
+		if ( isset( $this->session ) ) {
+			$redirect->set_session( $this->session );
+		}
+
+		return $redirect;
+	}
+
+	/**
+	 * Determine if the given "path" is a valid URL.
+	 *
+	 * @param  string $path The input URL to check.
+	 * @return bool
+	 */
+	public function is_valid_path( $path ) {
+		if ( ! preg_match( '~^(#|//|https?://|mailto:|tel:)~', $path ) ) {
+			return filter_var( $path, FILTER_VALIDATE_URL ) !== false;
+		}
+
+		return true;
 	}
 }
