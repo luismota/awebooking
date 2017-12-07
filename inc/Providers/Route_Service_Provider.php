@@ -3,9 +3,11 @@ namespace AweBooking\Providers;
 
 use Awethemes\Http\Request;
 use AweBooking\Http\Kernel;
+use AweBooking\Http\Routing\Redirector;
+use AweBooking\Http\Routing\Url_Generator;
 use AweBooking\Http\Routing\Binding_Resolver;
-use Awethemes\WP_Session\WP_Session;
 use AweBooking\Support\Service_Provider;
+use Awethemes\WP_Session\WP_Session;
 use Psr\Log\LoggerInterface;
 
 class Route_Service_Provider extends Service_Provider {
@@ -13,11 +15,13 @@ class Route_Service_Provider extends Service_Provider {
 	 * Registers services on the AweBooking.
 	 */
 	public function register() {
-		$this->register_request_binding();
+		$this->register_request();
 
-		$this->awebooking->singleton( Kernel::class );
+		$this->awebooking->singleton( 'url', Url_Generator::class );
+		$this->awebooking->singleton( 'route_binder', Binding_Resolver::class );
+		$this->awebooking->singleton( 'kernel', Kernel::class );
 
-		$this->awebooking->singleton( Binding_Resolver::class );
+		$this->register_redirector();
 	}
 
 	/**
@@ -62,16 +66,33 @@ class Route_Service_Provider extends Service_Provider {
 	 *
 	 * @return void
 	 */
-	protected function register_request_binding() {
-		$this->awebooking->singleton( Request::class, function( $awebooking ) {
+	protected function register_request() {
+		$this->awebooking->singleton( 'request', function( $a ) {
 			$request = Request::capture();
 
-			$request->set_wp_session( $awebooking->make( 'session' )->get_store() );
+			$request->set_wp_session( $a['session']->get_store() );
 
 			return $request;
 		});
 
-		$this->awebooking->alias( Request::class, 'request' );
+		$this->awebooking->alias( 'request', Request::class );
+	}
+
+	/**
+	 * Register the Redirector service.
+	 *
+	 * @return void
+	 */
+	protected function register_redirector() {
+		$this->awebooking->singleton( 'redirector', function ( $a ) {
+			$redirector = new Redirector( $a['url'] );
+
+			$redirector->set_wp_session( $a['session']->get_store() );
+
+			return $redirector;
+		});
+
+		$this->awebooking->alias( 'redirector', Redirector::class );
 	}
 
 	/**
