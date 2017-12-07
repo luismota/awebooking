@@ -3,11 +3,10 @@ namespace AweBooking;
 
 use AweBooking\Model\Room;
 use AweBooking\Model\Room_Type;
-use AweBooking\Model\Booking\Booking;
-use AweBooking\Model\Booking\Items\Line_Item;
-use AweBooking\Model\Booking\Items\Service_Item;
-use AweBooking\Model\Booking\Items\Booking_Item;
+use AweBooking\Model\Booking;
+use AweBooking\Model\Booking_Item;
 use AweBooking\Model\WP_Object;
+use AweBooking\Support\Utils as U;
 
 class Factory {
 	/**
@@ -47,27 +46,7 @@ class Factory {
 	 * @return mixed|false|null
 	 */
 	public static function get_booking_item( $item_id ) {
-		if ( is_numeric( $item_id ) ) {
-			global $wpdb;
-			$item_data = $wpdb->get_row( $wpdb->prepare( "SELECT `booking_item_type` FROM `{$wpdb->prefix}awebooking_booking_items` WHERE `booking_item_id` = %d LIMIT 1", $item_id ), ARRAY_A );
-
-			$id        = $item_id;
-			$item_type = isset( $item_data['booking_item_type'] ) ? $item_data['booking_item_type'] : false;
-		} elseif ( $item_id instanceof Booking_Item ) {
-			$id        = $item_id->get_id();
-			$item_type = $item_id->get_type();
-		} elseif ( is_array( $item_id ) && ! empty( $item_id['booking_item_type'] ) ) {
-			$id        = $item_id['booking_item_id'];
-			$item_type = $item_id['booking_item_type'];
-		} else {
-			$id        = false;
-			$item_type = false;
-		}
-
-		// Found invalid ID or type, just return.
-		if ( ! $id || ! $item_type ) {
-			return;
-		}
+		list( $item_id, $item_type ) = static::resolve_booking_item( $item_id );
 
 		// Resolve booking item class by type.
 		$classname = static::resolve_booking_item_class( $item_type );
@@ -75,11 +54,36 @@ class Factory {
 			return false;
 		}
 
-		try {
-			return new $classname( $id );
-		} catch ( \Exception $e ) {
-			return false;
+		return static::get_object_from_cache( $item_id, $classname, Constants::CACHE_BOOKING_ITEM );
+	}
+
+	/**
+	 * Resolve booking item ID, type by booking item ID.
+	 *
+	 * @param  int $item_id Booking item ID.
+	 * @return array
+	 */
+	protected static function resolve_booking_item( $item_id ) {
+		$id        = null;
+		$item_type = null;
+
+		if ( is_numeric( $item_id ) ) {
+			global $wpdb;
+			$item_data = $wpdb->get_row(
+				$wpdb->prepare( "SELECT `booking_item_type` FROM `{$wpdb->prefix}awebooking_booking_items` WHERE `booking_item_id` = %d LIMIT 1", $item_id ), ARRAY_A
+			);
+
+			$id        = $item_id;
+			$item_type = isset( $item_data['booking_item_type'] ) ? $item_data['booking_item_type'] : null;
+		} elseif ( is_array( $item_id ) && ! empty( $item_id['booking_item_type'] ) ) {
+			$id        = $item_id['booking_item_id'];
+			$item_type = $item_id['booking_item_type'];
+		} elseif ( $item_id instanceof Booking_Item ) {
+			$id        = $item_id->get_id();
+			$item_type = $item_id->get_type();
 		}
+
+		return [ $id, $item_type ];
 	}
 
 	/**
@@ -90,8 +94,8 @@ class Factory {
 	 */
 	protected static function resolve_booking_item_class( $type ) {
 		$maps = apply_filters( 'awebooking/booking_item_class_maps', [
-			'line_item'    => Line_Item::class,
-			'service_item' => Service_Item::class,
+			'line_item'    => \AweBooking\Model\Line_Item::class,
+			'service_item' => \AweBooking\Model\Service_Item::class,
 		]);
 
 		if ( array_key_exists( $type, $maps ) ) {
@@ -108,6 +112,33 @@ class Factory {
 	 * @return mixed
 	 */
 	protected static function get_object_from_cache( $object_id, $object_class, $cache_group ) {
+		$object_id = static::resolve_object_id( $object_id );
+
+		// Try get the object in the cached first.
+		$the_object = wp_cache_get( $object_id, $cache_group );
+
+		if ( false === $the_object ) {
+			$the_object = U::rescue( function() use ( $object_class, $object_id ) {
+				return new $object_class( $object_id );
+			});
+
+			if ( ! $the_object || ! $the_object->exists() ) {
+				return $the_object;
+			}
+
+			wp_cache_add( $object_id, $the_object, $cache_group );
+		}
+
+		return $the_object;
+	}
+
+	/**
+	 * Resolve object_id from mixed data.
+	 *
+	 * @param  mixed $object_id The object data.
+	 * @return int
+	 */
+	protected static function resolve_object_id( $object_id ) {
 		if ( is_numeric( $object_id ) && $object_id > 0 ) {
 			$object_id = (int) $object_id;
 		} elseif ( ! empty( $object_id->ID ) ) {
@@ -118,20 +149,6 @@ class Factory {
 			$object_id = $object_id->get_id();
 		}
 
-		$the_object = wp_cache_get( $object_id, $cache_group );
-
-		if ( false === $the_object ) {
-			$the_object = new $object_class( $object_id );
-
-			// If the object not exists, do not cache it.
-			// Just return the new instance.
-			if ( ! $the_object->exists() ) {
-				return $the_object;
-			}
-
-			wp_cache_add( $object_id, $the_object, $cache_group );
-		}
-
-		return $the_object;
+		return $object_id;
 	}
 }
