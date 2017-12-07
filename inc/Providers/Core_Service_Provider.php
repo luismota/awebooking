@@ -17,7 +17,7 @@ class Core_Service_Provider extends Service_Provider {
 			return new Currency( $a['setting']->get( 'currency' ) );
 		});
 
-		if ( $this->awebooking->is_request( 'frontend' ) ) {
+		if ( $this->awebooking->wp_request_is( 'frontend' ) ) {
 			$this->awebooking->singleton( 'cart', Cart::class );
 		}
 	}

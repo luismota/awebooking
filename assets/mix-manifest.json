@@ -1,13 +1,14 @@
 {
-    "/js/admin/awebooking.js": "/js/admin/awebooking.js?id=29eafec2730617bc6077",
-    "/css/admin.css": "/css/admin.css?id=e587ef922fc58fae08cc",
-    "/css/theme.css": "/css/theme.css?id=2132cdb61a834911ddbd",
-    "/css/awebooking.css": "/css/awebooking.css?id=6c70139f337958173659",
-    "/js/admin/vendor.js": "/js/admin/vendor.js?id=ec80dfceadf3f1ed8070",
-    "/js/admin/edit-booking.js": "/js/admin/edit-booking.js?id=b361033fd01e45b3a414",
-    "/js/admin/manager-pricing.js": "/js/admin/manager-pricing.js?id=752c7362da4f54b42736",
-    "/js/admin/manager-availability.js": "/js/admin/manager-availability.js?id=7bcefbd2d8648b07d020",
-    "/js/admin/edit-service.js": "/js/admin/edit-service.js?id=07f0c84f1b168c758ba2",
-    "/js/admin/edit-room-type.js": "/js/admin/edit-room-type.js?id=2bb124245d01dffa641e",
-    "/js/admin/manifest.js": "/js/admin/manifest.js?id=b42d5e89920b6ef49bec"
+    "/js/admin/awebooking.js": "/js/admin/awebooking.js",
+    "/css/admin.css": "/css/admin.css",
+    "/css/theme.css": "/css/theme.css",
+    "/css/awebooking.css": "/css/awebooking.css",
+    "/js/admin/vendor.js": "/js/admin/vendor.js",
+    "/js/admin/edit-booking.js": "/js/admin/edit-booking.js",
+    "/js/admin/manager-pricing.js": "/js/admin/manager-pricing.js",
+    "/js/admin/manager-availability.js": "/js/admin/manager-availability.js",
+    "/js/admin/edit-service.js": "/js/admin/edit-service.js",
+    "/js/admin/edit-room-type.js": "/js/admin/edit-room-type.js",
+    "/js/admin/schedule-calendar.js": "/js/admin/schedule-calendar.js",
+    "/js/admin/manifest.js": "/js/admin/manifest.js"
 }

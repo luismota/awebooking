@@ -1,5 +1,5 @@
 <?php
-namespace AweBooking\Booking\Items;
+namespace AweBooking\Model;
 
 use AweBooking\Factory;
 use AweBooking\Concierge;

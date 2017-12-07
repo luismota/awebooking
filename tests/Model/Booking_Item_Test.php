@@ -1,6 +1,6 @@
 <?php
 
-use AweBooking\Booking\Items\Booking_Item;
+use AweBooking\Model\Booking_Item;
 
 class Test_Booking_Item extends Booking_Item {
 	public function get_type() {

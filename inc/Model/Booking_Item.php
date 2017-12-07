@@ -1,9 +1,8 @@
 <?php
-namespace AweBooking\Booking\Items;
+namespace AweBooking\Model;
 
 use AweBooking\Factory;
-use AweBooking\AweBooking;
-use AweBooking\Support\WP_Object;
+use AweBooking\Constants;
 
 class Booking_Item extends WP_Object {
 	/**
@@ -211,7 +210,7 @@ class Booking_Item extends WP_Object {
 			return;
 		}
 
-		$post_type   = get_post_type_object( AweBooking::BOOKING );
+		$post_type   = get_post_type_object( Constants::BOOKING );
 		$delete_link = admin_url( sprintf( $post_type->_edit_link, $this->get_booking_id() ) );
 
 		$delete_link = add_query_arg([
@@ -318,31 +317,20 @@ class Booking_Item extends WP_Object {
 	protected function setup_instance() {
 		global $wpdb;
 
-		// Try get in the cache first.
-		$booking_item = wp_cache_get( $this->get_id(), 'awebooking_cache_booking_item' );
+		$type_query = '';
+		if ( $this->get_type() ) {
+			$type_query = "AND `booking_item_type` = '" . esc_sql( $this->get_type() ) . "' ";
+		}
 
-		if ( false === $booking_item ) {
-			$type_query = '';
-			if ( $this->get_type() ) {
-				$type_query = "AND `booking_item_type` = '" . esc_sql( $this->get_type() ) . "' ";
-			}
+		$booking_item = $wpdb->get_row(
+			// @codingStandardsIgnoreLine
+			$wpdb->prepare( "SELECT * FROM `{$wpdb->prefix}awebooking_booking_items` WHERE `booking_item_id` = '%d' {$type_query} LIMIT 1", $this->get_id() ),
+			ARRAY_A
+		);
 
-			$booking_item = $wpdb->get_row(
-				// @codingStandardsIgnoreLine
-				$wpdb->prepare( "SELECT * FROM `{$wpdb->prefix}awebooking_booking_items` WHERE `booking_item_id` = '%d' {$type_query} LIMIT 1", $this->get_id() ),
-				ARRAY_A
-			);
-
-			// Do nothing if not found the booking-item.
-			if ( is_null( $booking_item ) ) {
-				return;
-			}
-
-			// Santize before cache this booking-item.
-			$booking_item['booking_id'] = (int) $booking_item['booking_id'];
-			$booking_item['booking_item_id'] = (int) $booking_item['booking_item_id'];
-
-			wp_cache_add( $this->get_id(), $booking_item, 'awebooking_cache_booking_item' );
+		// Do nothing if not found the booking-item.
+		if ( is_null( $booking_item ) ) {
+			return;
 		}
 
 		$this->set_instance( $booking_item );

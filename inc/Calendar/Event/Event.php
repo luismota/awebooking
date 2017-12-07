@@ -162,7 +162,7 @@ class Event implements Event_Interface {
 	 * @return $this
 	 */
 	public function set_value( $value ) {
-		$this->value = (int) $value;
+		$this->value = $value;
 
 		return $this;
 	}
@@ -320,7 +320,7 @@ class Event implements Event_Interface {
 	 * @return \AweBooking\Support\Period
 	 */
 	public function get_period() {
-		return new Period( $this->getStartDate(), $this->getEndDate() );
+		return new Period( $this->get_start_date(), $this->get_end_date() );
 	}
 
 	/**

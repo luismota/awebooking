@@ -1,6 +1,7 @@
 <?php
 namespace AweBooking\Providers;
 
+use AweBooking\Factory;
 use AweBooking\Constants;
 use AweBooking\Support\Service_Provider;
 
@@ -58,6 +59,21 @@ class Admin_Service_Provider extends Service_Provider {
 
 		add_action( 'admin_init', array( $this, 'handle_admin_init' ) );
 		add_filter( 'display_post_states', array( $this, 'display_post_states' ), 10, 2 );
+
+		add_action( 'admin_menu', function() {
+			add_submenu_page(
+				'edit.php?post_type=room_type',
+				'custom menu',
+				'custom menu',
+				'manage_options',
+				'awebooking',
+				function() {
+					$room_type = Factory::get_room_type( 83 );
+					$cal = new \AweBooking\Admin\Calendar\Availability_Calendar( $room_type );
+					$cal->display();
+				}
+			);
+		});
 	}
 
 	/**

@@ -1,46 +1,27 @@
 <?php
 namespace AweBooking\Admin\Calendar;
 
-use AweBooking\Support\Period;
 use AweBooking\Support\Carbonate;
-use AweBooking\Support\Collection;
-use AweBooking\Support\Abstract_Calendar;
+use AweBooking\Calendar\Scheduler;
+use AweBooking\Calendar\Period\Period;
+use AweBooking\Calendar\Html\Skeleton_Calendar_Trait;
 
-abstract class Schedule_Calendar extends Abstract_Calendar {
+abstract class Schedule_Calendar {
+	use Skeleton_Calendar_Trait;
+
 	/**
 	 * The Calendar default options.
 	 *
 	 * @var array
 	 */
-	protected $defaults = [
+	protected $options = [
 		'date_title'       => 'l, M j, Y',
 		'month_label'      => 'abbrev',  // 'abbrev', 'full'.
 		'weekday_label'    => 'abbrev',  // 'initial', 'abbrev', 'full'.
 		'base_class'       => 'awebooking-schedule',
 	];
 
-	/**
-	 * Generate scheduler calendar.
-	 *
-	 * @param  Carbonate $month     The month to start calendar.
-	 * @param  array     $units An array units.
-	 * @return string
-	 */
-	protected function generate_scheduler_calendar( Carbonate $month, $units ) {
-		$this->period = $period = Period::createFromDay( $month )
-			->moveStartDate( '-2 DAY' )
-			->moveEndDate( '+1 MONTH' );
-
-		$this->data = $this->prepare_data( clone $period, 'scheduler' );
-
-		$this->events = Collection::make([
-			'2017-10-30' => new Period( '2017-10-30', '2017-11-04' ),
-		]);
-
-		$units = Collection::make( $units )->filter(function( $unit ) {
-			return isset( $unit['id'] ) && $unit['id'] > 0 && isset( $unit['name'] );
-		});
-
+	protected function generate_scheduler_calendar( $scheduler, $period ) {
 		wp_enqueue_script( 'awebooking-schedule-calendar' );
 
 		$output  = '<div class="' . esc_attr( $this->get_html_class() ) . '">';
@@ -48,8 +29,8 @@ abstract class Schedule_Calendar extends Abstract_Calendar {
 		$output .= '<aside class="' . esc_attr( $this->get_html_class( '&__aside' ) ) . '">';
 		$output .= "\n\t<ul>";
 
-		foreach ( $units as $unit ) {
-			$output .= '<li data-unit="' . esc_attr( $unit['id'] ) . '">' . esc_html( $unit['name'] ) . '</li>';
+		foreach ( $scheduler as $calendar ) {
+			$output .= '<li data-unit="' . esc_attr( $calendar->get_uid() ) . '">' . esc_html( $calendar->get_name() ) . '</li>';
 		}
 
 		$output .= "\n\t</ul>\n";
@@ -64,7 +45,7 @@ abstract class Schedule_Calendar extends Abstract_Calendar {
 		// }
 
 		// $output .= "\n\t\t" . '<th class="' . esc_attr( $this->get_html_class( '&__scheduler-heading' ) ) . '">' . $scheduler_heading . '</th>';
-		foreach ( $period->get_period() as $day ) {
+		foreach ( $period->get_date_period() as $day ) {
 			$output .= "\n\t\t" . sprintf( '<li class="%1$s" data-day="%2$s"><span>%3$s %2$s</span></li>',
 				esc_attr( $this->get_html_class( '&__day-heading' ) ),
 				esc_html( $day->day ),
@@ -75,23 +56,27 @@ abstract class Schedule_Calendar extends Abstract_Calendar {
 		$output .= "\n\t</ul>\n</header>";
 		$output .= "\n<div class=\"" . esc_attr( $this->get_html_class( '&__tbody' ) ) . '">';
 
-		foreach ( $units as $unit ) {
-			$output .= "\n\t<ul data-unit='" . esc_attr( $unit['id'] ) . "'>";
+		foreach ( $scheduler as $calendar ) {
+			$this->indexed_events[ $calendar->get_uid() ] = $calendar->get_events( $period )
+				->reject(function( $e ) {
+					return ! $e->get_value();
+				})
+				->indexes();
+
+			$output .= "\n\t<ul data-unit='" . esc_attr( $calendar->get_uid() ) . "'>";
 			// $output .= "\n\t\t" . '<th class="' . esc_attr( $this->get_html_class( '&__month-heading' ) ) . '" data-month="' . esc_attr( $month->month ) . '">' . $this->get_scheduler_row_heading( $month, $unit ) . '</th>';
 
-			foreach ( $period->get_period() as $day ) {
-				$this->setup_date( $day->copy(), $unit );
-				$output .= "\n\t\t" . $this->generate_cell_date( $day, 'scheduler' );
+			foreach ( $period->get_date_period() as $day ) {
+				$output .= "\n\t\t" . $this->generate_cell_date( $day, $calendar );
 			}
 
 			$output .= "\n\t</ul>\n";
 		} // End for().
 
-
 		$output .= '<div class="awebooking-schedule__marker"></div>';
 		$output .= "\n</div>";
 
-		$output .= '<div class="awebooking-schedule__asd popper"><span class="popper__arrow" x-arrow></span><div>asdasdasd</div></div>';
+		// $output .= '<div class="awebooking-schedule__asd popper"><span class="popper__arrow" x-arrow></span><div>asdasdasd</div></div>';
 
 		$output .= "\n</div></div>";
 
@@ -102,22 +87,27 @@ abstract class Schedule_Calendar extends Abstract_Calendar {
 	 * Generate HTML cell of a day.
 	 *
 	 * @param  Carbonate $date    Current day instance.
-	 * @param  string    $context Context from Calendar.
+	 * @param  string    $calendar
 	 * @return string
 	 */
-	protected function generate_cell_date( Carbonate $date, $context ) {
+	protected function generate_cell_date( Carbonate $date, $calendar ) {
+		$calendar_events = $this->indexed_events[ $calendar->get_uid() ];
 
-		$events = [];
-		if ( $this->events->has( $date->toDateString() ) ) {
-			$current_segment = $this->events->get( $date->toDateString() );
+		$html_events = [];
+		if ( $calendar_events->has( $date->toDateString() ) ) {
+			$events = $calendar_events->get( $date->toDateString() );
 
-			$width = $current_segment->nights();
-			$classes = [];
+			foreach ( $events as $event ) {
+				$classes = [];
+				$width   = $event->get_period()->getDateInterval()->format( '%r%a' ) + 1;
 
-			$events[] = '<i class="sevent ' . esc_attr( implode( ' ', $classes ) ) . '" style="width:' . esc_attr( $width * 100 ) . '%%"></i>';
+				$html_events[] = '<i class="sevent ' . esc_attr( implode( ' ', $classes ) ) . '" style="left: 30px; width:' . esc_attr( $width * 60 ) . 'px">' . $event->get_summary() . '</i>';
+			}
 		}
 
-		return sprintf( '<li class="%6$s" data-day="%1$d" data-month="%2$d" data-year="%3$d" data-date="%4$s" title="%5$s">' .  implode( ' ', $events ) . $this->get_date_contents( $date, $context ) . '</li>',
+		$date_contents = '';
+
+		return sprintf( '<li class="%6$s" data-day="%1$d" data-month="%2$d" data-year="%3$d" data-date="%4$s" title="%5$s">' .  implode( ' ', $html_events ) . $date_contents . '</li>',
 			esc_attr( $date->day ),
 			esc_attr( $date->month ),
 			esc_attr( $date->year ),

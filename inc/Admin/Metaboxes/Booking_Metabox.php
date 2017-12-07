@@ -3,7 +3,7 @@ namespace AweBooking\Admin\Metaboxes;
 
 use AweBooking\Factory;
 use AweBooking\AweBooking;
-use AweBooking\Booking\Booking;
+use AweBooking\Model\Booking;
 use AweBooking\Support\Carbonate;
 use AweBooking\Admin\Calendar\Booking_Calendar;
 use AweBooking\Admin\Forms\Booking_General_From;

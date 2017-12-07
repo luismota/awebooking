@@ -1,311 +1,104 @@
 <?php
-namespace AweBooking\Booking;
+namespace AweBooking\Reservation;
 
-use AweBooking\Factory;
-use AweBooking\AweBooking;
-use AweBooking\Support\Period;
-use AweBooking\Support\Collection;
+use AweBooking\Reservation\Request\Stay;
+use AweBooking\Reservation\Request\Party;
 
-class Request extends Collection {
-
-	protected $start_date;
-	protected $end_date;
-	protected $end_date;
+class Request {
+	/**
+	 * The request Party instance.
+	 *
+	 * @var \AweBooking\Reservation\Request\Party
+	 */
 	protected $party;
+
+	/**
+	 * The request Stay instance.
+	 *
+	 * @var \AweBooking\Reservation\Request\Stay
+	 */
+	protected $stay;
+
+	/**
+	 * The language of user request.
+	 *
+	 * @var string
+	 */
 	protected $language;
+
+	/**
+	 * The currency of user request.
+	 *
+	 * @var string
+	 */
 	protected $currency;
-	protected $user_country;
+
+	/**
+	 * The Hotel object instance.
+	 *
+	 * @var \AweBooking\Model\Hotel
+	 */
 	protected $hotel;
-	protected $location;
 
 	/**
-	 * Booking requests.
+	 * Constructor.
 	 *
-	 * @var array
+	 * @param Party  $party    The Party instance.
+	 * @param Stay   $stay     The Stay instance.
+	 * @param Hotel  $hotel    The user request for what Hotel.
+	 * @param string $currency The user request currency.
+	 * @param string $language The user request langiage.
 	 */
-	protected $defaults = [
-		'adults'   => 1,
-		'children' => 0,
-		'infants'  => 0,
-	];
+	public function __construct( Party $party, Stay $stay, Hotel $hotel = null, $currency = null, $language = null ) {
+		$this->stay = $stay;
+		$this->party = $party;
 
-	/**
-	 * Create request from array data.
-	 *
-	 * @param  array $request Request data.
-	 * @return static
-	 */
-	public static function from_array( array $request ) {
-		$period = new Period( $request['check_in'], $request['check_out'], true );
+		// $this->set_hotel( $hotel );
+		// $this->set_currency( $currency );
+		// $this->set_language( $language );
+	}
 
-		return new static( $period, $request );
+	public function ask( Asking $asking ) {
+		return new Response( $this, $asking );
 	}
 
 	/**
-	 * Booking request constructor.
+	 * Get the Party.
 	 *
-	 * @param Period $period   Period days.
-	 * @param array  $requests An array of booking requests.
+	 * @return \AweBooking\Reservation\Request\Party
 	 */
-	public function __construct( Period $period, array $requests = [] ) {
-		$this->period = $period;
-
-		parent::__construct(
-			array_merge( $this->defaults, $requests )
-		);
+	public function get_party() {
+		return $this->party;
 	}
 
 	/**
-	 * Gets the date period for the booking.
+	 * Set the Party.
 	 *
-	 * @return Period
+	 * @param Party $party The Party instance.
 	 */
-	public function get_period() {
-		return $this->period;
-	}
-
-	/**
-	 * Set the request period.
-	 *
-	 * @param  Period $period Period instance.
-	 * @return $this
-	 */
-	public function set_period( Period $period ) {
-		$this->period = $period;
+	public function set_party( Party $party ) {
+		$this->party = $party;
 
 		return $this;
 	}
 
 	/**
-	 * Gets the request adults for the booking.
+	 * Get the Stay.
 	 *
-	 * @return int
+	 * @return \AweBooking\Reservation\Request\Party
 	 */
-	public function get_adults() {
-		return $this->get( 'adults' );
+	public function get_stay() {
+		return $this->stay;
 	}
 
 	/**
-	 * Set the request adults for the booking.
+	 * Set the Stay.
 	 *
-	 * @param  int $adults Number adults for the booking.
-	 * @return $this
+	 * @param Stay $stay The Stay instance.
 	 */
-	public function set_adults( $adults ) {
-		$this['adults'] = max( 1, absint( $adults ) );
+	public function set_stay( Stay $stay ) {
+		$this->stay = $stay;
 
 		return $this;
-	}
-
-	/**
-	 * Gets the number of children for the booking.
-	 *
-	 * @return int
-	 */
-	public function get_children() {
-		return $this->get( 'children' );
-	}
-
-	/**
-	 * Set the request children for the booking.
-	 *
-	 * @param  int $children Number children for the booking.
-	 * @return $this
-	 */
-	public function set_children( $children ) {
-		$this['children'] = absint( $children );
-
-		return $this;
-	}
-
-	/**
-	 * Gets the number of infants for the booking.
-	 *
-	 * @return int
-	 */
-	public function get_infants() {
-		return $this->get( 'infants' );
-	}
-
-	/**
-	 * Set the request infants for the booking.
-	 *
-	 * @param  int $infants Number infants for the booking.
-	 * @return $this
-	 */
-	public function set_infants( $infants ) {
-		$this['infants'] = absint( $infants );
-
-		return $this;
-	}
-
-	/**
-	 * Get number of people (adults + children + infants).
-	 *
-	 * @return int
-	 */
-	public function get_people() {
-		return $this->get_adults() + $this->get_children() + $this->get_infants();
-	}
-
-	/**
-	 * Returns the Carbonate of check-in.
-	 *
-	 * @return Carbonate
-	 */
-	public function get_check_in() {
-		return $this->period->get_start_date();
-	}
-
-	/**
-	 * Returns the Carbonate of check-out.
-	 *
-	 * @return Carbonate
-	 */
-	public function get_check_out() {
-		return $this->period->get_end_date();
-	}
-
-	/**
-	 * Gets the stayed nights.
-	 *
-	 * @return int
-	 */
-	public function get_nights() {
-		return $this->period->nights();
-	}
-
-	/**
-	 * Get the request of items as a plain array.
-	 *
-	 * Overwrite: parent::toArray()
-	 *
-	 * @return array
-	 */
-	public function toArray() {
-		return array_merge( parent::toArray(), [
-			'check_in'  => $this->get_check_in()->toDateString(),
-			'check_out' => $this->get_check_out()->toDateString(),
-		]);
-	}
-
-	/**
-	 * Get booking request.
-	 *
-	 * TODO: Remove this.
-	 *
-	 * @param  string $key Booking request key name.
-	 * @return mixed
-	 */
-	public function get_request( $key ) {
-		$request = $this->get( $key );
-
-		if ( 'extra_services' === $key ) {
-			if ( ! $this->has( 'room-type' ) ) {
-				return [];
-			}
-
-			$room_type = Factory::get_room_type( $this->get( 'room-type' ) );
-			if ( ! $room_type || ! $room_type->exists() ) {
-				return [];
-			}
-
-			$services = (array) $this->get( 'extra_services', [] );
-			return array_filter( $services, function( $service_id ) use ( $room_type ) {
-				return in_array( $service_id, $room_type['service_ids'] );
-			});
-		}
-
-		return $request;
-	}
-
-	/**
-	 * If has a booking request.
-	 *
-	 * TODO: Remove this.
-	 *
-	 * @param  string $request Booking request.
-	 * @return bool
-	 */
-	public function has_request( $request ) {
-		return $this->has( $request );
-	}
-
-	/**
-	 * Set a booking request.
-	 *
-	 * TODO: Remove this.
-	 *
-	 * @param  string $key   Booking request key.
-	 * @param  string $value Booking request value.
-	 * @return $this
-	 */
-	public function set_request( $key, $value ) {
-		return $this->put( $key, $value );
-	}
-
-	/**
-	 * Get request services.
-	 *
-	 * TODO: Remove this.
-	 *
-	 * @return array
-	 */
-	public function get_services() {
-		if ( ! $this->has( 'extra_services' ) ) {
-			return [];
-		}
-
-		$services = [];
-		foreach ( (array) $this->get( 'extra_services' ) as $service_id => $quantity ) {
-			if ( is_int( $service_id ) ) {
-				$service_id = $quantity;
-				$quantity = 1;
-			}
-
-			$services[ $service_id ] = $quantity ? absint( $quantity ) : 1;
-		}
-
-		return $services;
-	}
-
-	/**
-	 * Gets formatted guest number HTML.
-	 *
-	 * TODO: Remove this.
-	 *
-	 * @param  boolean $echo Echo or return output.
-	 * @return string|void
-	 */
-	public function get_fomatted_guest_number( $echo = true ) {
-		$html = '';
-
-		$html .= sprintf(
-			'<span class="">%1$d %2$s</span>',
-			$this->get_adults(),
-			_n( 'adult', 'adults', $this->get_adults(), 'awebooking' )
-		);
-
-		if ( $this->get_children() ) {
-			$html .= sprintf(
-				' &amp; <span class="">%1$d %2$s</span>',
-				$this->get_children(),
-				_n( 'child', 'children', $this->get_children(), 'awebooking' )
-			);
-		}
-
-		if ( $this->get_infants() ) {
-			$html .= sprintf(
-				' &amp; <span class="">%1$d %2$s</span>',
-				$this->get_infants(),
-				_n( 'infant', 'infants', $this->get_infants(), 'awebooking' )
-			);
-		}
-
-		if ( $echo ) {
-			print $html; // WPCS: XSS OK.
-		} else {
-			return $html;
-		}
 	}
 }

@@ -1,7 +1,7 @@
 <?php
 namespace AweBooking\Admin\Calendar;
 
-use AweBooking\Booking\Booking;
+use AweBooking\Model\Booking;
 use AweBooking\Support\Period;
 use AweBooking\Support\Carbonate;
 use AweBooking\Support\Collection;

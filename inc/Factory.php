@@ -33,7 +33,7 @@ class Factory {
 	 * Get booking by ID.
 	 *
 	 * @param  int $booking_id Booking ID.
-	 * @return AweBooking\Booking\Booking
+	 * @return AweBooking\Model\Booking
 	 */
 	public static function get_booking( $booking_id ) {
 		return static::get_object_from_cache( $booking_id, Booking::class, Constants::CACHE_BOOKING );

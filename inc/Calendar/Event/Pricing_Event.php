@@ -32,7 +32,7 @@ class Pricing_Event extends Event {
 	 * {@inheritdoc}
 	 */
 	public function set_value( $value ) {
-		$this->value = ( 0 == $value ) ? Decimal::zero() : Decimal::create( $value );
+		$this->value = Decimal::create( $value );
 
 		return $this;
 	}

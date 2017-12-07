@@ -1,7 +1,7 @@
 <?php
 namespace AweBooking\Admin\List_Tables;
 
-use AweBooking\Booking\Booking;
+use AweBooking\Model\Booking;
 use AweBooking\AweBooking;
 
 class Booking_List_Table extends Post_Type_Abstract {
