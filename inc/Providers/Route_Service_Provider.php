@@ -9,6 +9,8 @@ use AweBooking\Http\Routing\Binding_Resolver;
 use AweBooking\Support\Service_Provider;
 use Awethemes\WP_Session\WP_Session;
 use Psr\Log\LoggerInterface;
+use Skeleton\Support\Validator;
+use AweBooking\Http\Exceptions\Validation_Failed_Exception;
 
 class Route_Service_Provider extends Service_Provider {
 	/**
@@ -67,6 +69,17 @@ class Route_Service_Provider extends Service_Provider {
 	 * @return void
 	 */
 	protected function register_request() {
+		Request::macro( 'validate', function( array $rules, array $labels = [] ) {
+			$validator = new Validator( $this->all(), $rules );
+			$validator->labels( $labels );
+
+			if ( $validator->fails() ) {
+				throw new Validation_Failed_Exception( 'The given data failed to pass validation.' );
+			}
+
+			return $this->only( array_keys( $rules ) );
+		});
+
 		$this->awebooking->singleton( 'request', function( $a ) {
 			$request = Request::capture();
 
