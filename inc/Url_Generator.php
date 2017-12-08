@@ -44,7 +44,7 @@ class Url_Generator {
 	 * @return string
 	 */
 	public function plugin_url() {
-		return untrailingslashit( plugins_url( '/', __DIR__ ) );
+		return $this->awebooking->plugin_url();
 	}
 
 	/**

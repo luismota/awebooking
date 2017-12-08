@@ -256,6 +256,58 @@ class Room_Type_Metabox extends Post_Type_Metabox {
 			'show_on_cb' => [ $this, '_render_rooms_callback' ],
 		));
 
+		$general->add_field( array(
+			'id'         => '__additional_price__',
+			'type'       => 'title',
+			'name'       => esc_html__( 'Additional price', 'awebooking' ),
+			'show_on_cb' => [ $this, '_render_additional_price_callback' ],
+		));
+
+		$general->add_field( array(
+			'name'       => esc_html__( 'Area size', 'awebooking' ),
+			'id'         => 'area_size',
+			'type'       => 'text_small',
+			'validate'   => 'numeric|min:1',
+			'before'     => '<div class="skeleton-input-group">',
+			'after'      => '<span class="skeleton-input-group__addon">' . awebooking( 'setting' )->get( 'measure_unit', 'm2' ) . '</span></div>',
+		));
+
+		$general->add_field( array(
+			'name'    => esc_html__( 'View', 'awebooking' ),
+			'id'      => 'view',
+			'type'    => 'text_medium',
+			'attributes' => array(
+				'list' => 'view_list',
+			),
+			'render_field_cb' => array( __CLASS__, '_view_field_callback' ),
+		) );
+
+		$general->add_field( array(
+			'name'    => esc_html__( 'Bed', 'awebooking' ),
+			'id'      => 'bed',
+			'type'    => 'text_small',
+			'default'    => 1,
+			'sanitization_cb' => 'absint',
+			'validate'   => 'required|numeric|min:0',
+			'render_field_cb'   => array( __CLASS__, '_bed_field_callback' ),
+		) );
+
+		$general->add_field( array(
+			'id'         => 'bed_style',
+			'type'       => 'text_medium',
+			'name'       => esc_html__( 'Bed style', 'awebooking' ),
+			'show_on_cb' => '__return_false',
+			'attributes' => array(
+				'list' => 'bed_style_list',
+			),
+		));
+
+		$general->add_field( array(
+			'id'         => 'smoking_policy',
+			'type'       => 'checkbox',
+			'name'       => esc_html__( 'Smoking policy', 'awebooking' ),
+		));
+
 		// ---
 		$extra_service = $metabox->add_section( 'extra_service', array(
 			'title' => esc_html__( 'Extra Services', 'awebooking' ),
@@ -287,6 +339,15 @@ class Room_Type_Metabox extends Post_Type_Metabox {
 	 */
 	public function _render_extra_services_callback( $field ) {
 		include trailingslashit( __DIR__ ) . 'views/html-room-type-services.php';
+	}
+
+	/**
+	 * Render additional price callback.
+	 *
+	 * @return void
+	 */
+	public function _render_additional_price_callback( $field ) {
+		include trailingslashit( __DIR__ ) . 'views/html-room-type-additional-price.php';
 	}
 
 	/**
@@ -359,5 +420,85 @@ class Room_Type_Metabox extends Post_Type_Metabox {
 
 			skeleton_display_field_errors( $max_infants_field );
 		}
+	}
+
+	/**
+	 * Render bed callback.
+	 *
+	 * @return void
+	 */
+	public static function _bed_field_callback( $field_args, $field ) {
+		$cmb2 = $field->get_cmb();
+		$bed_style = $cmb2->get_field( 'bed_style' );
+
+		echo '<div class="skeleton-input-group">';
+		skeleton_render_field( $field );
+		echo '</div>';
+
+		echo '<div class="skeleton-input-group">';
+		skeleton_render_field( $bed_style );
+
+		echo '<datalist id="bed_style_list">
+			  	<option value="' . esc_html__( 'Single bed', 'awebooking' ) . '">
+			  	<option value="' . esc_html__( 'Double bed', 'awebooking' ) . '">
+			  	<option value="' . esc_html__( 'Queen bed', 'awebooking' ) . '">
+			  	<option value="' . esc_html__( 'King bed', 'awebooking' ) . '">
+			  	<option value="' . esc_html__( 'Twin bed', 'awebooking' ) . '">
+			  	<option value="' . esc_html__( 'Super King bed', 'awebooking' ) . '">
+			  	<option value="' . esc_html__( 'Futon bed', 'awebooking' ) . '">
+			  	<option value="' . esc_html__( 'Murphy bed', 'awebooking' ) . '">
+			  	<option value="' . esc_html__( 'Sofa bed', 'awebooking' ) . '">
+			  	<option value="' . esc_html__( 'Tatami Mats bed', 'awebooking' ) . '">
+			  	<option value="' . esc_html__( 'Run of the House', 'awebooking' ) . '">
+			  	<option value="' . esc_html__( 'Dorm bed', 'awebooking' ) . '">
+			  	<option value="' . esc_html__( 'Roll-Away bed', 'awebooking' ) . '">
+			  	<option value="' . esc_html__( 'Crib', 'awebooking' ) . '">
+			  	<option value="' . esc_html__( 'Unspecified bed', 'awebooking' ) . '">
+			</datalist>';
+		echo '</div>';
+
+		skeleton_display_field_errors( $bed_style );
+	}
+
+	/**
+	 * Render view callback.
+	 *
+	 * @return void
+	 */
+	public static function _view_field_callback( $field_args, $field ) {
+		echo '<div class="skeleton-input-group">';
+
+		skeleton_render_field( $field );
+
+		echo '<datalist id="view_list">
+			  	<option value="' . esc_html__( 'Airport view', 'awebooking' ) . '">
+			  	<option value="' . esc_html__( 'Bay view', 'awebooking' ) . '">
+			  	<option value="' . esc_html__( 'City view', 'awebooking' ) . '">
+			  	<option value="' . esc_html__( 'Courtyard view', 'awebooking' ) . '">
+			  	<option value="' . esc_html__( 'Golf view', 'awebooking' ) . '">
+			  	<option value="' . esc_html__( 'Harbor view', 'awebooking' ) . '">
+			  	<option value="' . esc_html__( 'Intercoastal view', 'awebooking' ) . '">
+			  	<option value="' . esc_html__( 'Lake view', 'awebooking' ) . '">
+			  	<option value="' . esc_html__( 'Marina view', 'awebooking' ) . '">
+			  	<option value="' . esc_html__( 'Mountain view', 'awebooking' ) . '">
+			  	<option value="' . esc_html__( 'Ocean view', 'awebooking' ) . '">
+			  	<option value="' . esc_html__( 'Pool view', 'awebooking' ) . '">
+			  	<option value="' . esc_html__( 'River view', 'awebooking' ) . '">
+			  	<option value="' . esc_html__( 'Water view', 'awebooking' ) . '">
+			  	<option value="' . esc_html__( 'Beach view', 'awebooking' ) . '">
+			  	<option value="' . esc_html__( 'Garden view', 'awebooking' ) . '">
+			  	<option value="' . esc_html__( 'Park view', 'awebooking' ) . '">
+			  	<option value="' . esc_html__( 'Forest view', 'awebooking' ) . '">
+			  	<option value="' . esc_html__( 'Rain forest view', 'awebooking' ) . '">
+			  	<option value="' . esc_html__( 'Various views', 'awebooking' ) . '">
+			  	<option value="' . esc_html__( 'Limited view', 'awebooking' ) . '">
+			  	<option value="' . esc_html__( 'Slope view', 'awebooking' ) . '">
+			  	<option value="' . esc_html__( 'Strip view', 'awebooking' ) . '">
+			  	<option value="' . esc_html__( 'Countryside view', 'awebooking' ) . '">
+			  	<option value="' . esc_html__( 'Sea view', 'awebooking' ) . '">
+			</datalist>';
+		echo '</div>';
+
+		skeleton_display_field_errors( $field );
 	}
 }

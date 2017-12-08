@@ -12,7 +12,7 @@ class Register_Scripts {
 	 */
 	public function bootstrap( AweBooking $awebooking ) {
 		add_action( 'admin_enqueue_scripts', array( $this, 'register_scripts' ) );
-		// add_action( 'wp_enqueue_scripts', 'awebooking_template_scripts', 20 );
+		add_action( 'wp_enqueue_scripts', [ $this, 'awebooking_template_scripts' ], 20 );
 	}
 
 	/**
