@@ -1,8 +1,8 @@
 <?php
 
 use AweBooking\AweBooking;
-use AweBooking\Booking\Booking;
-use AweBooking\Booking\Items\Booking_Item;
+use AweBooking\Model\Booking;
+use AweBooking\Model\Booking_Item;
 
 class Test2_Booking_Item extends Booking_Item {
 	public function get_type() {

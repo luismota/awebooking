@@ -1,9 +1,9 @@
 <?php
-namespace AweBooking\Booking\Traits;
+namespace AweBooking\Model\Traits;
 
 use AweBooking\Factory;
+use AweBooking\Model\Booking_Item;
 use AweBooking\Support\Collection;
-use AweBooking\Booking\Items\Booking_Item;
 
 trait Booking_Items_Trait {
 	/**
@@ -111,6 +111,7 @@ trait Booking_Items_Trait {
 	 */
 	public function get_item( $item_id ) {
 		$item = Factory::get_booking_item( $item_id );
+
 		if ( ! $item ) {
 			return;
 		}
@@ -221,15 +222,6 @@ trait Booking_Items_Trait {
 				$wpdb->prepare( "SELECT * FROM `{$wpdb->prefix}awebooking_booking_items` WHERE `booking_id` = %d ORDER BY `booking_item_id`", $this->get_id() ),
 				ARRAY_A
 			);
-
-			// Cache each single item.
-			foreach ( $db_items as &$item ) {
-				// Santize before cache current booking-item.
-				$item['booking_id'] = (int) $item['booking_id'];
-				$item['booking_item_id'] = (int) $item['booking_item_id'];
-
-				wp_cache_add( $item['booking_item_id'], $item, 'awebooking_cache_booking_item' );
-			}
 
 			wp_cache_add( $this->get_id(), $db_items, 'awebooking_cache_booking_items' );
 		}

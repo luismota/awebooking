@@ -3,7 +3,7 @@ namespace AweBooking;
 
 use AweBooking\Model\Room;
 use AweBooking\Model\Room_Type;
-use AweBooking\Booking\Booking;
+use AweBooking\Model\Booking;
 use AweBooking\Booking\Request;
 use AweBooking\Booking\Availability;
 use AweBooking\Booking\Events\Room_State;

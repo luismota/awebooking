@@ -1,5 +1,5 @@
 <?php
-namespace AweBooking\Booking;
+namespace AweBooking\Model;
 
 use AweBooking\AweBooking;
 use AweBooking\Money\Price;

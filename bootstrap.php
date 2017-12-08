@@ -26,3 +26,12 @@ class_alias( 'AweBooking\\AweBooking', 'AweBooking' );
 
 // Deprecated classes, just make an alias for that.
 class_alias( 'AweBooking\\Support\\Service_Provider', 'AweBooking\\Support\\Service_Hooks' );
+
+/**
+ * Determines awebooking can be running the bootstrap.
+ *
+ * @return bool
+ */
+function awebooking_canbe_bootstrap() {
+	return true;
+}

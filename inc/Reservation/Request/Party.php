@@ -1,27 +1,27 @@
 <?php
-namespace AweBooking\Availability\Request;
+namespace AweBooking\Reservation\Request;
 
-class Party {
+class Party implements Request_Node {
 	/**
 	 * The number of adults in party.
 	 *
 	 * @var int
 	 */
-	protected $adults;
+	protected $adults = 1;
 
 	/**
 	 * The number of children in party.
 	 *
 	 * @var int
 	 */
-	protected $children;
+	protected $children = 0;
 
 	/**
 	 * The number of infants in party.
 	 *
 	 * @var int
 	 */
-	protected $infants;
+	protected $infants = 0;
 
 	/**
 	 * Constructor.
@@ -31,14 +31,146 @@ class Party {
 	 * @param int $infants  The number of infants.
 	 */
 	public function __construct( $adults, $children = null, $infants = null ) {
-		$this->adults = absint( $adults );
+		$this->set_adults( $adults );
 
 		if ( ! is_null( $children ) ) {
-			$this->children = absint( $children );
+			$this->set_children( $children );
 		}
 
 		if ( ! is_null( $infants ) ) {
-			$this->infants = absint( $infants );
+			$this->set_infants( $infants );
+		}
+	}
+
+	/**
+	 * Get number of adults.
+	 *
+	 * @return int
+	 */
+	public function get_adults() {
+		return $this->adults;
+	}
+
+	/**
+	 * Set the adults for the party.
+	 *
+	 * @param int $adults The number of adults.
+	 */
+	public function set_adults( $adults ) {
+		static::assert_minimum( $adults, 1 );
+
+		$this->adults = absint( $adults );
+
+		return $this;
+	}
+
+	/**
+	 * Get number of children.
+	 *
+	 * @return int
+	 */
+	public function get_children() {
+		return $this->children;
+	}
+
+	/**
+	 * Set the children for the party.
+	 *
+	 * @param int $children The number of children.
+	 */
+	public function set_children( $children ) {
+		static::assert_minimum( $children, 0 );
+
+		$this->children = absint( $children );
+
+		return $this;
+	}
+
+	/**
+	 * Get number of infants.
+	 *
+	 * @return int
+	 */
+	public function get_infants() {
+		return $this->infants;
+	}
+
+	/**
+	 * Set the infants for the party.
+	 *
+	 * @param int $infants The number of infants.
+	 */
+	public function set_infants( $infants ) {
+		static::assert_minimum( $infants, 0 );
+
+		$this->infants = absint( $infants );
+
+		return $this;
+	}
+
+	/**
+	 * Get total number of people (adults + children + infants).
+	 *
+	 * @return int
+	 */
+	public function get_people() {
+		return $this->get_adults() + $this->get_children() + $this->get_infants();
+	}
+
+	/**
+	 * The magic __toString method.
+	 *
+	 * @return string
+	 */
+	public function __toString() {
+		return $this->as_string();
+	}
+
+	/**
+	 * Return human readable of the request.
+	 *
+	 * @return string
+	 */
+	public function as_string() {
+		$adults = $this->get_adults();
+
+		$html = sprintf(
+			'<span class="awebooking_party__adults">%1$d %2$s</span>',
+			esc_html( $adults ),
+			esc_html( _n( 'adult', 'adults', $this->get_adults(), 'awebooking' ) )
+		);
+
+		if ( $children = $this->get_children() ) {
+			$html .= sprintf(
+				' , <span class="awebooking_party__children">%1$d %2$s</span>',
+				esc_html( $children ),
+				esc_html( _n( 'child', 'children', $children, 'awebooking' ) )
+			);
+		}
+
+		if ( $infants = $this->get_infants() ) {
+			$html .= sprintf(
+				' &amp; <span class="awebooking_party__infants">%1$d %2$s</span>',
+				esc_html( $infants ),
+				esc_html( _n( 'infant', 'infants', $infants, 'awebooking' ) )
+			);
+		}
+
+		return $html;
+	}
+
+	/**
+	 * Assert the value requires at least $minimum.
+	 *
+	 * @param  mixed   $value   The value.
+	 * @param  integer $minimum The minium.
+	 * @return void
+	 *
+	 * @throws \LogicException
+	 */
+	protected static function assert_minimum( $value, $minimum = 0 ) {
+		if ( $value < $minimum ) {
+			throw new \LogicException( "Requires at least {$minimum}" );
 		}
 	}
 }

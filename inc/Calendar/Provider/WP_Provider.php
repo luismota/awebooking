@@ -10,7 +10,6 @@ use AweBooking\Calendar\Provider\Stores\BAT_Store;
 use AweBooking\Calendar\Resource\Resource_Collection;
 use AweBooking\Calendar\Resource\Resource_Interface;
 use AweBooking\Support\Carbonate;
-use AweBooking\Support\Collection;
 use AweBooking\Support\Utils as U;
 
 class WP_Provider implements Provider_Interface, Contracts\Storable {
@@ -109,7 +108,7 @@ class WP_Provider implements Provider_Interface, Contracts\Storable {
 			return $this->get_calendar( $units )->getEvents( $start_date, $end_date, true );
 		}, [] );
 
-		return Collection::make( $raw_events )
+		return U::collect( $raw_events )
 			->flatten( 1 )
 			->map(function( $raw_event ) {
 				// Get back the resource.
@@ -121,6 +120,28 @@ class WP_Provider implements Provider_Interface, Contracts\Storable {
 				return $this->transform_calendar_event( $raw_event, $resource );
 			})
 			->all();
+	}
+
+	/**
+	 * Provides an itemized array of events keyed by
+	 * the resource_id and divided by day.
+	 *
+	 * @param  Carbonate $start_date The start date.
+	 * @param  Carbonate $end_date   The end date.
+	 * @return array
+	 */
+	public function get_events_itemized( Carbonate $start_date, Carbonate $end_date ) {
+		$units = $this->transform_resources_to_units();
+		if ( empty( $units ) ) {
+			return [];
+		}
+
+		$itemized = $this->get_calendar( $units )
+			->getEventsItemized( $start_date, $end_date, BAT_Event::BAT_DAILY );
+
+		return array_map( function( $item ) {
+			return $item[ BAT_Event::BAT_DAY ];
+		}, $itemized );
 	}
 
 	/**
@@ -150,7 +171,7 @@ class WP_Provider implements Provider_Interface, Contracts\Storable {
 	 * @return array
 	 */
 	protected function transform_resources_to_units() {
-		return Collection::make( $this->resources )
+		return U::collect( $this->resources )
 		->map(function( $r ) {
 			return new Unit( $r->get_id(), $r->get_value() );
 		})->unique(function( $u ) {

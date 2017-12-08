@@ -60,7 +60,7 @@ abstract class Taxonomy_Metabox {
 	 * @param array  $args   Metabox args.
 	 */
 	protected function create_metabox( $cmb_id, array $args = [] ) {
-		return (new Metabox( $cmb_id ))
+		return ( new Metabox( $cmb_id ) )
 			->set( $args )
 			->show_on_term( $this->taxonomy );
 	}

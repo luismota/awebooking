@@ -4,9 +4,9 @@ use AweBooking\Concierge;
 use AweBooking\AweBooking;
 use AweBooking\Model\Room;
 use AweBooking\Model\Room_Type;
-use AweBooking\Booking\Booking;
-use AweBooking\Booking\Events\Room_State;
-use AweBooking\Booking\Items\Line_Item;
+use AweBooking\Model\Booking;
+use AweBooking\Model\Events\Room_State;
+use AweBooking\Model\Line_Item;
 use AweBooking\Support\Carbonate;
 use AweBooking\Support\Period;
 

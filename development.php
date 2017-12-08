@@ -13,7 +13,14 @@ foreach ( $packages as $path ) {
 	require $path;
 }
 
+use AweBooking\Support\Carbonate;
+use AweBooking\Calendar\Resource\Resource;
+use AweBooking\Calendar\Provider\Pricing_Provider;
+
 add_action( 'awebooking/booted', function () {
+
+	// include __DIR__ . '/inc/Reservation/Reservation.php';
+	// exit;
 
 });
 

@@ -2,7 +2,7 @@
 namespace AweBooking\Notification;
 
 use AweBooking\AweBooking;
-use AweBooking\Booking\Booking;
+use AweBooking\Model\Booking;
 use AweBooking\Model\Room_Type;
 use AweBooking\Support\Mailable;
 use AweBooking\Support\Formatting;

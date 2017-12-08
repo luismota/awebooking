@@ -2,7 +2,7 @@
 namespace AweBooking\Calendar\Event;
 
 use AweBooking\Factory;
-use AweBooking\Booking\Booking;
+use AweBooking\Model\Booking;
 use AweBooking\Calendar\Resource\Resource_Interface;
 
 class Booking_Event extends Event {
@@ -39,7 +39,7 @@ class Booking_Event extends Event {
 	/**
 	 * Get Booking represent for this event.
 	 *
-	 * @return \AweBooking\Booking\Booking
+	 * @return \AweBooking\Model\Booking
 	 */
 	public function get_booking() {
 		return $this->value;

@@ -3,7 +3,7 @@ namespace AweBooking;
 
 use Skeleton\WP_Option;
 use AweBooking\Model\Service;
-use AweBooking\Booking\Booking;
+use AweBooking\Model\Booking;
 use AweBooking\Money\Currency;
 use Illuminate\Support\Arr;
 
@@ -131,20 +131,6 @@ class Setting extends WP_Option {
 		}
 
 		return $admin_emails;
-	}
-
-	/**
-	 * Return list room states.
-	 *
-	 * @return array
-	 */
-	public function get_room_states() {
-		return [
-			AweBooking::STATE_AVAILABLE   => esc_html__( 'Available', 'awebooking' ),
-			AweBooking::STATE_UNAVAILABLE => esc_html__( 'Unavailable', 'awebooking' ),
-			AweBooking::STATE_PENDING     => esc_html__( 'Pending', 'awebooking' ),
-			AweBooking::STATE_BOOKED      => esc_html__( 'Booked', 'awebooking' ),
-		];
 	}
 
 	/**

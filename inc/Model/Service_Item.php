@@ -1,7 +1,5 @@
 <?php
-namespace AweBooking\Booking\Items;
-
-use AweBooking\Model\Service;
+namespace AweBooking\Model;
 
 class Service_Item extends Booking_Item {
 	/**

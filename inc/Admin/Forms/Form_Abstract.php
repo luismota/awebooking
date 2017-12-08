@@ -4,8 +4,8 @@ namespace AweBooking\Admin\Forms;
 use CMB2_hookup;
 use Skeleton\CMB2\CMB2;
 use Skeleton\CMB2\Field_Proxy;
-use AweBooking\Admin\Forms\Exceptions\ValidationException;
-use AweBooking\Admin\Forms\Exceptions\NonceMismatchException;
+use AweBooking\Http\Exceptions\Validation_Exception;
+use AweBooking\Http\Exceptions\Nonce_Mismatch_Exception;
 
 abstract class Form_Abstract extends CMB2 implements \ArrayAccess {
 	/**
@@ -47,8 +47,8 @@ abstract class Form_Abstract extends CMB2 implements \ArrayAccess {
 	 * @param  boolean    $check_nonce Run verity nonce from request.
 	 * @return array|mixed
 	 *
-	 * @throws NonceMismatchException
-	 * @throws ValidationException
+	 * @throws Nonce_Mismatch_Exception
+	 * @throws Validation_Exception
 	 */
 	public function handle( array $data = null, $check_nonce = true ) {
 		return $this->get_sanitized( $data, $check_nonce );
@@ -61,22 +61,22 @@ abstract class Form_Abstract extends CMB2 implements \ArrayAccess {
 	 * @param  boolean    $check_nonce Run verity nonce from request.
 	 * @return array|mixed
 	 *
-	 * @throws NonceMismatchException
-	 * @throws ValidationException
+	 * @throws Nonce_Mismatch_Exception
+	 * @throws Validation_Exception
 	 */
 	public function get_sanitized( array $data = null, $check_nonce = true ) {
 		$data  = is_null( $data ) ? $_POST : $data;
 		$nonce = $this->nonce();
 
 		if ( $check_nonce && ( ! isset( $data[ $nonce ] ) || ! wp_verify_nonce( $data[ $nonce ], $nonce ) ) ) {
-			throw new NonceMismatchException;
+			throw new Nonce_Mismatch_Exception;
 		}
 
 		// Get sanitized values from input data.
 		$sanitized = $this->get_sanitized_values( $data );
 
 		if ( $this->fails() ) {
-			throw new ValidationException( esc_html__( 'Input data has failed validation, please check again.', 'awebooking' ) );
+			throw new Validation_Exception( esc_html__( 'Input data has failed validation, please check again.', 'awebooking' ) );
 		}
 
 		return $sanitized;
@@ -102,7 +102,9 @@ abstract class Form_Abstract extends CMB2 implements \ArrayAccess {
 	 */
 	public function contents() {
 		ob_start();
+
 		$this->output();
+
 		return ob_get_clean();
 	}
 

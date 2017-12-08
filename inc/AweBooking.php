@@ -603,7 +603,7 @@ final class AweBooking extends Container {
 	 * @param  string $type admin, ajax, cron or frontend.
 	 * @return bool
 	 */
-	public function is_request( $type ) {
+	public function wp_request_is( $type ) {
 		switch ( $type ) {
 			case 'admin':
 				return is_admin();

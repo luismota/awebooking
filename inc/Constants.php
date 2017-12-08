@@ -24,4 +24,5 @@ class Constants {
 	const CACHE_ROOM_TYPE          = 'awebooking_cache_room_type';
 	const CACHE_ROOMS_IN_ROOM_TYPE = 'awebooking_cache_rooms_in_room_type';
 	const CACHE_BOOKING            = 'awebooking_cache_booking';
+	const CACHE_BOOKING_ITEM       = 'awebooking_cache_booking_item';
 }
