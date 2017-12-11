@@ -104,7 +104,7 @@
 
       const $startDateEl = this.getElementByDate(this.model.get('unit'), startDate);
       if (_.isNull(endDate)) {
-        const position = $startDateEl.position();
+        const position = this.getCellPossiton($startDateEl);
         this.$marker.show().css({ top: position.top, left: position.left });
       } else {
         const $endDateEl = this.getElementByDate(this.model.get('unit'), endDate);
@@ -146,12 +146,22 @@
       let unit = $(element).data('unit');
 
       if (typeof unit === 'undefined') {
-        unit = $(element).parent().data('unit');
+        unit = $(element).closest('[data-unit]').data('unit');
       }
 
       unit = parseInt(unit, 10);
       return ! isNaN(unit) ? unit : 0;
     },
+
+    getCellPossiton(element) {
+      var childPos = element.offset();
+      var parentPos = this.$el.find('.awebooking-schedule__tbody').offset();
+
+      return {
+        top: childPos.top - parentPos.top,
+        left: childPos.left - parentPos.left
+      };
+    }
   });
 
   new ScheduleCalendar({

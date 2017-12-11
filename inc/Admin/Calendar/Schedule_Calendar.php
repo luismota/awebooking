@@ -21,7 +21,7 @@ abstract class Schedule_Calendar {
 		'base_class'       => 'awebooking-schedule',
 	];
 
-	protected function generate_scheduler_calendar( $scheduler, $period ) {
+	protected function generate( $scheduler, $period ) {
 		wp_enqueue_script( 'awebooking-schedule-calendar' );
 
 		$output  = '<div class="' . esc_attr( $this->get_html_class() ) . '">';
@@ -79,7 +79,6 @@ abstract class Schedule_Calendar {
 			}
 			$output .= "\n\t</div>\n";
 
-
 			$output .= "\n\t</div>\n";
 		} // End for().
 
@@ -115,11 +114,8 @@ abstract class Schedule_Calendar {
 			}
 		}
 
-
 		$output = '<div class="' . esc_attr( $this->get_html_class( '&__cell-event' ) ) . '">';
-
 		$output .= implode( ' ', $html_events );
-
 		$output .= '</div>';
 
 		return $output;

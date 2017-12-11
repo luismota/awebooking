@@ -13,10 +13,22 @@ use AweBooking\Calendar\Calendar;
 use AweBooking\Calendar\Scheduler;
 
 class Availability_Calendar extends Schedule_Calendar {
+	/**
+	 * The room-type instance.
+	 *
+	 * @var \AweBooking\Model\Room_Type
+	 */
 	protected $room_type;
 
+	/**
+	 * Constructor.
+	 *
+	 * @param Room_Type $room_type The room-type instance.
+	 * @param array     $options   The calendar options.
+	 */
 	public function __construct( Room_Type $room_type, array $options = [] ) {
 		$this->room_type = $room_type;
+		$this->options   = array_merge( $this->options, $options );
 	}
 
 	/**
@@ -38,7 +50,8 @@ class Availability_Calendar extends Schedule_Calendar {
 		$month = new Month( 2017, 12 );
 		$scheduler = new Scheduler( $calendars, $month );
 
-		echo $this->generate_scheduler_calendar( $scheduler, $month );
+		echo $this->generate( $scheduler, $month );
+
 	}
 
 	/**
