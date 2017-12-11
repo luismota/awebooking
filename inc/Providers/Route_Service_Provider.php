@@ -10,6 +10,7 @@ use AweBooking\Support\Service_Provider;
 use Awethemes\WP_Session\WP_Session;
 use Psr\Log\LoggerInterface;
 use Skeleton\Support\Validator;
+use AweBooking\Http\Exceptions\Nonce_Mismatch_Exception;
 use AweBooking\Http\Exceptions\Validation_Failed_Exception;
 
 class Route_Service_Provider extends Service_Provider {
@@ -19,11 +20,17 @@ class Route_Service_Provider extends Service_Provider {
 	public function register() {
 		$this->register_request();
 
-		$this->awebooking->singleton( 'url', Url_Generator::class );
+		$this->awebooking->singleton( 'url', function( $a ) {
+			return new Url_Generator( $a );
+		});
+
 		$this->awebooking->singleton( 'route_binder', Binding_Resolver::class );
 		$this->awebooking->singleton( 'kernel', Kernel::class );
 
 		$this->register_redirector();
+
+		// Register the aliases.
+		$this->awebooking->alias( 'url', Url_Generator::class );
 	}
 
 	/**
@@ -69,6 +76,14 @@ class Route_Service_Provider extends Service_Provider {
 	 * @return void
 	 */
 	protected function register_request() {
+		Request::macro( 'verify_nonce', function( $nonce_field, $action ) {
+			if ( ! wp_verify_nonce( $this->get( $nonce_field ), $action ) ) {
+				throw new Nonce_Mismatch_Exception( esc_html__( 'Sorry, your nonce did not verify.', 'awebooking' ) );
+			}
+
+			return $this;
+		});
+
 		Request::macro( 'validate', function( array $rules, array $labels = [] ) {
 			$validator = new Validator( $this->all(), $rules );
 			$validator->labels( $labels );
@@ -80,7 +95,7 @@ class Route_Service_Provider extends Service_Provider {
 			return $this->only( array_keys( $rules ) );
 		});
 
-		$this->awebooking->singleton( 'request', function( $a ) {
+		$this->awebooking->bind( 'request', function( $a ) {
 			$request = Request::capture();
 
 			$request->set_wp_session( $a['session']->get_store() );
@@ -112,7 +127,7 @@ class Route_Service_Provider extends Service_Provider {
 	 * Register the routes.
 	 *
 	 * @param \FastRoute\RouteCollector $route The route collector.
-	 * @return void
+	 * @access private
 	 */
 	public function register_routes( $route ) {
 		require trailingslashit( __DIR__ ) . '/../Http/routes.php';
@@ -122,10 +137,10 @@ class Route_Service_Provider extends Service_Provider {
 	 * Register the admin routes.
 	 *
 	 * @param \FastRoute\RouteCollector $route The route collector.
-	 * @return void
+	 * @access private
 	 */
 	public function register_admin_routes( $route ) {
-		require trailingslashit( __DIR__ ) . '/../Admin/routes.php';
+		require trailingslashit( __DIR__ ) . '/../Admin/admin-routes.php';
 	}
 
 	/**
@@ -143,7 +158,7 @@ class Route_Service_Provider extends Service_Provider {
 		// Handle the awebooking_route endpoint requests.
 		awebooking()->make( Kernel::class )
 			->use_request_uri( $wp->query_vars['awebooking_route'] )
-			->handle( $this->awebooking->make( Request::class ) );
+			->handle( $this->awebooking->make( 'request' ) );
 	}
 
 	/**
@@ -158,6 +173,6 @@ class Route_Service_Provider extends Service_Provider {
 
 		awebooking()->make( Kernel::class )
 			->use_request_uri( $_REQUEST['awebooking'] )
-			->handle( $this->awebooking->make( Request::class ) );
+			->handle( $this->awebooking->make( 'request' ) );
 	}
 }

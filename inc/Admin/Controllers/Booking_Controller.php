@@ -2,10 +2,10 @@
 namespace AweBooking\Admin;
 
 use AweBooking\Factory;
-use AweBooking\AweBooking;
+use AweBooking\Constants;
 use Skeleton\Support\Validator;
 
-class Action_Handler {
+class Booking_Controller {
 	/**
 	 * Constructor actions handler.
 	 *
@@ -24,7 +24,7 @@ class Action_Handler {
 	public function delete_booking_item( $post_id ) {
 		check_admin_referer( 'delete_item_awebooking_' . $post_id );
 
-		if ( AweBooking::BOOKING !== get_post_type( $post_id ) ) {
+		if ( Constants::BOOKING !== get_post_type( $post_id ) ) {
 			wp_die( esc_html__( 'Invalid post type.', 'awebooking' ) );
 		}
 

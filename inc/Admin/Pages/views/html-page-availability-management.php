@@ -1,5 +1,6 @@
 <?php
 
+use AweBooking\Constants;
 use AweBooking\Admin\Admin_Utils;
 
 ?>
@@ -129,12 +130,12 @@ use AweBooking\Admin\Admin_Utils;
 
 	<p>
 		<label>
-			<input type="radio" name="state" checked="" value="<?php echo esc_attr( AweBooking::STATE_AVAILABLE ); ?>">
+			<input type="radio" name="state" checked="" value="<?php echo esc_attr( Constants::STATE_AVAILABLE ); ?>">
 			<?php echo esc_html__( 'Available', 'awebooking' ); ?>
 		</label>
 
 		<label>
-			<input type="radio" name="state" value="<?php echo esc_attr( AweBooking::STATE_UNAVAILABLE ); ?>">
+			<input type="radio" name="state" value="<?php echo esc_attr( Constants::STATE_UNAVAILABLE ); ?>">
 			<span><?php echo esc_html__( 'Unavailable', 'awebooking' ) ?></span>
 		</label>
 	</p>

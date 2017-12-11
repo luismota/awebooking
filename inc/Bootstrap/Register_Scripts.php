@@ -2,6 +2,7 @@
 namespace AweBooking\Bootstrap;
 
 use AweBooking\AweBooking;
+use AweBooking\Constants;
 
 class Register_Scripts {
 	/**
@@ -89,11 +90,11 @@ class Register_Scripts {
 		wp_enqueue_style( 'awebooking-admin' );
 		wp_enqueue_script( 'awebooking-admin' );
 
-		if ( AweBooking::ROOM_TYPE === $screen->id ) {
+		if ( Constants::ROOM_TYPE === $screen->id ) {
 			wp_enqueue_script( 'awebooking-edit-room-type' );
 		}
 
-		if ( AweBooking::BOOKING === $screen->id ) {
+		if ( Constants::BOOKING === $screen->id ) {
 			wp_enqueue_script( 'awebooking-edit-booking' );
 		}
 

@@ -4,7 +4,7 @@ namespace AweBooking\Admin\Pages;
 use WP_Query;
 use WP_List_Table;
 use AweBooking\Concierge;
-use AweBooking\AweBooking;
+use AweBooking\Constants;
 use AweBooking\Pricing\Rate;
 use AweBooking\Model\Room_Type;
 use AweBooking\Money\Price;
@@ -119,7 +119,7 @@ class Pricing_Management extends WP_List_Table {
 	 */
 	protected function setup_the_query() {
 		return new WP_Query([
-			'post_type'           => AweBooking::ROOM_TYPE,
+			'post_type'           => Constants::ROOM_TYPE,
 			'posts_per_page'      => $this->get_items_per_page( 'awebooking/management_per_page', 15 ),
 			'paged'               => $this->get_pagenum(),
 			'post_status'         => 'publish',

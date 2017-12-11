@@ -2,6 +2,7 @@
 namespace AweBooking\Providers;
 
 use AweBooking\Constants;
+use AweBooking\Support\Flash_Message;
 use AweBooking\Support\Service_Provider;
 
 class Frontend_Service_Provider extends Service_Provider {
@@ -9,7 +10,9 @@ class Frontend_Service_Provider extends Service_Provider {
 	 * Registers services on the AweBooking.
 	 */
 	public function register() {
-		// ...
+		$this->awebooking->singleton( 'flash_message', function() {
+			return new Flash_Message( $a['session'] );
+		});
 	}
 
 	/**

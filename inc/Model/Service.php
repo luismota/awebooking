@@ -1,7 +1,7 @@
 <?php
 namespace AweBooking\Model;
 
-use AweBooking\AweBooking;
+use AweBooking\Constants;
 use AweBooking\Money\Price;
 
 class Service extends WP_Object {
@@ -24,7 +24,7 @@ class Service extends WP_Object {
 	 *
 	 * @var string
 	 */
-	protected $object_type = AweBooking::HOTEL_SERVICE;
+	protected $object_type = Constants::HOTEL_SERVICE;
 
 	/**
 	 * WordPress type for object.
@@ -84,7 +84,7 @@ class Service extends WP_Object {
 	 * @return static
 	 */
 	public static function get_by_slug( $slug ) {
-		$service = get_term_by( 'slug', $slug, AweBooking::HOTEL_SERVICE );
+		$service = get_term_by( 'slug', $slug, Constants::HOTEL_SERVICE );
 		if ( $service instanceof \WP_Term ) {
 			return new static( $service->term_id );
 		}

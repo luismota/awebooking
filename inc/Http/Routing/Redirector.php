@@ -58,12 +58,7 @@ class Redirector {
 	 * @return \AweBooking\Http\Redirect_Response
 	 */
 	public function to( $url, $status = 302, $headers = [], $safe_redirect = false ) {
-		// If the $url considered is a path, call it in home_url().
-		if ( ! $this->is_valid_path( $url ) ) {
-			$url = home_url( $url );
-		}
-
-		return $this->create_redirect( $url, $status, $headers, $safe_redirect );
+		return $this->create_redirect( $this->generator->to( $url ), $status, $headers, $safe_redirect );
 	}
 
 	/**
@@ -91,12 +86,12 @@ class Redirector {
 	/**
 	 * Create a new redirect response to the previous location.
 	 *
+	 * @param  mixed $fallback The fallback, if null it'll be admin_url() or home_url() depend by context.
 	 * @param  int   $status   The response status code.
 	 * @param  array $headers  The response headers.
-	 * @param  mixed $fallback The fallback, if null it'll be admin_url() or home_url() depend by context.
 	 * @return \AweBooking\Http\Redirect_Response
 	 */
-	public function back( $status = 302, $headers = [], $fallback = null ) {
+	public function back( $fallback = null, $status = 302, $headers = [] ) {
 		$previous = wp_get_referer();
 
 		if ( ! $previous && ! $fallback ) {
@@ -115,8 +110,8 @@ class Redirector {
 	 * @param  array  $headers    The response headers.
 	 * @return \AweBooking\Http\Redirect_Response
 	 */
-	public function site_route( $path = '/', $parameters = [], $status = 302, $headers = [] ) {
-		$to_url = $this->generator->site_route( $path );
+	public function route( $path = '/', $parameters = [], $status = 302, $headers = [] ) {
+		$to_url = $this->generator->route( $path );
 
 		if ( $parameters ) {
 			$to_url = add_query_arg( $parameters, $to_url );
@@ -163,19 +158,5 @@ class Redirector {
 		}
 
 		return $redirect;
-	}
-
-	/**
-	 * Determine if the given "path" is a valid URL.
-	 *
-	 * @param  string $path The input URL to check.
-	 * @return bool
-	 */
-	public function is_valid_path( $path ) {
-		if ( ! preg_match( '~^(#|//|https?://|mailto:|tel:)~', $path ) ) {
-			return filter_var( $path, FILTER_VALIDATE_URL ) !== false;
-		}
-
-		return true;
 	}
 }

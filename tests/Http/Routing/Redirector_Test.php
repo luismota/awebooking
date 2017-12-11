@@ -42,8 +42,8 @@ class Http_Routing_Redirector_Test extends WP_UnitTestCase {
 	}
 
 	public function testBasicRedirectToWithFullUrl() {
-		$response = $this->redirect->to('http://foo.bar');
-		$this->assertEquals('http://foo.bar', $response->getTargetUrl());
+		$response = $this->redirect->to('http://' . WP_TESTS_DOMAIN);
+		$this->assertEquals('http://' . WP_TESTS_DOMAIN, $response->getTargetUrl());
 	}
 
 	public function testComplexRedirectTo() {
@@ -78,18 +78,18 @@ class Http_Routing_Redirector_Test extends WP_UnitTestCase {
 
 	public function testRedirectSiteRoute() {
 		$this->set_permalink_structure( '' );
-		$response = $this->redirect->site_route();
+		$response = $this->redirect->route();
 		$this->assertEquals('http://' . WP_TESTS_DOMAIN . '/index.php?awebooking_route=/', $response->getTargetUrl());
 
-		$response = $this->redirect->site_route( '/', [ 'foo' => 'bar' ]);
+		$response = $this->redirect->route( '/', [ 'foo' => 'bar' ]);
 		$this->assertEquals('http://' . WP_TESTS_DOMAIN . '/index.php?awebooking_route=%2F&foo=bar', $response->getTargetUrl());
 
 		// ===========
 		$this->set_permalink_structure( '/%year%/%monthnum%/%day%/%postname%/' );
-		$response = $this->redirect->site_route();
+		$response = $this->redirect->route();
 		$this->assertEquals('http://' . WP_TESTS_DOMAIN . '/awebooking-route/', $response->getTargetUrl());
 
-		$response = $this->redirect->site_route( '/', [ 'foo' => 'bar' ]);
+		$response = $this->redirect->route( '/', [ 'foo' => 'bar' ]);
 		$this->assertEquals('http://' . WP_TESTS_DOMAIN . '/awebooking-route/?foo=bar', $response->getTargetUrl());
 	}
 

@@ -27,7 +27,7 @@ class Url_Generator {
 	 * @return \Awethemes\Http\Request
 	 */
 	public function get_request() {
-		return $this->awebooking->make( Request::class );
+		return $this->awebooking->make( 'request' );
 	}
 
 	/**
@@ -49,44 +49,43 @@ class Url_Generator {
 	}
 
 	/**
-	 * Get the check availability page url (fallback to home-url).
+	 * Generate a url for the site.
 	 *
+	 * @param  string $path       The path relative to the home URL.
+	 * @param  array  $parameters The additional parameters.
+	 * @param  string $scheme     Optional. Sanitization scheme.
 	 * @return string
 	 */
-	public function availability_page() {
-		return $this->get_page_permalink( 'check_availability' );
+	public function to( $path = '', $parameters = [], $scheme = null ) {
+		if ( $this->is_valid_path( $path ) ) {
+			return $path;
+		}
+
+		$url = home_url( $path, $scheme );
+
+		if ( ! empty( $parameters ) ) {
+			$url = add_query_arg( $parameters, $url );
+		}
+
+		return $url;
 	}
 
 	/**
-	 * Get the booking page url (fallback to home-url).
+	 * Generate a url for the admin.
 	 *
+	 * @param  string $path       The path relative to the admin URL.
+	 * @param  array  $parameters The additional parameters.
+	 * @param  string $scheme     Optional. Sanitization scheme, default: 'admin'.
 	 * @return string
 	 */
-	public function booking_page() {
-		return $this->get_page_permalink( 'booking' );
-	}
+	public function admin( $path = '', $parameters = [], $scheme = 'admin' ) {
+		$admin_url = admin_url( $path, $scheme );
 
-	/**
-	 * Get the checkout page url (fallback to home-url).
-	 *
-	 * @return string
-	 */
-	public function checkout_page() {
-		return $this->get_page_permalink( 'checkout' );
-	}
+		if ( ! empty( $parameters ) ) {
+			$admin_url = add_query_arg( $parameters, $admin_url );
+		}
 
-	/**
-	 * Retrieve page permalink by setting name.
-	 *
-	 * @param  string $page The retrieve page.
-	 * @return string
-	 */
-	protected function get_page_permalink( $page ) {
-		$page_id = apply_filters( "awebooking/get_{$page}_page_id", $this->awebooking['setting']->get( "page_{$page}" ) );
-
-		$permalink = $page_id ? get_permalink( $page_id ) : get_home_url();
-
-		return apply_filters( "awebooking/get_{$page}_page_permalink", $permalink );
+		return $admin_url;
 	}
 
 	/**
@@ -96,7 +95,7 @@ class Url_Generator {
 	 * @param  string $scheme  Optional. Sanitization scheme. Default 'null depend on is_ssl()'.
 	 * @return string
 	 */
-	public function site_route( $path = '/', $scheme = null ) {
+	public function route( $path = '/', $scheme = null ) {
 		if ( empty( $path ) ) {
 			$path = '/';
 		}
@@ -149,5 +148,60 @@ class Url_Generator {
 		$url = add_query_arg( 'awebooking', $path, admin_url( 'admin.php', $scheme ) );
 
 		return apply_filters( 'awebooking/admin_route_url', $url, $path );
+	}
+
+	/**
+	 * Get the check availability page url (fallback to home-url).
+	 *
+	 * @return string
+	 */
+	public function availability_page() {
+		return $this->get_page_permalink( 'check_availability' );
+	}
+
+	/**
+	 * Get the booking page url (fallback to home-url).
+	 *
+	 * @return string
+	 */
+	public function booking_page() {
+		return $this->get_page_permalink( 'booking' );
+	}
+
+	/**
+	 * Get the checkout page url (fallback to home-url).
+	 *
+	 * @return string
+	 */
+	public function checkout_page() {
+		return $this->get_page_permalink( 'checkout' );
+	}
+
+	/**
+	 * Retrieve page permalink by setting name.
+	 *
+	 * @param  string $page The retrieve page.
+	 * @return string
+	 */
+	protected function get_page_permalink( $page ) {
+		$page_id = apply_filters( "awebooking/get_{$page}_page_id", $this->awebooking['setting']->get( "page_{$page}" ) );
+
+		$permalink = $page_id ? get_permalink( $page_id ) : get_home_url();
+
+		return apply_filters( "awebooking/get_{$page}_page_permalink", $permalink );
+	}
+
+	/**
+	 * Determine if the given "path" is a valid URL.
+	 *
+	 * @param  string $path The input URL to check.
+	 * @return bool
+	 */
+	public function is_valid_path( $path ) {
+		if ( ! preg_match( '~^(#|//|https?://|mailto:|tel:)~', $path ) ) {
+			return filter_var( $path, FILTER_VALIDATE_URL ) !== false;
+		}
+
+		return true;
 	}
 }

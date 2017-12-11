@@ -4,8 +4,8 @@ namespace AweBooking\Http;
 use AweBooking\AweBooking;
 use Awethemes\Http\Request;
 use Awethemes\Http\Kernel as Base_Kernel;
-use AweBooking\Http\Routing\Binding_Resolver;
 use Awethemes\Http\Resolver\Container_Resolver;
+use AweBooking\Http\Routing\Binding_Resolver;
 use Symfony\Component\HttpFoundation\Request as SymfonyRequest;
 use Psr\Log\LoggerInterface;
 
@@ -74,6 +74,9 @@ class Kernel extends Base_Kernel {
 		if ( $this->awebooking->bound( Binding_Resolver::class ) && isset( $routeinfo[2] ) ) {
 			$routeinfo[2] = $this->awebooking->make( Binding_Resolver::class )->resolve( $routeinfo[2] );
 		}
+
+		// In this, we'll instance the request into the Container.
+		$this->awebooking->instance( 'request', $request );
 
 		return parent::handle_found_route( $request, $routeinfo );
 	}

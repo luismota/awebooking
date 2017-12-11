@@ -3,9 +3,23 @@ namespace AweBooking\Providers;
 
 use AweBooking\Factory;
 use AweBooking\Constants;
+use AweBooking\Admin\Admin_Menus;
+use AweBooking\Admin\Admin_Settings;
+use AweBooking\Support\Flash_Message;
 use AweBooking\Support\Service_Provider;
 
 class Admin_Service_Provider extends Service_Provider {
+	/**
+	 * The core List_Tables classes.
+	 *
+	 * @var array
+	 */
+	protected $settings = [
+		\AweBooking\Admin\Settings\General_Setting::class,
+		\AweBooking\Admin\Settings\Display_Setting::class,
+		\AweBooking\Admin\Settings\Email_Setting::class,
+	];
+
 	/**
 	 * The core metaboxes classes.
 	 *
@@ -36,6 +50,16 @@ class Admin_Service_Provider extends Service_Provider {
 		if ( ! is_admin() ) {
 			return;
 		}
+
+		$this->awebooking->singleton( 'admin_notices', function( $a ) {
+			return new Flash_Message( $a['session'], '_admin_notices' );
+		});
+
+		$this->awebooking->singleton( 'admin_settings', function( $a ) {
+			return new Admin_Settings( $a['setting'] );
+		});
+
+		$this->awebooking->alias( 'admin_settings', Admin_Settings::class );
 	}
 
 	/**
@@ -48,7 +72,12 @@ class Admin_Service_Provider extends Service_Provider {
 			return;
 		}
 
-		// Wake-up the metaboxes.
+		// Register core admin settings.
+		$this->register_core_settings();
+
+		// Fire the admin hooks.
+		$this->awebooking->make( Admin_Menus::class )->hooks();
+
 		foreach ( $this->metaboxes as $class ) {
 			$this->awebooking->make( $class );
 		}
@@ -57,27 +86,57 @@ class Admin_Service_Provider extends Service_Provider {
 			$this->awebooking->make( $class );
 		}
 
-		add_action( 'admin_init', array( $this, 'handle_admin_init' ) );
-		add_filter( 'display_post_states', array( $this, 'display_post_states' ), 10, 2 );
+		add_action( 'admin_init', [ $this, 'handle_admin_init' ] );
+		add_action( 'admin_notices', [ $this, 'admin_notices' ] );
+		add_filter( 'display_post_states', [ $this, 'display_post_states' ], 10, 2 );
+	}
 
-		add_action( 'admin_menu', function() {
-			add_submenu_page(
-				'edit.php?post_type=room_type',
-				'custom menu',
-				'custom menu',
-				'manage_options',
-				'awebooking',
-				function() {
-					$room_type = Factory::get_room_type( 83 );
-					$cal = new \AweBooking\Admin\Calendar\Availability_Calendar( $room_type );
-					$cal->display();
-				}
-			);
-		});
+	/**
+	 * Register the core admin settings.
+	 *
+	 * @return void
+	 */
+	protected function register_core_settings() {
+		$settings = $this->awebooking->make( 'admin_settings' );
+
+		// Loop all core settings and register them.
+		foreach ( $this->settings as $setting ) {
+			$settings->register( $setting );
+		}
+
+		/**
+		 * Here you can register or custom AweBooking settings.
+		 *
+		 * @param Admin_Settings $settings The Admin_Setting instance.
+		 */
+		do_action( 'awebooking/register_admin_settings', $settings );
+	}
+
+	/**
+	 * Setup and display admin notices.
+	 *
+	 * @see https://codex.wordpress.org/Plugin_API/Action_Reference/admin_notices
+	 *
+	 * @access private
+	 */
+	public function admin_notices() {
+		$this->awebooking['admin_notices']->setup_message();
+
+		if ( ! $this->awebooking['admin_notices']->has() ) {
+			return;
+		}
+
+		foreach ( $this->awebooking['admin_notices']->all() as $message ) : ?>
+			<div class="notice notice-<?php echo esc_attr( $message['type'] ); ?> is-dismissible">
+				<?php echo wp_kses_post( wpautop( $message['message'] ) ); ?>
+			</div>
+		<?php endforeach;
 	}
 
 	/**
 	 * Handle redirects to setup/welcome page after install and updates.
+	 *
+	 * @access private
 	 */
 	public function handle_admin_init() {
 		// Setup wizard redirect.
@@ -102,6 +161,8 @@ class Admin_Service_Provider extends Service_Provider {
 	 * @param  void  $post        The post object.
 	 *
 	 * @return array
+	 *
+	 * @access private
 	 */
 	public function display_post_states( $post_states, $post ) {
 		if ( intval( awebooking_option( 'page_check_availability' ) ) === $post->ID ) {

@@ -1,7 +1,7 @@
 <?php
 namespace AweBooking\Admin\List_Tables;
 
-use AweBooking\AweBooking;
+use AweBooking\Constants;
 
 class Room_Type_List_Table extends Post_Type_Abstract {
 	/**
@@ -9,7 +9,7 @@ class Room_Type_List_Table extends Post_Type_Abstract {
 	 *
 	 * @var string
 	 */
-	protected $post_type = AweBooking::ROOM_TYPE;
+	protected $post_type = Constants::ROOM_TYPE;
 
 	/**
 	 * Init somethings hooks.
@@ -138,14 +138,14 @@ class Room_Type_List_Table extends Post_Type_Abstract {
 		global $typenow, $wp_query;
 
 		// Works only on room type page.
-		if ( AweBooking::ROOM_TYPE !== $typenow ) {
+		if ( Constants::ROOM_TYPE !== $typenow ) {
 			return;
 		}
 
 		if ( awebooking()->is_multi_location() ) {
 			wp_dropdown_categories([
 				'show_option_all' => esc_html__( 'All Location', 'awebooking' ),
-				'taxonomy'        => AweBooking::HOTEL_LOCATION,
+				'taxonomy'        => Constants::HOTEL_LOCATION,
 				'name'            => 'hotel-location', // Don't using "hotel_location", I got some trouble with this.
 				'orderby'         => 'name',
 				'selected'        => isset( $_REQUEST['hotel-location'] ) ? absint( $_REQUEST['hotel-location'] ) : '',
@@ -165,16 +165,15 @@ class Room_Type_List_Table extends Post_Type_Abstract {
 	public function filters_query( $query ) {
 		global $typenow, $wp_query;
 
-
 		// Works only on room type page.
-		if ( AweBooking::ROOM_TYPE !== $typenow ) {
+		if ( Constants::ROOM_TYPE !== $typenow ) {
 			return;
 		}
 
 		// Hotel location.
 		if ( isset( $_REQUEST['hotel-location'] ) && '0' !== $_REQUEST['hotel-location'] ) {
 			$query->query_vars['tax_query'][] = array(
-				'taxonomy' => AweBooking::HOTEL_LOCATION,
+				'taxonomy' => Constants::HOTEL_LOCATION,
 				'terms'    => absint( $_REQUEST['hotel-location'] ),
 				'field'    => 'id',
 				'operator' => 'IN',

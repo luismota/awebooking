@@ -1,6 +1,7 @@
 <?php
 namespace AweBooking\Model;
 
+use AweBooking\Constants;
 use AweBooking\Money\Price;
 use AweBooking\Support\WP_Object;
 
@@ -10,7 +11,7 @@ class Amenity extends WP_Object {
 	 *
 	 * @var string
 	 */
-	protected $object_type = AweBooking::HOTEL_AMENITY;
+	protected $object_type = Constants::HOTEL_AMENITY;
 
 	/**
 	 * WordPress type for object, Eg: "post" and "term".

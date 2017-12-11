@@ -30,8 +30,6 @@ class Start_Session {
 	public function bootstrap() {
 		$this->register_session_bindings();
 
-		$this->register_flash_bindings();
-
 		$this->start_session();
 	}
 
@@ -60,15 +58,10 @@ class Start_Session {
 			return new WP_Session( 'awebooking_session', [ 'lifetime' => 120 ] );
 		});
 
-		$this->awebooking->alias( 'session', WP_Session::class );
-	}
+		$this->awebooking->singleton( 'session.store', function( $a ) {
+			return $a['session']->get_store();
+		});
 
-	/**
-	 * Register the flash message bindings.
-	 *
-	 * @return void
-	 */
-	protected function register_flash_bindings() {
-		$this->awebooking->singleton( 'flash_message', Flash_Message::class );
+		$this->awebooking->alias( 'session', WP_Session::class );
 	}
 }

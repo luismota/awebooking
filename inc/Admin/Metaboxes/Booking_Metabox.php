@@ -3,6 +3,7 @@ namespace AweBooking\Admin\Metaboxes;
 
 use AweBooking\Factory;
 use AweBooking\AweBooking;
+use AweBooking\Constants;
 use AweBooking\Model\Booking;
 use AweBooking\Support\Carbonate;
 use AweBooking\Admin\Calendar\Booking_Calendar;
@@ -34,6 +35,21 @@ class Booking_Metabox extends Post_Type_Metabox {
 		add_action( 'add_meta_boxes', array( $this, 'handler_meta_boxes' ), 10 );
 		add_action( 'edit_form_after_title', array( $this, 'booking_title' ), 10 );
 		add_action( 'admin_footer', [ $this, 'booking_templates' ] );
+	}
+
+	/**
+	 * Remove some un-used meta boxes.
+	 *
+	 * @access private
+	 */
+	public function handler_meta_boxes() {
+		remove_meta_box( 'slugdiv', $this->post_type, 'normal' );
+		remove_meta_box( 'submitdiv', $this->post_type, 'side' );
+		remove_meta_box( 'commentstatusdiv', $this->post_type, 'normal' );
+
+		add_meta_box( 'awebooking_booking_action', esc_html__( 'Booking Action', 'awebooking' ), [ $this, 'output_action_metabox' ], Constants::BOOKING, 'side', 'high' );
+		add_meta_box( 'awebooking-booking-notes', esc_html__( 'Booking Notes', 'awebooking' ), [ $this, 'booking_note_output' ], Constants::BOOKING, 'side', 'low' );
+		// add_meta_box( 'awebooking-booking-calendar', esc_html__( 'Mini Calendar', 'awebooking' ), [ $this, 'output_calendar_metabox' ], Constants::BOOKING, 'side', 'default' );
 	}
 
 	/**
@@ -117,18 +133,6 @@ class Booking_Metabox extends Post_Type_Metabox {
 		}
 	}
 
-	/**
-	 * Remove some un-used meta boxes.
-	 */
-	public function handler_meta_boxes() {
-		remove_meta_box( 'slugdiv', $this->post_type, 'normal' );
-		remove_meta_box( 'submitdiv', $this->post_type, 'side' );
-		remove_meta_box( 'commentstatusdiv', $this->post_type, 'normal' );
-
-		add_meta_box( 'awebooking_booking_action', esc_html__( 'Booking Action', 'awebooking' ), [ $this, 'output_action_metabox' ], AweBooking::BOOKING, 'side', 'high' );
-		add_meta_box( 'awebooking-booking-calendar', esc_html__( 'Calendar', 'awebooking' ), [ $this, 'output_calendar_metabox' ], AweBooking::BOOKING, 'side', 'default' );
-		add_meta_box( 'awebooking-booking-notes', esc_html__( 'Booking notes', 'awebooking' ), [ $this, 'booking_note_output' ], AweBooking::BOOKING, 'side', 'low' );
-	}
 
 	public function booking_templates() {
 		$screen = get_current_screen();
@@ -147,7 +151,7 @@ class Booking_Metabox extends Post_Type_Metabox {
 	 * @return void
 	 */
 	public function booking_title( $post ) {
-		if ( AweBooking::BOOKING !== $post->post_type ) {
+		if ( Constants::BOOKING !== $post->post_type ) {
 			return;
 		}
 
@@ -329,6 +333,6 @@ class Booking_Metabox extends Post_Type_Metabox {
 
 		$the_booking = Factory::get_booking( $post->ID );
 
-		(new Booking_Calendar( $the_booking ))->display();
+		( new Booking_Calendar( $the_booking ) )->display();
 	}
 }

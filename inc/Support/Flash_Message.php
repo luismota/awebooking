@@ -12,6 +12,13 @@ class Flash_Message {
 	protected $session;
 
 	/**
+	 * The group key.
+	 *
+	 * @var string
+	 */
+	protected $group_key;
+
+	/**
 	 * The messages collection.
 	 *
 	 * @var array
@@ -20,9 +27,13 @@ class Flash_Message {
 
 	/**
 	 * Create the flash message.
+	 *
+	 * @param WP_Session $session   The WP_Session implementation.
+	 * @param string     $group_key The group key.
 	 */
-	public function __construct( WP_Session $session ) {
+	public function __construct( WP_Session $session, $group_key = 'flash_messages' ) {
 		$this->session = $session;
+		$this->group_key = $group_key;
 	}
 
 	/**
@@ -203,7 +214,7 @@ class Flash_Message {
 	 * @return void
 	 */
 	protected function store_messages( $messages ) {
-		$this->session->flash( 'flash_messages', maybe_serialize( $messages ) );
+		$this->session->flash( $this->group_key, maybe_serialize( $messages ) );
 	}
 
 	/**
@@ -212,7 +223,7 @@ class Flash_Message {
 	 * @return void
 	 */
 	protected function flush_messages() {
-		$this->session->remove( 'flash_messages' );
+		$this->session->remove( $this->group_key );
 	}
 
 	/**
@@ -222,7 +233,7 @@ class Flash_Message {
 	 */
 	protected function get_messages() {
 		return maybe_unserialize(
-			$this->session->pull( 'flash_messages', [] )
+			$this->session->pull( $this->group_key, [] )
 		);
 	}
 }

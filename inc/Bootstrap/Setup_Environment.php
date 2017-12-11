@@ -133,7 +133,7 @@ class Setup_Environment {
 			]))
 			->register();
 
-			$location_tax = new Taxonomy_Single_Term( Constants::HOTEL_LOCATION, [], 'select', absint( awebooking_option( 'location_default' ) ) );
+			$location_tax = new \Taxonomy_Single_Term( Constants::HOTEL_LOCATION, [], 'select', absint( awebooking_option( 'location_default' ) ) );
 			$location_tax->set( 'force_selection', true );
 		}
 
@@ -163,6 +163,8 @@ class Setup_Environment {
 				'with_front' => false,
 			],
 			'labels'    => [
+				'menu_name'             => esc_html_x( 'Hotel', 'dashboard menu', 'awebooking' ),
+				'all_items'             => esc_html__( 'Room Types', 'awebooking' ),
 				'add_new'               => esc_html__( 'New Room Type', 'awebooking' ),
 				'featured_image'        => esc_html__( 'Room Type Image', 'awebooking' ),
 				'set_featured_image'    => esc_html__( 'Set room type image', 'awebooking' ),
@@ -184,7 +186,7 @@ class Setup_Environment {
 			'show_in_admin_bar'   => false,
 			'exclude_from_search' => true,
 			'show_ui'             => true,
-			'show_in_menu'        => true,
+			'show_in_menu'        => 'awebooking',
 			'supports'            => [ 'comments' ],
 			'labels'              => [
 				'all_items' => esc_html__( 'Bookings', 'awebooking' ),
