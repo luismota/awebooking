@@ -32,7 +32,7 @@ if (mix.inProduction()) {
 }
 
 mix.browserSync({
-  proxy: 'awebooking.dev',
+  proxy: 'awebooking.local',
   files: [
     'inc/**/*.php',
     'templates/**/*.php',

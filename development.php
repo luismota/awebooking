@@ -80,6 +80,7 @@ function awebooking_availability_template( $atts ) {
 												<span class="awebooking-price-currencySymbol">$</span>87.00
 											</span>
 										</ins>
+										<strong>i</strong>
 									</div>
 
 									<div class="awebooking-rate__price_detail">

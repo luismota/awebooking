@@ -10,5 +10,7 @@
     "/js/admin/edit-service.js": "/js/admin/edit-service.js",
     "/js/admin/edit-room-type.js": "/js/admin/edit-room-type.js",
     "/js/admin/schedule-calendar.js": "/js/admin/schedule-calendar.js",
-    "/js/admin/manifest.js": "/js/admin/manifest.js"
+    "/js/admin/manifest.js": "/js/admin/manifest.js",
+    "/css/sweetalert2.min.css": "/css/sweetalert2.min.css",
+    "/js/sweetalert2/sweetalert2.min.js": "/js/sweetalert2/sweetalert2.min.js"
 }
