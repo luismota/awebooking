@@ -3,7 +3,7 @@ namespace AweBooking\Admin\Pages;
 
 use Skeleton\Support\Priority_List;
 
-class Admin_Welcome {
+class About_Page {
 	/**
 	 * Tabs collection to render.
 	 *

@@ -3,21 +3,34 @@ namespace AweBooking\Providers;
 
 use Awethemes\Http\Request;
 use AweBooking\Http\Kernel;
+use AweBooking\Http\Routing\Redirector;
+use AweBooking\Http\Routing\Url_Generator;
 use AweBooking\Http\Routing\Binding_Resolver;
-use Awethemes\WP_Session\WP_Session;
 use AweBooking\Support\Service_Provider;
+use Awethemes\WP_Session\WP_Session;
 use Psr\Log\LoggerInterface;
+use Skeleton\Support\Validator;
+use AweBooking\Http\Exceptions\Nonce_Mismatch_Exception;
+use AweBooking\Http\Exceptions\Validation_Failed_Exception;
 
 class Route_Service_Provider extends Service_Provider {
 	/**
 	 * Registers services on the AweBooking.
 	 */
 	public function register() {
-		$this->register_request_binding();
+		$this->register_request();
 
-		$this->awebooking->singleton( Kernel::class );
+		$this->awebooking->singleton( 'url', function( $a ) {
+			return new Url_Generator( $a );
+		});
 
-		$this->awebooking->singleton( Binding_Resolver::class );
+		$this->awebooking->singleton( 'route_binder', Binding_Resolver::class );
+		$this->awebooking->singleton( 'kernel', Kernel::class );
+
+		$this->register_redirector();
+
+		// Register the aliases.
+		$this->awebooking->alias( 'url', Url_Generator::class );
 	}
 
 	/**
@@ -62,23 +75,59 @@ class Route_Service_Provider extends Service_Provider {
 	 *
 	 * @return void
 	 */
-	protected function register_request_binding() {
-		$this->awebooking->singleton( Request::class, function( $awebooking ) {
+	protected function register_request() {
+		Request::macro( 'verify_nonce', function( $nonce_field, $action ) {
+			if ( ! wp_verify_nonce( $this->get( $nonce_field ), $action ) ) {
+				throw new Nonce_Mismatch_Exception( esc_html__( 'Sorry, your nonce did not verify.', 'awebooking' ) );
+			}
+
+			return $this;
+		});
+
+		Request::macro( 'validate', function( array $rules, array $labels = [] ) {
+			$validator = new Validator( $this->all(), $rules );
+			$validator->labels( $labels );
+
+			if ( $validator->fails() ) {
+				throw new Validation_Failed_Exception( 'The given data failed to pass validation.' );
+			}
+
+			return $this->only( array_keys( $rules ) );
+		});
+
+		$this->awebooking->bind( 'request', function( $a ) {
 			$request = Request::capture();
 
-			$request->set_wp_session( $awebooking->make( 'session' )->get_store() );
+			$request->set_wp_session( $a['session']->get_store() );
 
 			return $request;
 		});
 
-		$this->awebooking->alias( Request::class, 'request' );
+		$this->awebooking->alias( 'request', Request::class );
+	}
+
+	/**
+	 * Register the Redirector service.
+	 *
+	 * @return void
+	 */
+	protected function register_redirector() {
+		$this->awebooking->singleton( 'redirector', function ( $a ) {
+			$redirector = new Redirector( $a['url'] );
+
+			$redirector->set_wp_session( $a['session']->get_store() );
+
+			return $redirector;
+		});
+
+		$this->awebooking->alias( 'redirector', Redirector::class );
 	}
 
 	/**
 	 * Register the routes.
 	 *
 	 * @param \FastRoute\RouteCollector $route The route collector.
-	 * @return void
+	 * @access private
 	 */
 	public function register_routes( $route ) {
 		require trailingslashit( __DIR__ ) . '/../Http/routes.php';
@@ -88,10 +137,10 @@ class Route_Service_Provider extends Service_Provider {
 	 * Register the admin routes.
 	 *
 	 * @param \FastRoute\RouteCollector $route The route collector.
-	 * @return void
+	 * @access private
 	 */
 	public function register_admin_routes( $route ) {
-		require trailingslashit( __DIR__ ) . '/../Admin/routes.php';
+		require trailingslashit( __DIR__ ) . '/../Admin/admin-routes.php';
 	}
 
 	/**
@@ -109,7 +158,7 @@ class Route_Service_Provider extends Service_Provider {
 		// Handle the awebooking_route endpoint requests.
 		awebooking()->make( Kernel::class )
 			->use_request_uri( $wp->query_vars['awebooking_route'] )
-			->handle( $this->awebooking->make( Request::class ) );
+			->handle( $this->awebooking->make( 'request' ) );
 	}
 
 	/**
@@ -124,6 +173,6 @@ class Route_Service_Provider extends Service_Provider {
 
 		awebooking()->make( Kernel::class )
 			->use_request_uri( $_REQUEST['awebooking'] )
-			->handle( $this->awebooking->make( Request::class ) );
+			->handle( $this->awebooking->make( 'request' ) );
 	}
 }

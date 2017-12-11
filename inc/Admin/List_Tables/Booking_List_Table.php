@@ -1,8 +1,8 @@
 <?php
 namespace AweBooking\Admin\List_Tables;
 
+use AweBooking\Constants;
 use AweBooking\Model\Booking;
-use AweBooking\AweBooking;
 
 class Booking_List_Table extends Post_Type_Abstract {
 	/**
@@ -10,7 +10,7 @@ class Booking_List_Table extends Post_Type_Abstract {
 	 *
 	 * @var string
 	 */
-	protected $post_type = AweBooking::BOOKING;
+	protected $post_type = Constants::BOOKING;
 
 	/**
 	 * List table primary column.

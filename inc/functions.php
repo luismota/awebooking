@@ -49,25 +49,6 @@ function awebooking_get_common_titles() {
 	));
 }
 
-function awebooking_get_booking_request_query( $extra_args = array() ) {
-	$raw = [ 'start-date', 'end-date', 'adults' ];
-
-	if ( awebooking( 'setting' )->get_children_bookable() ) {
-		$raw[] = 'children';
-	}
-
-	if ( awebooking( 'setting' )->get_infants_bookable() ) {
-		$raw[] = 'infants';
-	}
-
-	$clean = [];
-	foreach ( $raw as $key ) {
-		$clean[ $key ] = isset( $_REQUEST[ $key ] ) ? sanitize_text_field( wp_unslash( $_REQUEST[ $key ] ) ) : '';
-	}
-
-	return array_merge( $clean, $extra_args );
-}
-
 /**
  * ------------------------------------------------------
  * Templates and frontend functions
@@ -156,7 +137,7 @@ if ( ! function_exists( 'is_room_type_archive' ) ) :
 	 * @return bool
 	 */
 	function is_room_type_archive() {
-		return is_post_type_archive( AweBooking::ROOM_TYPE );
+		return is_post_type_archive( Constants::ROOM_TYPE );
 	}
 endif;
 
@@ -167,7 +148,7 @@ if ( ! function_exists( 'is_room_type' ) ) :
 	 * @return bool
 	 */
 	function is_room_type() {
-		return is_singular( AweBooking::ROOM_TYPE );
+		return is_singular( Constants::ROOM_TYPE );
 	}
 endif;
 

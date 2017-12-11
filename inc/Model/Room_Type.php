@@ -2,7 +2,7 @@
 namespace AweBooking\Model;
 
 use AweBooking\Concierge;
-use AweBooking\AweBooking;
+use AweBooking\Constants;
 use AweBooking\Pricing\Rate;
 use AweBooking\Money\Price;
 use AweBooking\Cart\Buyable;
@@ -18,7 +18,7 @@ class Room_Type extends WP_Object implements Buyable {
 	 *
 	 * @var string
 	 */
-	protected $object_type = AweBooking::ROOM_TYPE;
+	protected $object_type = Constants::ROOM_TYPE;
 
 	/**
 	 * The attributes for this object.
@@ -101,7 +101,7 @@ class Room_Type extends WP_Object implements Buyable {
 	 */
 	public static function query( array $args = [] ) {
 		$query = wp_parse_args( $args, [
-			'post_type'        => AweBooking::ROOM_TYPE,
+			'post_type'        => Constants::ROOM_TYPE,
 			'booking_adults'   => -1,
 			'booking_children' => -1,
 			'booking_infants'  => -1,
@@ -186,13 +186,13 @@ class Room_Type extends WP_Object implements Buyable {
 		}
 
 		// Location only have one.
-		$hotel_locations = $this->get_term_ids( AweBooking::HOTEL_LOCATION );
+		$hotel_locations = $this->get_term_ids( Constants::HOTEL_LOCATION );
 		if ( isset( $hotel_locations[0] ) ) {
 			$this['location_id'] = $hotel_locations[0];
 		}
 
-		$this['amenity_ids'] = $this->get_term_ids( AweBooking::HOTEL_AMENITY );
-		$this['service_ids'] = $this->get_term_ids( AweBooking::HOTEL_SERVICE );
+		$this['amenity_ids'] = $this->get_term_ids( Constants::HOTEL_AMENITY );
+		$this['service_ids'] = $this->get_term_ids( Constants::HOTEL_SERVICE );
 		$this['room_ids']    = $this->list_the_rooms( 'id' );
 
 		/**
@@ -436,7 +436,7 @@ class Room_Type extends WP_Object implements Buyable {
 	public function get_rates() {
 		return Collection::make( get_children([
 			'post_parent' => $this->get_id(),
-			'post_type'   => AweBooking::PRICING_RATE,
+			'post_type'   => Constants::PRICING_RATE,
 			'orderby'     => 'menu_order',
 			'order'       => 'ASC',
 		]))->map(function( $post ) {
@@ -461,7 +461,7 @@ class Room_Type extends WP_Object implements Buyable {
 	 * @return WP_Term|null
 	 */
 	public function get_location() {
-		$location = get_term( $this['location_id'], AweBooking::HOTEL_LOCATION );
+		$location = get_term( $this['location_id'], Constants::HOTEL_LOCATION );
 
 		if ( is_null( $location ) || is_wp_error( $location ) ) {
 			$location = null;

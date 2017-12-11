@@ -9,9 +9,6 @@ $schedule_item_border-color: #dfe5eb;
 
   overflow: hidden;
   background-color: #fff;
-
-  // TODO: ...
-  margin-top: 50px;
 }
 
 .awebooking-schedule__aside {
@@ -20,7 +17,8 @@ $schedule_item_border-color: #dfe5eb;
 
   > ul {
     background: #f9f9f9;
-    margin-top: $schedule_item_height;
+    margin-top: 0;
+    // margin-top: $schedule_item_height;
   }
 
   > ul > li {
@@ -33,28 +31,52 @@ $schedule_item_border-color: #dfe5eb;
   }
 }
 
+.awebooking-schedule__tbody {
+  flex: 1 1 0%;
+  display: flex;
+  flex-direction: column;
+}
+
 .awebooking-schedule__table {
   overflow: auto;
   margin-left: 260px;
-
-  ul {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-
-    margin: 0;
-    // border-top: 1px solid #dfe5eb;
-
-    > li {
-      margin: 0;
-      float: left;
-      display: block;
-      min-width: 60px;
-      height: 60px;
-    }
-  }
 }
 
+.awebooking-schedule__table > header > ul,
+.awebooking-schedule__row {
+  height: $schedule_item_height;
+
+  display: flex;
+  flex: 1 1 0%;
+  // flex-direction: row;
+  // flex-wrap: nowrap;
+
+  margin: 0;
+  position: relative;
+  // border-top: 1px solid #dfe5eb;
+}
+
+.awebooking-schedule__days {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+}
+
+.awebooking-schedule__day {
+  margin: 0;
+
+  min-width: 60px;
+  // height: 60px;
+
+  flex: 1 1 0%;
+}
+
+
+
+.awebooking-schedule__day-heading,
 .awebooking-schedule__day {
   position: relative;
   // border-top: 1px solid #dfe5eb;
@@ -100,12 +122,29 @@ $schedule_item_border-color: #dfe5eb;
   position: absolute;
 }
 
-.sevent {
+.awebooking-schedule__events {
+  display: flex;
+}
+
+.awebooking-schedule__cell-event {
+  flex: 1 1 auto;
+  min-width: 60px;
+  position: relative;
+  pointer-events: none;
+}
+
+.awebooking-schedule__event {
   left: 0;
   top: 0;
   height: 100%;
   position: absolute;
-  background-color: rgba(#111, 0.25);
+  background: url('../img/blocked-pattern.png') rgba(#000, .01);
   z-index: 35;
+
   cursor: pointer;
+  pointer-events: auto;
+
+  &:hover {
+    background-color: rgba(#000, .05);
+  }
 }

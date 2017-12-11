@@ -27,6 +27,15 @@ class Setting extends WP_Option {
 	}
 
 	/**
+	 * Get the setting key.
+	 *
+	 * @return string
+	 */
+	public function get_setting_key() {
+		return $this->key;
+	}
+
+	/**
 	 * Get a config by key.
 	 *
 	 * @param  string $key     A string configure key.
@@ -96,10 +105,10 @@ class Setting extends WP_Option {
 		$default_location = (int) $this->get( 'location_default' );
 
 		if ( $default_location && 0 < $default_location ) {
-			$term = get_term( $default_location, AweBooking::HOTEL_LOCATION );
+			$term = get_term( $default_location, Constants::HOTEL_LOCATION );
 		} else {
 			$terms = get_terms([
-				'taxonomy'   => AweBooking::HOTEL_LOCATION,
+				'taxonomy'   => Constants::HOTEL_LOCATION,
 				'hide_empty' => false,
 			]);
 

@@ -1,7 +1,7 @@
 <?php
 namespace AweBooking\Model;
 
-use AweBooking\AweBooking;
+use AweBooking\Constants;
 use AweBooking\Model\Room_Type;
 
 class Rate extends WP_Object {
@@ -18,7 +18,7 @@ class Rate extends WP_Object {
 	 *
 	 * @var string
 	 */
-	protected $object_type = AweBooking::PRICING_RATE;
+	protected $object_type = Constants::PRICING_RATE;
 
 	/**
 	 * The attributes for this object.
@@ -62,7 +62,7 @@ class Rate extends WP_Object {
 
 		// If we pass an rate ID same as room-type, switch object_type.
 		if ( $room_type && $rate_id && $rate_id === $room_type->get_id() ) {
-			$this->object_type = AweBooking::ROOM_TYPE;
+			$this->object_type = Constants::ROOM_TYPE;
 		}
 
 		parent::__construct( $rate_id );

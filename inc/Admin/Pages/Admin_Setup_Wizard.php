@@ -1,7 +1,7 @@
 <?php
 namespace AweBooking\Admin\Pages;
 
-use AweBooking\AweBooking;
+use AweBooking\Constants;
 use AweBooking\Admin\Admin_Utils;
 use Skeleton\Support\Priority_List;
 
@@ -63,8 +63,8 @@ class Admin_Setup_Wizard {
 		$suffix     = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 		wp_register_script( 'select2', awebooking()->plugin_url() . '/assets/js/select2/select2.full.js', array( 'jquery' ), '4.0.3' );
 
-		wp_enqueue_style( 'awebooking_admin_styles', awebooking()->plugin_url() . '/assets/css/admin.css', array(), AweBooking::VERSION );
-		wp_enqueue_style( 'awebooking-setup', awebooking()->plugin_url() . '/assets/css/awebooking-setup.css', array( 'dashicons', 'install' ), AweBooking::VERSION );
+		wp_enqueue_style( 'awebooking_admin_styles', awebooking()->plugin_url() . '/assets/css/admin.css', array(), awebooking()->version() );
+		wp_enqueue_style( 'awebooking-setup', awebooking()->plugin_url() . '/assets/css/awebooking-setup.css', array( 'dashicons', 'install' ), awebooking()->version() );
 		wp_enqueue_style( 'select2', awebooking()->plugin_url() . '/assets/css/select2.css', array( 'install' ), '4.0.3' );
 
 		if ( ! empty( $_POST['save_step'] ) && isset( $this->steps[ $this->step ]['handler'] ) ) {

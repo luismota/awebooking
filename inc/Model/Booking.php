@@ -1,11 +1,11 @@
 <?php
 namespace AweBooking\Model;
 
-use AweBooking\AweBooking;
+use AweBooking\Constants;
 use AweBooking\Money\Price;
 use AweBooking\Model\WP_Object;
-use AweBooking\Support\Period_Collection;
-use AweBooking\Support\Period;
+use AweBooking\Calendar\Period\Period;
+use AweBooking\Calendar\Period\Period_Collection;
 
 class Booking extends WP_Object {
 	use Traits\Booking_Items_Trait,
@@ -23,7 +23,7 @@ class Booking extends WP_Object {
 	 *
 	 * @var string
 	 */
-	protected $object_type = AweBooking::BOOKING;
+	protected $object_type = Constants::BOOKING;
 
 	/**
 	 * The attributes for this object.
@@ -181,11 +181,11 @@ class Booking extends WP_Object {
 	public function get_state_status() {
 		switch ( $this->get_status() ) {
 			case static::COMPLETED:
-				return AweBooking::STATE_BOOKED;
+				return Constants::STATE_BOOKED;
 			case static::CANCELLED:
-				return AweBooking::STATE_AVAILABLE;
+				return Constants::STATE_AVAILABLE;
 			default:
-				return AweBooking::STATE_PENDING;
+				return Constants::STATE_PENDING;
 		}
 	}
 
@@ -327,8 +327,8 @@ class Booking extends WP_Object {
 			$comment_author       = $user->display_name;
 			$comment_author_email = $user->user_email;
 		} else {
-			$comment_author       = __( 'AweBooking', 'awebooking' );
-			$comment_author_email = strtolower( __( 'AweBooking', 'awebooking' ) ) . '@';
+			$comment_author       = esc_html__( 'AweBooking', 'awebooking' );
+			$comment_author_email = strtolower( esc_html__( 'AweBooking', 'awebooking' ) ) . '@';
 			$comment_author_email .= isset( $_SERVER['HTTP_HOST'] ) ? str_replace( 'www.', '', $_SERVER['HTTP_HOST'] ) : 'noreply.com';
 			$comment_author_email = sanitize_email( $comment_author_email );
 		}
@@ -391,7 +391,7 @@ class Booking extends WP_Object {
 	 */
 	protected function perform_insert() {
 		$this['version']  = AweBooking::VERSION;
-		$this['status']   = $this['status'] ? $this['status'] : Booking::PENDING;
+		$this['status']   = $this['status'] ? $this['status'] : static::PENDING;
 		$this['currency'] = $this['currency'] ? $this['currency'] : awebooking( 'currency' )->get_code();
 
 		$insert_id = wp_insert_post( apply_filters( $this->prefix( 'insert_data' ), [
@@ -424,7 +424,7 @@ class Booking extends WP_Object {
 			return true;
 		}
 
-		$this['status'] = $this['status'] ? $this['status'] : Booking::PENDING;
+		$this['status'] = $this['status'] ? $this['status'] : static::PENDING;
 
 		return $this->update_the_post([
 			'post_status'  => $this['status'],

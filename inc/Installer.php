@@ -608,7 +608,7 @@ CREATE TABLE {$wpdb->prefix}awebooking_booking_itemmeta (
 			'manage_awebooking_settings',
 		];
 
-		$capability_types = [ AweBooking::ROOM_TYPE, AweBooking::BOOKING, AweBooking::PRICING_RATE ];
+		$capability_types = [ Constants::ROOM_TYPE, Constants::BOOKING, Constants::PRICING_RATE ];
 
 		foreach ( $capability_types as $capability_type ) {
 
@@ -652,7 +652,7 @@ CREATE TABLE {$wpdb->prefix}awebooking_booking_itemmeta (
 		];
 
 		// Room type.
-		$room_type = AweBooking::ROOM_TYPE;
+		$room_type = Constants::ROOM_TYPE;
 
 		$capabilities[ $room_type ] = [
 			"read_{$room_type}",
@@ -665,7 +665,7 @@ CREATE TABLE {$wpdb->prefix}awebooking_booking_itemmeta (
 		];
 
 		// Pricing rate.
-		$pricing_rate = AweBooking::PRICING_RATE;
+		$pricing_rate = Constants::PRICING_RATE;
 
 		$capabilities[ $pricing_rate ] = [
 			"read_{$pricing_rate}",
@@ -675,7 +675,7 @@ CREATE TABLE {$wpdb->prefix}awebooking_booking_itemmeta (
 		];
 
 		// Booking.
-		$booking = AweBooking::BOOKING;
+		$booking = Constants::BOOKING;
 
 		$capabilities[ $booking ] = [
 			// Post type.

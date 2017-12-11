@@ -13,6 +13,10 @@ class Constants {
 	const HOTEL_AMENITY  = 'hotel_amenity';
 	const HOTEL_SERVICE  = 'hotel_extra_service';
 
+	// The menu page constants.
+	const MENU_PAGE_BOOKING = 'awebooking';
+	const MENU_PAGE_HOTEL   = 'edit.php?post_type=room_type';
+
 	// The availability state.
 	const STATE_AVAILABLE   = 0;
 	const STATE_UNAVAILABLE = 1;

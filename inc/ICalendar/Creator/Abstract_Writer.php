@@ -2,7 +2,7 @@
 namespace AweBooking\ICalendar\Writer;
 
 use AweBooking\Factory;
-use AweBooking\AweBooking;
+use AweBooking\Constants;
 use AweBooking\Model\Room_Type;
 use AweBooking\Model\Booking;
 use AweBooking\Booking\Items\Line_Item;
@@ -75,7 +75,7 @@ abstract class Abstract_Writer {
 		foreach ( $unit_events as $unit_id => &$events ) {
 			$events = U::collect( $events )
 				->reject(function( $event ) {
-					return $event->getValue() !== AweBooking::STATE_UNAVAILABLE;
+					return $event->getValue() !== Constants::STATE_UNAVAILABLE;
 				})->all();
 		}
 

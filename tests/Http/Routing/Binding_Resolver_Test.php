@@ -3,7 +3,7 @@
 use AweBooking\AweBooking;
 use AweBooking\Http\Routing\Binding_Resolver;
 
-class Binding_Resolver_Test extends WP_UnitTestCase {
+class Http_Routing_Binding_Resolver_Test extends WP_UnitTestCase {
 	public function setUp() {
 		parent::setUp();
 

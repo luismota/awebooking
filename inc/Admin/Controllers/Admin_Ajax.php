@@ -3,6 +3,7 @@ namespace AweBooking\Admin;
 
 use WP_Error;
 use AweBooking\Factory;
+use AweBooking\Constants;
 use AweBooking\Concierge;
 use AweBooking\AweBooking;
 use AweBooking\Model\Room;
@@ -359,7 +360,7 @@ class Admin_Ajax {
 		$service->save();
 
 		if ( $service->exists() ) {
-			$tt_ids = wp_set_object_terms( $room_type->get_id(), $service->get_id(), AweBooking::HOTEL_SERVICE, true );
+			$tt_ids = wp_set_object_terms( $room_type->get_id(), $service->get_id(), Constants::HOTEL_SERVICE, true );
 
 			if ( ! is_wp_error( $tt_ids ) ) {
 				wp_send_json_success( $service );

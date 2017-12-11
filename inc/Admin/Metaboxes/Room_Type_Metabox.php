@@ -1,7 +1,7 @@
 <?php
 namespace AweBooking\Admin\Metaboxes;
 
-use AweBooking\AweBooking;
+use AweBooking\Constants;
 use AweBooking\Model\Room;
 use AweBooking\Model\Room_Type;
 
@@ -77,10 +77,10 @@ class Room_Type_Metabox extends Post_Type_Metabox {
 			);
 
 			$term_taxonomy_ids = wp_set_object_terms(
-				$post_id, $services, AweBooking::HOTEL_SERVICE, false
+				$post_id, $services, Constants::HOTEL_SERVICE, false
 			);
 		} else {
-			wp_delete_object_term_relationships( $post_id, AweBooking::HOTEL_SERVICE );
+			wp_delete_object_term_relationships( $post_id, Constants::HOTEL_SERVICE );
 		}
 	}
 
