@@ -22,7 +22,7 @@ $(function() {
   $('#awebooking-booking-notes').on('click', '.delete_note', function(e) {
     e.preventDefault();
 
-    const el = $(this);
+    const bookingID = $('#post_ID').val();
     const note = $(this).closest('li.note');
 
     wp.ajax.post('delete_awebooking_note', {
@@ -37,20 +37,25 @@ $(function() {
   $('#awebooking-booking-notes').on('click', 'button.add_note', function (e) {
     e.preventDefault();
 
+    const bookingID = $('#post_ID').val();
     const noteContents = $('textarea#add_booking_note').val();
+
     if (! noteContents ) {
       return;
     }
 
-    wp.ajax.post('add_awebooking_note', {
-      booking_id: $('#post_ID').val(),
-      note:       $('textarea#add_booking_note').val(),
-      note_type:  $('select#booking_note_type').val(),
+    $.ajax({
+      url: awebooking.route('booking/' + bookingID + '/add_note'),
+      type: 'POST',
+      data: {
+        note: noteContents,
+        note_type: $('select#booking_note_type').val(),
+      },
     })
     .done(function(data) {
       $('ul.booking_notes').prepend(data.new_note);
       $('#add_booking_note').val('');
-    })
+    });
   });
 
 });

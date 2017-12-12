@@ -340,17 +340,7 @@ class Event implements Event_Interface {
 	 * @return bool
 	 */
 	public function contains_period( Period $period ) {
-		return $this->contains( $period );
-	}
-
-	/**
-	 * Check if the event is during the given period.
-	 *
-	 * @param  Period $period The period given.
-	 * @return bool
-	 */
-	public function is_during( Period $period ) {
-		// TODO: ...
+		return $this->get_period()->contains( $period );
 	}
 
 	/**

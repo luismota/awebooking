@@ -26,7 +26,6 @@ class Pricing_Provider extends WP_Provider {
 	protected function transform_calendar_event( BAT_Event $raw_event, Resource_Interface $resource ) {
 		$amount = Decimal::from_raw_value( $raw_event->getValue() );
 
-		// TODO: Correct the event start and end.
 		return new Pricing_Event( $resource, $raw_event->getStartDate(), $raw_event->getEndDate(), $amount );
 	}
 }

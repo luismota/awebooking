@@ -6,12 +6,10 @@ use AweBooking\Http\Kernel;
 use AweBooking\Http\Routing\Redirector;
 use AweBooking\Http\Routing\Url_Generator;
 use AweBooking\Http\Routing\Binding_Resolver;
-use AweBooking\Support\Service_Provider;
-use Awethemes\WP_Session\WP_Session;
-use Psr\Log\LoggerInterface;
-use Skeleton\Support\Validator;
 use AweBooking\Http\Exceptions\Nonce_Mismatch_Exception;
 use AweBooking\Http\Exceptions\Validation_Failed_Exception;
+use AweBooking\Support\Service_Provider;
+use Skeleton\Support\Validator;
 
 class Route_Service_Provider extends Service_Provider {
 	/**
@@ -20,54 +18,11 @@ class Route_Service_Provider extends Service_Provider {
 	public function register() {
 		$this->register_request();
 
-		$this->awebooking->singleton( 'url', function( $a ) {
-			return new Url_Generator( $a );
-		});
-
-		$this->awebooking->singleton( 'route_binder', Binding_Resolver::class );
-		$this->awebooking->singleton( 'kernel', Kernel::class );
-
 		$this->register_redirector();
 
-		// Register the aliases.
-		$this->awebooking->alias( 'url', Url_Generator::class );
-	}
+		$this->register_url_generator();
 
-	/**
-	 * Init service provider.
-	 *
-	 * @param AweBooking $awebooking AweBooking instance.
-	 */
-	public function init( $awebooking ) {
-		$this->setup_router_binding();
-
-		add_action( 'parse_request', [ $this, 'dispatch' ], 0 );
-		add_action( 'awebooking/register_routes', [ $this, 'register_routes' ] );
-
-		add_action( 'admin_init', [ $this, 'admin_dispatch' ], 0 );
-		add_action( 'awebooking/register_admin_routes', [ $this, 'register_admin_routes' ] );
-	}
-
-	/**
-	 * Setup router binding.
-	 *
-	 * @return void
-	 */
-	protected function setup_router_binding() {
-		$router = $this->awebooking->make( Binding_Resolver::class );
-
-		$models = apply_filters( 'awebooking/route_models_binding', [
-			'rate'      => \AweBooking\Model\Rate::class,
-			'room'      => \AweBooking\Model\Room::class,
-			'room_type' => \AweBooking\Model\Room_Type::class,
-			'amenity'   => \AweBooking\Model\Amenity::class,
-			'service'   => \AweBooking\Model\Service::class,
-			'booking'   => \AweBooking\Model\Booking\Booking::class,
-		]);
-
-		foreach ( $models as $key => $model ) {
-			$router->model( $key, $model );
-		}
+		$this->register_kernel();
 	}
 
 	/**
@@ -107,7 +62,7 @@ class Route_Service_Provider extends Service_Provider {
 	}
 
 	/**
-	 * Register the Redirector service.
+	 * Register the Redirector binding.
 	 *
 	 * @return void
 	 */
@@ -121,6 +76,71 @@ class Route_Service_Provider extends Service_Provider {
 		});
 
 		$this->awebooking->alias( 'redirector', Redirector::class );
+	}
+
+	/**
+	 * Register the Url_Generator binding.
+	 *
+	 * @return void
+	 */
+	protected function register_url_generator() {
+		$this->awebooking->singleton( 'url', function( $a ) {
+			return new Url_Generator( $a );
+		});
+
+		$this->awebooking->alias( 'url', Url_Generator::class );
+	}
+
+	/**
+	 * Register the Kernel binding.
+	 *
+	 * @return void
+	 */
+	protected function register_kernel() {
+		$this->awebooking->bind( 'kernel', function( $a ) {
+			return new Kernel( $a );
+		});
+
+		$this->awebooking->singleton( 'route_binder', function( $a ) {
+			return new Binding_Resolver( $a );
+		});
+	}
+
+	/**
+	 * Init service provider.
+	 *
+	 * @param AweBooking $awebooking AweBooking instance.
+	 */
+	public function init( $awebooking ) {
+		$this->setup_router_binding();
+
+		add_action( 'parse_request', [ $this, 'dispatch' ], 0 );
+		add_action( 'awebooking/register_routes', [ $this, 'register_routes' ] );
+
+		add_action( 'admin_init', [ $this, 'admin_dispatch' ], 0 );
+		add_action( 'awebooking/register_admin_routes', [ $this, 'register_admin_routes' ] );
+	}
+
+	/**
+	 * Setup router binding.
+	 *
+	 * @return void
+	 */
+	protected function setup_router_binding() {
+		$router_binding = $this->awebooking->make( 'route_binder' );
+
+		$models = apply_filters( 'awebooking/route_models_binding', [
+			'rate'      => \AweBooking\Model\Rate::class,
+			'room'      => \AweBooking\Model\Room::class,
+			'room_type' => \AweBooking\Model\Room_Type::class,
+			'amenity'   => \AweBooking\Model\Amenity::class,
+			'service'   => \AweBooking\Model\Service::class,
+			'booking'   => \AweBooking\Model\Booking::class,
+		]);
+
+		foreach ( $models as $key => $model ) {
+			$router_binding->model( $key, $model );
+		}
 	}
 
 	/**
@@ -156,7 +176,7 @@ class Route_Service_Provider extends Service_Provider {
 		}
 
 		// Handle the awebooking_route endpoint requests.
-		awebooking()->make( Kernel::class )
+		$this->awebooking->make( 'kernel' )
 			->use_request_uri( $wp->query_vars['awebooking_route'] )
 			->handle( $this->awebooking->make( 'request' ) );
 	}
@@ -167,11 +187,15 @@ class Route_Service_Provider extends Service_Provider {
 	 * @access private
 	 */
 	public function admin_dispatch() {
-		if ( empty( $_REQUEST['awebooking'] ) ) {
+		if ( defined( 'DOING_AJAX' ) || empty( $_REQUEST['awebooking'] ) ) {
 			return;
 		}
 
-		awebooking()->make( Kernel::class )
+		// Set the headers to prevent caching for the different browsers.
+		send_nosniff_header();
+		nocache_headers();
+
+		$this->awebooking->make( 'kernel' )
 			->use_request_uri( $_REQUEST['awebooking'] )
 			->handle( $this->awebooking->make( 'request' ) );
 	}

@@ -71,12 +71,12 @@ class Kernel extends Base_Kernel {
 	 * @return Response
 	 */
 	protected function handle_found_route( SymfonyRequest $request, array $routeinfo ) {
-		if ( $this->awebooking->bound( Binding_Resolver::class ) && isset( $routeinfo[2] ) ) {
-			$routeinfo[2] = $this->awebooking->make( Binding_Resolver::class )->resolve( $routeinfo[2] );
-		}
-
 		// In this, we'll instance the request into the Container.
 		$this->awebooking->instance( 'request', $request );
+
+		if ( $this->awebooking->bound( 'route_binder' ) && isset( $routeinfo[2] ) ) {
+			$routeinfo[2] = $this->awebooking->make( 'route_binder' )->resolve( $routeinfo[2] );
+		}
 
 		return parent::handle_found_route( $request, $routeinfo );
 	}

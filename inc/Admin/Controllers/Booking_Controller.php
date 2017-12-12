@@ -1,62 +1,80 @@
 <?php
-namespace AweBooking\Admin;
+namespace AweBooking\Admin\Controllers;
 
-use AweBooking\Factory;
-use AweBooking\Constants;
-use Skeleton\Support\Validator;
+use Awethemes\Http\Request;
+use AweBooking\Model\Booking;
 
-class Booking_Controller {
+class Booking_Controller extends Controller {
 	/**
-	 * Constructor actions handler.
+	 * Ajax add a booking note.
 	 *
-	 * @see https://developer.wordpress.org/reference/hooks/post_action_action/
+	 * @param  \Awethemes\Http\Request  $request The current request.
+	 * @param  \Awethemes\Model\Booking $booking The Booking instance.
+	 * @return \Awethemes\Http\Response
 	 */
-	public function __construct() {
-		add_action( 'post_action_delete_awebooking_item', [ $this, 'delete_booking_item' ] );
+	public function add_note( Request $request, Booking $booking ) {
+		$request->validate([
+			'note'      => 'required|length_min:2',
+			'note_type' => 'optional',
+		]);
+
+		$note = wp_kses_post( trim( stripslashes( $request['note'] ) ) );
+		$is_customer_note = ( 'customer' === $request['note_type'] ) ? 1 : 0;
+
+		// Insert the note.
+		$comment_id = $booking->add_booking_note( $note, $is_customer_note, true );
+
+		// Build response note.
+		$new_note = '<li rel="' . esc_attr( $comment_id ) . '" class="note ';
+		if ( $is_customer_note ) {
+			$new_note .= 'customer-note';
+		}
+
+		$new_note .= '"><div class="note_content">';
+		$new_note .= wpautop( wptexturize( $note ) );
+		$new_note .= '</div><p class="meta"><a href="#" class="delete_note">' . esc_html__( 'Delete note', 'awebooking' ) . '</a></p>';
+		$new_note .= '</li>';
+
+		return [ 'new_note' => $new_note ];
 	}
 
 	/**
-	 * Handle delete booking item.
-	 *
-	 * @param  int $post_id Raw post_id from request.
-	 * @return void
+	 * Delete booking note via ajax.
 	 */
-	public function delete_booking_item( $post_id ) {
-		check_admin_referer( 'delete_item_awebooking_' . $post_id );
+	public function delete_booking_note() {
+		$note_id = sanitize_text_field( $_POST['note_id'] );
+		$booking_id = sanitize_text_field( $_POST['booking_id'] );
 
-		if ( Constants::BOOKING !== get_post_type( $post_id ) ) {
-			wp_die( esc_html__( 'Invalid post type.', 'awebooking' ) );
+		try {
+			if ( empty( $note_id ) ) {
+				return wp_send_json_error( [ 'message' => __( 'Invalid booking note ID', 'awebooking' ) ], 400 );
+			}
+
+			// Ensure note ID is valid.
+			$note = get_comment( $note_id );
+
+			if ( is_null( $note ) ) {
+				return wp_send_json_error( [ 'message' => __( 'A booking note with the provided ID could not be found', 'awebooking' ) ], 404 );
+			}
+
+			// Ensure note ID is associated with given order.
+			if ( $note->comment_post_ID != $booking_id ) {
+				return wp_send_json_error( [ 'message' => __( 'The booking note ID provided is not associated with the booking', 'awebooking' ) ], 400 );
+			}
+
+			// Force delete since trashed booking notes could not be managed through comments list table.
+			$result = wp_delete_comment( $note->comment_ID, true );
+
+			if ( ! $result ) {
+				return wp_send_json_error( [ 'message' => __( 'This booking note cannot be deleted', 'awebooking' ) ], 500 );
+			}
+
+			do_action( 'awebooking/api_delete_booking_note', $note->comment_ID, $note_id, $this );
+
+			return wp_send_json_success( [ 'note_id' => $note_id ], 200 );
+
+		} catch ( \Exception $e ) {
+			// ...
 		}
-
-		if ( empty( $_REQUEST['item'] ) && ! is_int( $_REQUEST['item'] ) ) {
-			wp_die( esc_html__( 'You are wrong somewhere, please try again.', 'awebooking' ) );
-		}
-
-		$the_booking = Factory::get_booking( $post_id );
-		if ( ! $the_booking->exists() ) {
-			wp_die( esc_html__( 'The booking not found.', 'awebooking' ) );
-		}
-
-		$booking_item = $the_booking->get_item( (int) $_REQUEST['item'] );
-		if ( is_null( $booking_item ) ) {
-			wp_die( esc_html__( 'You attempted to edit an item that doesn&#8217;t exist. Perhaps it was deleted?', 'awebooking' ) );
-		}
-
-		if ( isset( $_REQUEST['item_type'] ) && $booking_item->get_type() !== $_REQUEST['item_type'] ) {
-			wp_die( esc_html__( 'Invalid booking item type to delete.', 'awebooking' ) );
-		}
-
-		// Delete the booking item.
-		$the_booking->remove_item( $booking_item );
-		$the_booking->save();
-
-		$the_booking->calculate_totals();
-
-		awebooking( 'admin_notices' )->info(
-			sprintf( esc_html__( 'The booking item #%s has been deleted.', 'awebooking' ), esc_html( $post_id ) )
-		);
-
-		wp_redirect( $the_booking->get_edit_url() );
-		exit;
 	}
 }

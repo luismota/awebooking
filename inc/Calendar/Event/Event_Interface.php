@@ -97,12 +97,4 @@ interface Event_Interface {
 	 * @return bool
 	 */
 	public function contains_period( Period $period );
-
-	/**
-	 * Check if the event is during the given period.
-	 *
-	 * @param  Period $period The period given.
-	 * @return bool
-	 */
-	public function is_during( Period $period );
 }

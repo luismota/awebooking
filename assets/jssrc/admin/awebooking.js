@@ -48,6 +48,16 @@ const AweBooking = _.extend(settings, {
   },
 
   /**
+   * Get the admin route.
+   *
+   * @param  {string} action Optional, action.
+   * @return {string}
+   */
+  route(action) {
+    return this.admin_route + action;
+  },
+
+  /**
    * Make form ajax request.
    */
   ajaxSubmit(form, action) {
@@ -57,10 +67,14 @@ const AweBooking = _.extend(settings, {
     // Add .ajax-loading class in to the form.
     $(form).addClass('ajax-loading');
 
-    return wp.ajax.post(action, data)
-      .always(function() {
-        $(form).removeClass('ajax-loading');
-      });
+    $.ajax({
+      url: this.admin_route + action,
+      type: 'POST',
+      data: data,
+    })
+    .always(function() {
+      $(form).removeClass('ajax-loading');
+    });
   },
 });
 

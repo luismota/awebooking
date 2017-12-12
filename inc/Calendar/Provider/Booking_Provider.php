@@ -26,13 +26,6 @@ class Booking_Provider extends WP_Provider {
 	protected function transform_calendar_event( BAT_Event $raw_event, Resource_Interface $resource ) {
 		$booking = Factory::get_booking( $raw_event->getValue() );
 
-		$event = new Booking_Event( $resource, $raw_event->getStartDate(), $raw_event->getEndDate(), $booking );
-
-		// TODO: ...
-		if ( $booking->exists() ) {
-			$event->set_summary( '#' . $booking->get_id() );
-		}
-
-		return $event;
+		return new Booking_Event( $resource, $raw_event->getStartDate(), $raw_event->getEndDate(), $booking );
 	}
 }

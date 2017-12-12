@@ -2,20 +2,33 @@
 namespace AweBooking\Calendar;
 
 use AweBooking\Support\Collection;
-use AweBooking\Calendar\Period\Period;
-use AweBooking\Calendar\Event\Event_Collection;
 
 class Scheduler extends Collection {
 	/**
-	 * Get events available in a period.
+	 * The scheduler name.
 	 *
-	 * @param  Period $period  The period.
-	 * @param  array  $options Optional, something pass to provider to get events.
-	 * @return \AweBooking\Calendar\Event\Event_Collection
+	 * @var string
 	 */
-	public function get_events( Period $period, array $options = [] ) {
-		$events = array_reduce( $this->items, function( $collection, $calendar ) use ( $period, $options ) {
-			return $collection->merge( $calendar->get_events( $period, $options ) );
-		}, new Event_Collection );
+	protected $name;
+
+	/**
+	 * Get the Calendar name.
+	 *
+	 * @return string
+	 */
+	public function get_name() {
+		return $this->name;
+	}
+
+	/**
+	 * Set the Calendar name.
+	 *
+	 * @param  string $name The Calendar name.
+	 * @return $this
+	 */
+	public function set_name( $name ) {
+		$this->name = $name;
+
+		return $this;
 	}
 }

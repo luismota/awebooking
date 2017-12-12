@@ -11,14 +11,14 @@ class Calendar {
 	/**
 	 * The Calendar resource.
 	 *
-	 * @var Resource_Interface
+	 * @var \AweBooking\Calendar\Resource\Resource_Interface
 	 */
 	protected $resource;
 
 	/**
 	 * The Calendar Store
 	 *
-	 * @var Store_Interface
+	 * @var \AweBooking\Calendar\Provider\Provider_Interface
 	 */
 	protected $provider;
 
@@ -51,6 +51,13 @@ class Calendar {
 	protected $foreground_color;
 
 	/**
+	 * Cached events from provider.
+	 *
+	 * @var array
+	 */
+	protected static $cached_provider_events = [];
+
+	/**
 	 * Create a Calendar.
 	 *
 	 * @param Resource_Interface $resource The resource implementation.
@@ -69,18 +76,52 @@ class Calendar {
 	 * @return \AweBooking\Calendar\Event\Event_Collection
 	 */
 	public function get_events( Period $period, array $options = [] ) {
-		// Get events from provider.
-		$events = $this->provider->get_events( $period->get_start_date(), $period->get_end_date(), $options );
-
-		return Event_Collection::make( $events )
+		return Event_Collection::make( $this->get_provider_events( $period, $options ) )
 			->each(function( $e ) {
 				if ( $e->is_untrusted_resource() ) {
 					$e->set_resource( $this->resource );
 				}
 			})
 			->reject(function( $e ) {
-				return $this->resource->get_id() !== $e->get_resource()->get_id();
+				return $this->get_resource()->get_id() !== $e->get_resource()->get_id();
 			});
+	}
+
+	/**
+	 * Get events available in a period from provider.
+	 *
+	 * @param  Period $period  The period.
+	 * @param  array  $options Optional, something pass to provider to get events.
+	 * @return array
+	 */
+	protected function get_provider_events( Period $period, array $options = [] ) {
+		$hash = $this->generate_cache_hash( $period, $options );
+
+		// If found cached events, return the events from cache.
+		if ( array_key_exists( $hash, static::$cached_provider_events ) ) {
+			return static::$cached_provider_events[ $hash ];
+		}
+
+		// Get events from provider.
+		$events = $this->provider->get_events(
+			$period->get_start_date(), $period->get_end_date(), $options
+		);
+
+		// Attach events to the cache.
+		static::$cached_provider_events[ $hash ] = $events;
+
+		return $events;
+	}
+
+	/**
+	 * Generate the cache hash.
+	 *
+	 * @param  Period $period  The period.
+	 * @param  array  $options The options.
+	 * @return string
+	 */
+	protected function generate_cache_hash( $period, $options ) {
+		return spl_object_hash( $this->provider ) . '_' . spl_object_hash( $period ) . '_' . md5( serialize( $options ) );
 	}
 
 	/**
@@ -92,6 +133,24 @@ class Calendar {
 	 */
 	public function get_uid() {
 		return $this->resource->get_id();
+	}
+
+	/**
+	 * The resource of the Calendar.
+	 *
+	 * @return \AweBooking\Calendar\Resource\Resource_Interface
+	 */
+	public function get_resource() {
+		return $this->resource;
+	}
+
+	/**
+	 * The provider of the Calendar.
+	 *
+	 * @return \AweBooking\Calendar\Provider\Provider_Interface
+	 */
+	public function get_provider() {
+		return $this->provider;
 	}
 
 	/**

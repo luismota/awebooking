@@ -390,7 +390,7 @@ class Booking extends WP_Object {
 	 * @return int|void
 	 */
 	protected function perform_insert() {
-		$this['version']  = AweBooking::VERSION;
+		$this['version']  = awebooking()->version();
 		$this['status']   = $this['status'] ? $this['status'] : static::PENDING;
 		$this['currency'] = $this['currency'] ? $this['currency'] : awebooking( 'currency' )->get_code();
 

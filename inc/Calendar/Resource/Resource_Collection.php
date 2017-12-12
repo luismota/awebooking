@@ -45,6 +45,11 @@ class Resource_Collection extends Collection {
 	 * @throws \InvalidArgumentException
 	 */
 	protected static function assert_is_resource( $value ) {
+		// Allowed nested collection when use groupBy method.
+		if ( $value instanceof Resource_Collection ) {
+			return;
+		}
+
 		if ( ! $value instanceof Resource_Interface ) {
 			throw new \InvalidArgumentException( 'The resource must be instance of Resource_Interface.' );
 		}

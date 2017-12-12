@@ -26,19 +26,19 @@ class State_Provider extends WP_Provider {
 		$event = new State_Event( $resource, $raw_event->getStartDate(), $raw_event->getEndDate(), $raw_event->getValue() );
 
 		switch ( true ) {
-			case $event->is_available():
+			case $event->is_available_state():
 				$event->set_summary( esc_html_x( 'Available', 'booking state', 'awebooking' ) );
 				break;
 
-			case $event->is_unavailable():
+			case $event->is_unavailable_state():
 				$event->set_summary( esc_html_x( 'Unavailable', 'booking state', 'awebooking' ) );
 				break;
 
-			case $event->is_pending():
+			case $event->is_pending_state():
 				$event->set_summary( esc_html_x( 'Pending', 'booking state', 'awebooking' ) );
 				break;
 
-			case $event->is_booked():
+			case $event->is_booked_state():
 				$event->set_summary( esc_html_x( 'Booked', 'booking state', 'awebooking' ) );
 				break;
 		}

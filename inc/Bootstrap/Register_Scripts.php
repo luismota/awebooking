@@ -12,21 +12,20 @@ class Register_Scripts {
 	 * @return void
 	 */
 	public function bootstrap( AweBooking $awebooking ) {
-		add_action( 'admin_enqueue_scripts', array( $this, 'register_scripts' ) );
+		add_action( 'admin_enqueue_scripts', [ $this, 'register_admin_scripts' ] );
+		add_action( 'admin_enqueue_scripts', [ $this, 'enqueue_admin_scripts' ], 20 );
+
 		add_action( 'wp_enqueue_scripts', [ $this, 'awebooking_template_scripts' ], 20 );
 	}
 
 	/**
 	 * Register admin scripts.
+	 *
+	 * @access private
 	 */
-	public function register_scripts() {
-		$awebooking_url = awebooking()->plugin_url();
-
-		/**
-	 	* If we are debugging the site,
-	 	* use a unique version every page load so as to ensure no cache issues.
-		 */
+	public function register_admin_scripts() {
 		$version = AweBooking::VERSION;
+		$awebooking_url = awebooking()->plugin_url();
 
 		// Register vendor styles and scripts.
 		wp_register_style( 'select2', $awebooking_url . '/assets/css/select2.css', [], '4.0.3' );
@@ -54,24 +53,23 @@ class Register_Scripts {
 
 		// Send AweBooking object.
 		wp_localize_script( 'awebooking-admin', '_awebookingSettings', array(
-			'ajax_url' => admin_url( 'admin-ajax.php' ),
-			'strings'  => array(
-				'warning' => esc_html__( 'Are you sure you want to do this?', 'awebooking' ),
+			'ajax_url'    => esc_url( admin_url( 'admin-ajax.php' ) ),
+			'admin_route' => esc_url( awebooking( 'url' )->admin_route( '/' ) ),
+			'strings'     => [
+				'warning'              => esc_html__( 'Are you sure you want to do this?', 'awebooking' ),
 				'ask_reduce_the_rooms' => esc_html__( 'Are you sure you want to do this?', 'awebooking' ),
-			),
-		) );
+			],
+		));
 
 		do_action( 'awebooking/register_admin_scripts' );
-
-		$this->enqueue_scripts();
 	}
 
 	/**
-	 * Register admin scripts.
+	 * Enqueue admin scripts.
 	 *
-	 * @return void
+	 * @access private
 	 */
-	public function enqueue_scripts() {
+	public function enqueue_admin_scripts() {
 		$screen = get_current_screen();
 
 		/**
@@ -98,10 +96,6 @@ class Register_Scripts {
 			wp_enqueue_script( 'awebooking-edit-booking' );
 		}
 
-		if ( 'edit-hotel_extra_service' === $screen->id ) {
-			// wp_enqueue_script( 'awebooking-edit-service' );
-		}
-
 		if ( $awebooking_screen_id . '_page_manager-pricing' === $screen->id ) {
 			wp_enqueue_script( 'awebooking-manager-pricing' );
 		}
@@ -111,7 +105,7 @@ class Register_Scripts {
 		}
 	}
 
-	function awebooking_template_scripts() {
+	public function awebooking_template_scripts() {
 		wp_enqueue_style( 'awebooking-template', awebooking()->plugin_url() . '/assets/css/awebooking.css', array(), AweBooking::VERSION );
 
 		wp_enqueue_script( 'jquery-ui-accordion' );

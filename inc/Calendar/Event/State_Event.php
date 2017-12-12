@@ -7,6 +7,25 @@ use AweBooking\Calendar\Event\Exceptions\Invalid_State_Exception;
 
 class State_Event extends Event {
 	/**
+	 * The state reference.
+	 *
+	 * @var mixed
+	 */
+	protected $reference;
+
+	/**
+	 * The valid states.
+	 *
+	 * @var array
+	 */
+	protected static $valid_states = [
+		Constants::STATE_BOOKED,
+		Constants::STATE_PENDING,
+		Constants::STATE_AVAILABLE,
+		Constants::STATE_UNAVAILABLE,
+	];
+
+	/**
 	 * Create an event.
 	 *
 	 * @param Resource_Interface $resource   The resource implementation.
@@ -29,7 +48,7 @@ class State_Event extends Event {
 	 * @throws Invalid_State_Exception
 	 */
 	public function set_value( $value ) {
-		if ( ! in_array( $value, [ Constants::STATE_AVAILABLE, Constants::STATE_UNAVAILABLE, Constants::STATE_PENDING, Constants::STATE_BOOKED ] ) ) {
+		if ( ! in_array( $value, static::$valid_states ) ) {
 			throw new Invalid_State_Exception( 'Invalid state' );
 		}
 
@@ -37,12 +56,34 @@ class State_Event extends Event {
 	}
 
 	/**
+	 * Get the reference.
+	 *
+	 * @return mixed
+	 */
+	public function get_reference() {
+		return $this->reference;
+	}
+
+	/**
+	 * Set the reference.
+	 *
+	 * "Reference" can be a booking or whaterver.
+	 *
+	 * @param mixed $reference The reference.
+	 */
+	public function set_reference( $reference ) {
+		$this->reference = $reference;
+
+		return $this;
+	}
+
+	/**
 	 * Determines if current event is available state.
 	 *
 	 * @return bool
 	 */
-	public function is_available() {
-		return $this->get_value() === Constants::STATE_AVAILABLE;
+	public function is_available_state() {
+		return (int) $this->get_value() === Constants::STATE_AVAILABLE;
 	}
 
 	/**
@@ -50,8 +91,8 @@ class State_Event extends Event {
 	 *
 	 * @return bool
 	 */
-	public function is_unavailable() {
-		return $this->get_value() === Constants::STATE_UNAVAILABLE;
+	public function is_unavailable_state() {
+		return (int) $this->get_value() === Constants::STATE_UNAVAILABLE;
 	}
 
 	/**
@@ -59,8 +100,8 @@ class State_Event extends Event {
 	 *
 	 * @return bool
 	 */
-	public function is_pending() {
-		return $this->get_value() === Constants::STATE_PENDING;
+	public function is_pending_state() {
+		return (int) $this->get_value() === Constants::STATE_PENDING;
 	}
 
 	/**
@@ -68,7 +109,7 @@ class State_Event extends Event {
 	 *
 	 * @return bool
 	 */
-	public function is_booked() {
-		return $this->get_value() === Constants::STATE_BOOKED;
+	public function is_booked_state() {
+		return (int) $this->get_value() === Constants::STATE_BOOKED;
 	}
 }
