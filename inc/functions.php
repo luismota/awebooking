@@ -5,6 +5,7 @@ use AweBooking\Money\Price;
 use AweBooking\Support\Period;
 use AweBooking\Support\Template;
 use AweBooking\Support\Formatting;
+use AweBooking\Constants;
 
 /**
  * Get the available container instance.
