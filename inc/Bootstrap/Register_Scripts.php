@@ -122,6 +122,13 @@ class Register_Scripts {
 			'ajax_url' => admin_url( 'admin-ajax.php' ),
 		));
 
+		wp_localize_script( 'awebooking', 'AweBooking', array(
+			'ajax_url'   => admin_url( 'admin-ajax.php' ),
+			'route_url'  => awebooking( 'url' )->route(),
+		));
+
+		wp_enqueue_script( 'awebooking-cart', awebooking()->plugin_url() . '/assets/js/frontend/cart.js', array( 'jquery' ), AweBooking::VERSION, true );
+
 		global $wp_locale;
 
 		wp_localize_script( 'awebooking', '_awebookingDateSetting', array(

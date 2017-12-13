@@ -19,7 +19,8 @@ mix.js('assets/jssrc/admin/awebooking.js', 'assets/js/admin')
    .js('assets/jssrc/admin/edit-room-type.js', 'assets/js/admin')
    .js('assets/jssrc/admin/manager-pricing.js', 'assets/js/admin')
    .js('assets/jssrc/admin/manager-availability.js', 'assets/js/admin')
-   .js('assets/jssrc/admin/calendar/schedule-calendar.js', 'assets/js/admin');
+   .js('assets/jssrc/admin/calendar/schedule-calendar.js', 'assets/js/admin')
+   .js('assets/jssrc/frontend/cart.js', 'assets/js/frontend');
 
 mix.copy('./node_modules/magnific-popup/dist/magnific-popup.css', './assets/css/magnific-popup.css', false);
 mix.copy('./node_modules/magnific-popup/dist/jquery.magnific-popup.min.js', './assets/js/magnific-popup/jquery.magnific-popup.min.js', false);

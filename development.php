@@ -24,11 +24,14 @@ add_action( 'awebooking/booted', function () {
 
 function awebooking_availability_template( $atts ) {
 	$atts = shortcode_atts( array(
-		'foo' => 'no foo',
+		'has-sidebar' => false,
 	), $atts, 'awebooking_availability_template' );
-
+	$el_class = [
+		'awebooking-availability-container',
+		$atts['has-sidebar'] ? 'has-sidebar' : '',
+	];
 	?>
-	<div class="awebooking-availability-container">
+	<div class="<?php echo esc_attr( implode( ' ', $el_class ) ); ?>">
 		<ul class="room_types awebooking-availability-room-types">
 			<li class="awebooking-availability-room-type">
 
@@ -97,7 +100,7 @@ function awebooking_availability_template( $atts ) {
 
 								<div class="awebooking-rate__actions-right">
 									<span class="awebooking-rate__rooms"><span class="count">10</span> Rooms Left</span>
-									<a class="awebooking-rate__book" href="http://demo.awethemes.com/awebooking/booking/?booking-action=view&amp;start-date=2017-12-14&amp;end-date=2017-12-15&amp;adults=1&amp;children=0&amp;room-type=19">Add room</a>
+									<a class="awebooking-rate__book js-awebooking-add-room" href="#">Add room</a>
 								</div>
 
 							</div>
@@ -192,7 +195,7 @@ function awebooking_availability_template( $atts ) {
 
 								<div class="awebooking-rate__actions-right">
 									<span class="awebooking-rate__rooms"><span class="count">10</span> Rooms Left</span>
-									<a class="awebooking-rate__book" href="http://demo.awethemes.com/awebooking/booking/?booking-action=view&amp;start-date=2017-12-14&amp;end-date=2017-12-15&amp;adults=1&amp;children=0&amp;room-type=19">Add room</a>
+									<a class="awebooking-rate__book js-awebooking-add-room" href="#">Add room</a>
 								</div>
 
 							</div>
@@ -208,7 +211,61 @@ function awebooking_availability_template( $atts ) {
 		</ul>
 
 		<div class="awebooking-availability-sidebar">
-			test
+
+			<h2 class="awebooking-cart-title">Booking Summary</h2>
+
+			<div class="awebooking-cart">
+
+				<div class="awebooking-cart__header">
+					<div class="awebooking-cart__checktime">
+						<label for="">Dates</label>
+						<p>
+							14 Dec 2017 - 16 Dec 2017
+						</p>
+					</div>
+
+					<div class="awebooking-cart__nights">
+						<label for="">Nights</label>
+						<p>
+							2
+						</p>
+					</div>
+				</div>
+
+				<div class="awebooking-cart__items">
+					<ul>
+						<li class="awebooking-cart-item">
+							<div class="awebooking-cart-item__info">
+								<h5 class="awebooking-cart-item__rate">
+									Stay for 2 nights and get exclusive 20% discount
+								</h5>
+
+								<p class="awebooking-cart-item__guess">
+									2 Adults ,2 Children ,1 Room
+								</p>
+							</div>
+
+							<p class="awebooking-cart-item__price">
+								8800$
+							</p>
+
+							<a href="#" class="awebooking-cart-item__remove js-awebooking-remove-cart">x</a>
+						</li>
+					</ul>
+				</div>
+
+				<div class="awebooking-cart__footer">
+					<div class="awebooking-cart__total">
+						<label for="">Total</label>
+						<p class="awebooking-cart__total-amount">15000$</p>
+					</div>
+					<div class="awebooking-cart__buttons">
+						<a class="btn button awebooking-button" href="#">Book</a>
+					</div>
+				</div>
+
+			</div>
+
 		</div>
 	</div>
 

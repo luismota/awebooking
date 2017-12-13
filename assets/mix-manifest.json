@@ -3,14 +3,15 @@
     "/css/admin.css": "/css/admin.css",
     "/css/theme.css": "/css/theme.css",
     "/css/awebooking.css": "/css/awebooking.css",
-    "/js/admin/vendor.js": "/js/admin/vendor.js",
+    "/js/frontend/vendor.js": "/js/frontend/vendor.js",
     "/js/admin/edit-booking.js": "/js/admin/edit-booking.js",
+    "/js/frontend/cart.js": "/js/frontend/cart.js",
     "/js/admin/manager-pricing.js": "/js/admin/manager-pricing.js",
     "/js/admin/manager-availability.js": "/js/admin/manager-availability.js",
     "/js/admin/edit-service.js": "/js/admin/edit-service.js",
     "/js/admin/edit-room-type.js": "/js/admin/edit-room-type.js",
     "/js/admin/schedule-calendar.js": "/js/admin/schedule-calendar.js",
-    "/js/admin/manifest.js": "/js/admin/manifest.js",
+    "/js/frontend/manifest.js": "/js/frontend/manifest.js",
     "/css/magnific-popup.css": "/css/magnific-popup.css",
     "/js/magnific-popup/jquery.magnific-popup.min.js": "/js/magnific-popup/jquery.magnific-popup.min.js"
 }

@@ -1,9 +1,6 @@
 jQuery(function($) {
     'use strict';
 
-    /**
-     * find page number
-     */
     $('#awebooking-service input[type="checkbox"]').on('change', function (e) {
         var el = $(this);
 
@@ -23,17 +20,10 @@ jQuery(function($) {
                 action: 'awebooking/price_calculator',
             }),
             beforeSend: function() {
-              /**
-               * create effect before send data.
-               */
                $("#awebooking-booking-form").addClass('awebooking-loading');
             },
 
             success: function( response ) {
-                /**
-                 * remove loading button.
-                 * show result.
-                 */
               $('#awebooking-total-cost').html(response.data.total_price);
               $("#awebooking-booking-form").removeClass('awebooking-loading');
             }

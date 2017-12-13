@@ -1,6 +1,5 @@
 <?php
 
-use AweBooking\Http\Controllers\Test_Controller;
+use AweBooking\Http\Controllers\Cart_Controller;
 
-$route->get( '/step1', Test_Controller::class . '@step1' );
-$route->get( '/step2', Test_Controller::class . '@step2' );
+$route->get( '/cart', Cart_Controller::class . '@add' );
