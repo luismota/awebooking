@@ -392,3 +392,52 @@
     transform: translateX(-50%);
   }
 }
+
+.awebooking-rate__book-action {
+  display: inline-block;
+  width: 100px;
+  vertical-align: middle;
+  text-align: center;
+}
+
+.awebooking-rate__nums {
+  border: 1px solid #ccc;
+  display: inline-block;
+  border-radius: 3px;
+}
+
+.awebooking-cal {
+  display: inline-block;
+  vertical-align: middle;
+  text-decoration: none;
+  color: #333;
+  padding: 0px 10px;
+  box-shadow: none !important;
+  font-size: 14px;
+  font-weight: bold;
+
+  &:first-child {
+    border-radius: 3px 0 0 3px;
+    border-right: 1px solid #ccc;
+  }
+
+  &:last-child {
+    border-radius: 0 3px 3px 0;
+    border-left: 1px solid #ccc;
+  }
+}
+
+.js-awebooking-count-room {
+  padding: 0px 10px;
+}
+
+.awebooking-dropdown-content {
+  position: relative;
+  background-color: #fff;
+  width: 100%;
+  margin-top: 1px;
+  overflow: hidden;
+  display: none;
+  overflow-y: auto;
+  z-index: 9
+}

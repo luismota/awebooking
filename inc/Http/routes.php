@@ -1,5 +1,5 @@
 <?php
 
-use AweBooking\Http\Controllers\Cart_Controller;
+use AweBooking\Http\Controllers\Cart_Ajax_Controller;
 
-$route->get( '/cart', Cart_Controller::class . '@add' );
+$route->post( '/cart/add', Cart_Ajax_Controller::class . '@add' );

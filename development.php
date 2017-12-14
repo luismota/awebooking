@@ -52,7 +52,7 @@ function awebooking_availability_template( $atts ) {
 				<div class="awebooking-availability-room-type__info">
 					<div class="awebooking-rates">
 
-						<div class="awebooking-rate">
+						<div id="rate-1" class="awebooking-rate js-awebooking-rate">
 							<div class="awebooking-rate__body">
 								<div class="awebooking-discount">
 									<span>Special Deal</span>
@@ -98,14 +98,55 @@ function awebooking_availability_template( $atts ) {
 									<a href="#">Enquire</a>
 								</div>
 
-								<div class="awebooking-rate__actions-right">
-									<span class="awebooking-rate__rooms"><span class="count">10</span> Rooms Left</span>
-									<a class="awebooking-rate__book js-awebooking-add-room" href="#">Add room</a>
+								<div class="awebooking-rate__actions-right js-awebooking-rate-actions">
+									<span class="awebooking-rate__rooms"><span class="count js-awebooking-room-left">10</span> Rooms Left</span>
+									<div class="awebooking-rate__book-action">
+										<a class="awebooking-rate__book js-awebooking-add-room" href="#" data-init="awebooking-dropdown" data-dropdown="#dr-rate-1">Add room</a>
+									</div>
+
 								</div>
 
 							</div>
+							<div class="awebooking-rate__bottom awebooking-dropdown-content" id="dr-rate-1">
+								<div class="awebooking-service" id="awebooking-service">
+									<div class="awebooking-service__item">
+										<input type="checkbox" id="extra_id_14" name="awebooking_services[]" value="14">
+										<label for="extra_id_14">Buffet Breakfast</label>
+										<span> + $20 x person  to price</span>
+									</div>
+									<div class="awebooking-service__item">
+										<input type="checkbox" id="extra_id_13" name="awebooking_services[]" value="13">
+										<label for="extra_id_13">Gym Ticket</label>
+										<span> + $160 x person  to price</span>
+									</div>
+									<div class="awebooking-service__item">
+										<input type="checkbox" id="extra_id_12" name="awebooking_services[]" value="12">
+										<label for="extra_id_12">Spa Ticket</label>
+										<span> + $120 x person  to price</span>
+									</div>
+								</div>
+							</div>
 
-							<div id="rate-01" class="breakdown-popup mfp-hide">
+							<!-- <div class="awebooking-rate__bottom">
+								<div class="awebooking-rate__actions-left">
+									<a href="#">Room Info</a>
+									<a href="#">Enquire</a>
+								</div>
+
+								<div class="awebooking-rate__actions-right">
+									<span class="awebooking-rate__rooms"><span class="count js-awebooking-room-left">10</span> Rooms Left</span>
+									<div class="awebooking-rate__book-action">
+										<div class="awebooking-rate__nums">
+											<a class="awebooking-cal js-awebooking-decrease-room" href="#">-</a>
+											<span class="js-awebooking-count-room">0</span>
+											<a class="awebooking-cal js-awebooking-increase-room" href="#">+</a>
+										</div>
+									</div>
+								</div>
+
+							</div> -->
+
+							<div id="popup-rate-01" class="breakdown-popup mfp-hide">
 								<div class="awebooking-breakdown">
 									<div class="awebooking-breakdown__wrapper">
 										<div class="awebooking-breakdown__header">
@@ -169,7 +210,7 @@ function awebooking_availability_template( $atts ) {
 													<span class="awebooking-price-currencySymbol">$</span>87.00
 												</span>
 											</ins>
-											<a href="#rate-01" class="awebooking-price__info awebooking-price-info"><strong>i</strong></a>
+											<a href="#popup-rate-01" class="awebooking-price__info awebooking-price-info"><strong>i</strong></a>
 										</div>
 
 										<div class="awebooking-rate__price_detail">
@@ -268,16 +309,6 @@ function awebooking_availability_template( $atts ) {
 
 		</div>
 	</div>
-
-	<script>
-		jQuery(document).ready(function($) {
-			$('.awebooking-price-info').magnificPopup({
-				type:'inline',
-				midClick: true,
-				mainClass: 'awebooking-breakdown-popup'
-			});
-		});
-	</script>
 	<?php
 }
 add_shortcode( 'awebooking_availability_template', 'awebooking_availability_template' );

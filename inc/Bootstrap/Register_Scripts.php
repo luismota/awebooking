@@ -127,7 +127,13 @@ class Register_Scripts {
 			'route_url'  => awebooking( 'url' )->route(),
 		));
 
-		wp_enqueue_script( 'awebooking-cart', awebooking()->plugin_url() . '/assets/js/frontend/cart.js', array( 'jquery' ), AweBooking::VERSION, true );
+		wp_register_script( 'awebooking-manifest', awebooking()->plugin_url() . '/assets/js/frontend/manifest.js', [], AweBooking::VERSION, true );
+		wp_register_script( 'awebooking-vendor', awebooking()->plugin_url() . '/assets/js/frontend/vendor.js', [], AweBooking::VERSION, true );
+
+		// Register awebooking main styles and scripts.
+		$deps = [ 'awebooking-manifest', 'awebooking-vendor' ];
+
+		wp_enqueue_script( 'awebooking-cart', awebooking()->plugin_url() . '/assets/js/frontend/cart.js', $deps, AweBooking::VERSION, true );
 
 		global $wp_locale;
 
