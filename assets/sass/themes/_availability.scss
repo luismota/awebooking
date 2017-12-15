@@ -228,13 +228,32 @@
   }
 }
 
-.awebooking-rate__bottom {
+.awebooking-rate__bottom,
+.awebooking-rate__services {
   width: 100%;
   background: #fff;
   padding: 10px;
   border-top: 1px solid #ccc;
   border-radius: 0 0 3px 3px;
   overflow: hidden;
+}
+
+.awebooking-rate__services {
+  .awebooking-service__item {
+    margin-top: 0;
+    font-size: 14px;
+
+    label {
+      cursor: pointer;
+      margin-bottom: 0px;
+      line-height: 22px;
+      color: #04aa07;
+    }
+
+    input {
+      cursor: pointer;
+    }
+  }
 }
 
 .awebooking-rate__price_detail {
@@ -440,4 +459,16 @@
   display: none;
   overflow-y: auto;
   z-index: 9
+}
+
+.awebooking-rate__list-services {
+  font-size: 14px;
+  margin-bottom: 0px;
+  line-height: 22px;
+  color: #04aa07;
+}
+
+.awebooking-rate__service-btn.active i {
+  display: inline-block;
+  transform: rotate(180deg);
 }
