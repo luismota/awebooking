@@ -277,7 +277,7 @@ function awebooking_availability_template( $atts ) {
 
 				<div class="awebooking-cart__items">
 					<ul>
-						<li class="awebooking-cart-item">
+						<li class="awebooking-cart-item" data-rate="rate-1">
 							<div class="awebooking-cart-item__info">
 								<h5 class="awebooking-cart-item__rate">
 									Stay for 2 nights and get exclusive 20% discount
@@ -286,13 +286,16 @@ function awebooking_availability_template( $atts ) {
 								<p class="awebooking-cart-item__guess">
 									2 Adults ,2 Children ,1 Room
 								</p>
+								<p><span class="awebooking-rate__list-services js-awebooking-list-service">Buffet Breakfast, Gym Ticket</span></p>
 							</div>
 
 							<p class="awebooking-cart-item__price">
-								8800$
+								<a href="#" class="awebooking-cart-item__edit js-awebooking-edit-room"><span class="screen-reader-text">Edit</span>&#9998;</a>
+								<span>8800$</span>
 							</p>
 
-							<a href="#" class="awebooking-cart-item__remove js-awebooking-remove-cart">&#x2715;</a>
+							<a href="#" class="awebooking-cart-item__remove js-awebooking-remove-room">&#x2715;</a>
+							<input type="hidden" name="awebooking-cart-rooms[]">
 						</li>
 					</ul>
 				</div>
@@ -300,7 +303,7 @@ function awebooking_availability_template( $atts ) {
 				<div class="awebooking-cart__footer">
 					<div class="awebooking-cart__total">
 						<label for="">Total</label>
-						<p class="awebooking-cart__total-amount">15000$</p>
+						<p class="awebooking-cart__total-amount js-awebooking-cart-total">15000$</p>
 					</div>
 					<div class="awebooking-cart__buttons">
 						<a class="btn button awebooking-button" href="#">Book</a>
