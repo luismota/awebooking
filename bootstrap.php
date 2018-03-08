@@ -5,7 +5,7 @@
  * @package AweBooking
  */
 
-require_once __DIR__ . '/development.php';
+// require_once __DIR__ . '/development.php';
 
 /**
  * We need autoload via Composer to make everything works.

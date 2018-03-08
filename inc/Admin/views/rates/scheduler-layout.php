@@ -2,6 +2,8 @@
 
 use League\Period\Period;
 use AweBooking\Support\Formatting as format;
+use AweBooking\Admin\Forms\Bulk_Update_Schedule;
+use AweBooking\Admin\Admin_Utils;
 
 $current_route = awebooking( 'url' )->full();
 
@@ -25,7 +27,9 @@ list( $prev_date, $next_date ) = [
 
 		<div class="scheduler__header-main">
 			<div class="scheduler-flex">
-				<div class="scheduler-flexspace"></div>
+				<div class="scheduler-flexspace">
+					<div><a href="#bulk-update-form-dialog" class="button" data-toggle="awebooking-popup"><?php esc_html_e( 'Bulk Update', 'awebooking' ); ?></a></div>
+				</div>
 
 				<div class="scheduler__datepicker">
 					<a href="<?php echo esc_url( add_query_arg( 'date', $prev_date->toDateString(), $current_route ) ); ?>" title="<?php echo esc_html__( 'Prev Date', 'awebooking' ); ?>" class="scheduler__arrow prev">
@@ -158,6 +162,21 @@ list( $prev_date, $next_date ) = [
 
 		<div class="awebooking-dialog-contents" style="padding: 1em;">
 			<div id="js-scheduler-form-controls"></div>
+		</div>
+
+		<div class="awebooking-dialog-buttons">
+			<button type="button" class="button"><?php echo esc_html__( 'Cancel', 'awebooking' ); ?></button>
+			<button type="submit" class="button button-primary"><?php echo esc_html__( 'Submit', 'awebooking' ); ?></button>
+		</div>
+	</form>
+</div>
+
+<div id="bulk-update-form-dialog" class="awebooking-dialog" title="<?php echo esc_html__( 'Bulk Update', 'awebooking' ); ?>" style="display: none;">
+	<form id="bulk-update-form" method="POST" action="<?php echo esc_url( awebooking( 'url' )->admin_route( 'rates' ) ); ?>">
+		<?php wp_nonce_field( 'awebooking_bulk_update' ); ?>
+
+		<div class="awebooking-dialog-contents" style="padding: 1em;">
+			<?php (new Bulk_Update_Schedule)->output(); ?>
 		</div>
 
 		<div class="awebooking-dialog-buttons">
